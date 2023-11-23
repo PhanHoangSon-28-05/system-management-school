@@ -25,7 +25,7 @@
                                         style="font-weight: bold; font-size:15px;">Name
                                         <span class="required" style="color: red;">*</span></label>
                                     <div class="col-md-6 col-sm-6">
-                                        @if ($role->name == 'super-admin')
+                                        @if ($role->slug == 'super-admin')
                                             <input class="form-control" type="text" data-validate-length-range="6"
                                                 data-validate-words="2" value="{{ old('name') ?? $role->name }}"
                                                 name="name" id="name" required="required" readonly />
@@ -44,49 +44,21 @@
                                 </div>
 
                                 <div class="field item form-group">
-                                    <label class="col-form-label col-sm-2 label-align" for="display_name"
-                                        style="font-weight: bold; font-size:15px;">Display Name
+                                    <label class="col-form-label col-sm-2 label-align" for="description"
+                                        style="font-weight: bold; font-size:15px;">Description
                                         <span class="required" style="color: red;">*</span></label>
                                     <div class="col-md-6 col-sm-6">
-                                        @if ($role->name == 'super-admin')
-                                            <input class="form-control" type="text" data-validate-length-range="6"
-                                                data-validate-words="2"
-                                                value="{{ old('display_name') ?? $role->display_name }}" name="display_name"
-                                                id="display_name" required="required" readonly />
+                                        @if ($role->slug == 'super-admin')
+                                            <textarea class="form-control" type="text" data-validate-length-range="6" data-validate-words="2" name="description"
+                                                id="description" required="required" readonly>{{ old('description') ?? $role->description }}</textarea>
                                         @else
-                                            <input class="form-control" type="text" data-validate-length-range="6"
-                                                data-validate-words="2"
-                                                value="{{ old('display_name') ?? $role->display_name }}" name="display_name"
-                                                id="display_name" placeholder="...." required="required" />
+                                            <textarea class="form-control" type="text" data-validate-length-range="6" data-validate-words="2" name="description"
+                                                id="description" placeholder="...." required="required">{{ old('description') ?? $role->description }}</textarea>
                                         @endif
 
-                                        @error('display_name')
+                                        @error('description')
                                             <span class="text-danger">{{ $message }}</span><br>
                                         @enderror
-                                    </div>
-                                </div>
-
-                                <div class="item form-group">
-                                    <label class="col-form-label col-sm-2 label-align"
-                                        style="font-weight: bold; font-size:15px;">Group
-                                        <span class="required" style="color: red;">*</span></label>
-                                    <div class="col-md-6 col-sm-6 ">
-                                        <div id="group" class="btn-group" data-toggle="buttons">
-                                            <label class="btn btn-secondary" data-toggle-class="btn-primary"
-                                                data-toggle-passive-class="btn-default">
-                                                <input type="radio" name="group"
-                                                    value="system"{{ $role->group == 'system' ? 'checked' : '' }}
-                                                    class="join-btn">
-                                                &nbsp; System &nbsp;
-                                            </label>
-                                            <label class="btn btn-primary" data-toggle-class="btn-primary"
-                                                data-toggle-passive-class="btn-default">
-                                                <input type="radio" name="group"
-                                                    value="user"{{ $role->group == 'user' ? 'checked' : '' }}
-                                                    class="join-btn">
-                                                User
-                                            </label>
-                                        </div>
                                     </div>
                                 </div>
 
@@ -103,14 +75,13 @@
                                                         @foreach ($permission as $item)
                                                             <div class="col-md-8">
                                                                 <div class="form-check form-check-inline">
-                                                                    <input name="permission_ids[]"
-                                                                        class="form-check-input" type="checkbox"
-                                                                        value="{{ $item->id }} "
+                                                                    <input name="permission_ids[]" class="form-check-input"
+                                                                        type="checkbox" value="{{ $item->id }} "
                                                                         {{ $role->permissions->contains('name', $item->name) ? 'checked' : '' }}
                                                                         id="{{ $item->id }}">
                                                                     <label style="font-weight: bold; font-size:13px;"
                                                                         class="form-check-label"
-                                                                        for="{{ $item->id }}">{{ $item->display_name }}</label>
+                                                                        for="{{ $item->id }}">{{ $item->name }}</label>
                                                                 </div>
                                                             </div>
                                                         @endforeach

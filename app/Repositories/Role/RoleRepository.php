@@ -17,4 +17,12 @@ class RoleRepository extends BaseRepository implements RoleRepositoryInterface
     {
         return $this->model->select('Role_name')->take(5)->get();
     }
+
+    public function updateRole($status, $id)
+    {
+        $result = $this->model->where('id', $id)->first();
+        $update_status = $result->users()->first()->pivot;
+        $update_status->update(['status' => $status]);
+        return $update_status;
+    }
 }

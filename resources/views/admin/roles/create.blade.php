@@ -31,16 +31,14 @@
                                         @enderror
                                     </div>
                                 </div>
-
                                 <div class="field item form-group">
-                                    <label class="col-form-label col-sm-2 label-align" for="display_name"
-                                        style="font-weight: bold; font-size:15px;">Display Name
+                                    <label class="col-form-label col-sm-2 label-align" for="description"
+                                        style="font-weight: bold; font-size:15px;">Description
                                         <span class="required" style="color: red;">*</span></label>
                                     <div class="col-md-6 col-sm-6">
-                                        <input class="form-control" data-validate-length-range="6" data-validate-words="2"
-                                            value="{{ old('display_name') }}" name="display_name" id="display_name"
-                                            placeholder="...." required="required" type="text" />
-                                        @error('display_name')
+                                        <textarea value="" id="editor" data-validate-length-range="6" data-validate-words="2"
+                                            class="form-control"required="required" type="text" name="description" placeholder="...."></textarea>
+                                        @error('description')
                                             <span class="text-danger">{{ $message }}</span><br>
                                         @enderror
                                     </div>
