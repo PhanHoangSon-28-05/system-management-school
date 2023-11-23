@@ -31,18 +31,6 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="field item form-group">
-                                    <label class="col-form-label col-sm-2 label-align" for="description"
-                                        style="font-weight: bold; font-size:15px;">Description
-                                        <span class="required" style="color: red;">*</span></label>
-                                    <div class="col-md-6 col-sm-6">
-                                        <textarea value="" id="editor" data-validate-length-range="6" data-validate-words="2"
-                                            class="form-control"required="required" type="text" name="description" placeholder="...."></textarea>
-                                        @error('description')
-                                            <span class="text-danger">{{ $message }}</span><br>
-                                        @enderror
-                                    </div>
-                                </div>
 
                                 <div class="item form-group">
                                     <label class="col-form-label col-sm-2 label-align"

@@ -14,9 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    // return view('welcome');
+    return view('admin.dashboard.index');
+});
 
 Route::prefix('roles')->controller(ApiRoleController::class)->name('roles.')->group(function () {
     Route::get('/', 'index')->name('index');
