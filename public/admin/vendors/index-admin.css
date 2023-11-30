@@ -13,6 +13,13 @@ textarea[type=text] {
     border-radius: 8px;
 }
 
+.text-area {
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid rgb(141, 139, 139);
+    border-radius: 8px;
+}
+
 table {
     border: 2px solid rgb(141, 139, 139);
     border-radius: 8px;

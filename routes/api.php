@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Api\Admin\ApiRoleController;
+use App\Http\Controllers\Api\Auth\LoginController;
+use App\Http\Controllers\Api\Auth\LogoutController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,17 +21,3 @@ use Illuminate\Support\Facades\Route;
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-
-Route::get('/', function () {
-    return view('admin.dashboard.index');
-})->name('admin.dashboard');
-
-
-
-
-Route::prefix('roles')->controller(ApiRoleController::class)->name('roles.')->group(function () {
-    Route::post('/', 'store')->name('store');
-    Route::get('/{coupon}', 'show')->name('show');
-    Route::put('/{coupon}', 'update')->name('update');
-    Route::delete('/{coupon}', 'destroy')->name('destroy');
-});

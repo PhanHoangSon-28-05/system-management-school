@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
-
-namespace App\Http\Controllers\Api\Admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Role\CreateRoleRequest;
+use App\Http\Requests\Role\UpdateRoleRequest;
+use App\Http\Resources\Role;
 use App\Repositories\Permission\PermissionRepositoryInterface;
 use App\Repositories\Role\RoleRepositoryInterface;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller as RoutingController;
 
-class ApiRoleController extends RoutingController
+class RoleController extends Controller
 {
     protected $roleRepo;
     protected $permissionRepo;
@@ -37,8 +37,13 @@ class ApiRoleController extends RoutingController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateRoleRequest $request)
     {
+        $array = $request->all();
+        // dd($request);
+        $roleRepo = $this->roleRepo->insertRole($array);
+        $role = new Role($roleRepo);
+        return redirect()->route('roles.index')->with(['massage' => 'Create suceess']);
     }
 
     /**
@@ -58,9 +63,9 @@ class ApiRoleController extends RoutingController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateRoleRequest $request, string $id)
     {
-        $roles = $this->roleRepo->find($id);
+        $roles = $this->roleRepo->updateRole($request, $id);
 
         return redirect()->route('roles.index')->with(['message' => 'Update success']);
     }
@@ -70,6 +75,9 @@ class ApiRoleController extends RoutingController
      */
     public function destroy(string $id)
     {
-        //
+        $role = $this->roleRepo->delete($id);
+        return response()->json([
+            'message' => 'Story deteled successfully '
+        ]);
     }
 }

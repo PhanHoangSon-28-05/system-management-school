@@ -9,7 +9,7 @@
                 @endif
                 <div class="">
                     <div class="x_title">
-                        <h2>KeyTable example Roles</h2>
+                        <h2>Roles</h2>
                         <ul class="nav navbar-right panel_toolbox">
                             <a type="button" href="{{ URL::route('roles.create') }}" class="btn btn-secondary">
                                 Create
@@ -53,7 +53,7 @@
                                                                 href="{{ route('roles.edit', $role->id) }}"><i
                                                                     class="fas fa-edit"></i> Edit</a>
 
-                                                            <a class="btn btn-danger btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3"
+                                                            <a class="btn btn-danger btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 delete-role"
                                                                 data-role-id="{{ $role->id }}"><i
                                                                     class="fas fa-trash-alt"></i>
                                                                 Delete</a>

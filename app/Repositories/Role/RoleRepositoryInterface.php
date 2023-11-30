@@ -8,6 +8,6 @@ interface RoleRepositoryInterface extends RepositoryInterface
 {
     //ví dụ: lấy 5 sản phầm đầu tiên
     public function getRole();
-
-    public function updateRole($status, $id);
+    public function insertRole($attributes = []);
+    public function updateRole($attributes = [], $id);
 }

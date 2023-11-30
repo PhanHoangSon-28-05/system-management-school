@@ -16,4 +16,11 @@ class Role extends ModelsRole
         'description',
         'group',
     ];
+
+    protected static function booted()
+    {
+        static::creating(function ($roles) {
+            $roles->guard_name = 'web';
+        });
+    }
 }
