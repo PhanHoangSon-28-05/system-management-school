@@ -40,6 +40,5 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::put('/{coupon}', 'update')->name('update');
         Route::delete('/{coupon}', 'destroy')->name('destroy');
     });
-
     //
 });
