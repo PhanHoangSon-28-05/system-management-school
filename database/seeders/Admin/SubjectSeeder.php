@@ -2,6 +2,7 @@
 
 namespace Database\Seeders\admin;
 
+use App\Models\Subject;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -21,5 +22,9 @@ class SubjectSeeder extends Seeder
             ['name' => 'Anh văn cơ bản 2', 'credit_hours' => '2', 'description' => 'Học và lấy lại kiến thức cơ bản, cách viết đoạn văn và giao tiếp bằng tiếng anh'],
             ['name' => 'Cơ sở dữ liệu', 'credit_hours' => '2', 'description' => 'Làm quên với cơ sở dữ liệu và hiểu cách hoạt động của nó'],
         ];
+
+        foreach ($subjects as $value) {
+            Subject::updateOrCreate($value);
+        }
     }
 }
