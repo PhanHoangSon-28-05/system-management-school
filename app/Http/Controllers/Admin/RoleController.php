@@ -43,7 +43,7 @@ class RoleController extends Controller
         // dd($request);
         $roleRepo = $this->roleRepo->insertRole($array);
         $role = new Role($roleRepo);
-        return redirect()->route('roles.index')->with(['massage' => 'Create suceess']);
+        return redirect()->route('roles.index')->with(['message' => 'Create Role suceess']);
     }
 
     /**
@@ -67,7 +67,7 @@ class RoleController extends Controller
     {
         $roles = $this->roleRepo->updateRole($request, $id);
 
-        return redirect()->route('roles.index')->with(['message' => 'Update success']);
+        return redirect()->route('roles.index')->with(['message' => 'Update Role Success']);
     }
 
     /**
@@ -77,7 +77,7 @@ class RoleController extends Controller
     {
         $role = $this->roleRepo->delete($id);
         return response()->json([
-            'message' => 'Story deteled successfully '
+            'message' => 'Role deteled successfully '
         ]);
     }
 }
