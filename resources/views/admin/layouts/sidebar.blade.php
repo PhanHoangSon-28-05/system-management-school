@@ -10,6 +10,7 @@
             <li><a href="{{ URL::route('subjects.index') }}"><i class="fa fa-book"></i> Subject </a></li>
             <li><a href="{{ URL::route('classes.index') }}"><i class="fa fa-chalkboard"></i> Class </a></li>
             <li><a href="{{ URL::route('students.index') }}"><i class="fa fa-graduation-cap"></i> Student </a></li>
+            <li><a href="{{ URL::route('schedules.index') }}"><i class="fa fa-flag-o"></i> Scheldule </a></li>
         </ul>
     </div>
 </div>

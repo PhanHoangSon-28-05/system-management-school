@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
-use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\UserController;
@@ -47,6 +48,13 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('/{coupon}/edit', 'edit')->name('edit');
         Route::put('/{coupon}', 'update')->name('update');
         Route::delete('/{coupon}', 'destroy')->name('destroy');
+    });
+    //
+
+    Route::prefix('scheldule')->controller(ScheduleController::class)->name('schedules.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/', 'store')->name('store');
+        Route::get('/create', 'create')->name('create');
     });
 
     // Routes in User

@@ -9,6 +9,7 @@ class Rank_Schedule extends Model
 {
     use HasFactory;
 
+    
     protected $fillable = [
         'schedule_id',
         'name',
