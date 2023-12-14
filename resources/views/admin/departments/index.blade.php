@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title', 'Users')
+@section('title', 'Department')
 @section('content')
 <div class="right_col" role="main">
     <div class="row">
@@ -9,10 +9,10 @@
             @endif
             <div class="">
                 <div class="x_title">
-                    <h2>KeyTable example Users</h2>
+                    <h2>KeyTable example Department</h2>
 
                     <ul class="nav navbar-right panel_toolbox">
-                        <a type="button" href="{{ URL::route('users.create') }}" class="btn btn-secondary">
+                        <a type="button" href="{{ URL::route('departments.create') }}" class="btn btn-secondary">
                             Create
                         </a>
                     </ul>
@@ -33,23 +33,19 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Account Name</th>
-                                            <th>Email</th>
-                                            <th>Created at</th>
+                                            <th>Faculty Name</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($users as $user)
+                                        @foreach ($departments as $department)
                                         <tr>
-                                            <td>{{ $user->id }}</td>
-                                            <td>{{ $user->username }}</td>
-                                            <td>{{ $user->email }}</td>
-                                            <td>{{ $user->created_at }}</td>
+                                            <td>{{ $department->id }}</td>
+                                            <td>{{ $department->name }}</td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <a class="btn btn-info btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3" href="{{ route('users.edit', $user->id) }}"><i class="fas fa-edit"></i> Edit</a>
-                                                    <a class="btn btn-danger btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 delete-user" data-user-id="{{ $user->id }}"><i class="fas fa-trash-alt"></i>
+                                                    <a class="btn btn-info btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 " href="{{ URL::route('departments.edit', $department->id) }}"><i class="fas fa-edit"></i> Edit</a>
+                                                    <a class="btn btn-danger btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 delete-department" data-department-id="{{ $department->id }}"><i class="fas fa-trash-alt"></i>
                                                         Delete</a>
                                                 </div>
                                             </td>
@@ -71,13 +67,13 @@
 
 <script>
     $(document).ready(function() {
-        $('.delete-user').click(function(e) {
+        $('.delete-department').click(function(e) {
             e.preventDefault();
 
-            var userId = $(this).data('user-id');
-            if (confirm('Are you sure you want to delete user with ID ' + userId + '?')) {
+            var departmentID = $(this).data('department-id');
+            if (confirm('Are you sure you want to delete department with ID ' + departmentID + '?')) {
                 $.ajax({
-                    url: '/admin/users/' + userId,
+                    url: '/admin/departments/' + departmentID,
                     type: 'DELETE',
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

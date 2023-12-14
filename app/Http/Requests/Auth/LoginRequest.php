@@ -32,7 +32,7 @@ class LoginRequest extends FormRequest
     public function getCredentials()
     {
         $username = $this->get('username');
-        // dd($this->get('password'));
+        //dd($this->get('username'), $this->get('password'));
 
         if ($this->isUsername($username)) {
             return [

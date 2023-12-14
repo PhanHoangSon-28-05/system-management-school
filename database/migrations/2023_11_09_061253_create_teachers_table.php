@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('gender')->default('male');
             $table->string('email')->unique();
             $table->string('phone')->unique();
-            $table->string('hometown', 4000)->unique();
+            $table->string('hometown', 4000);
             $table->string('slug')->unique();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->timestamps();

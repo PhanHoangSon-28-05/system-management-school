@@ -1,45 +1,42 @@
 <?php
 
-namespace App\Repositories\Role;
+namespace App\Repositories\Department;
 
 use App\Repositories\BaseRepository;
-use App\Repositories\Role\RoleRepositoryInterface;
+use App\Repositories\Department\DepartmentRepositoryInterface;
 use Illuminate\Support\Str;
 
-class RoleRepository extends BaseRepository implements RoleRepositoryInterface
+class DepartmentRepository extends BaseRepository implements DepartmentRepositoryInterface
 {
     //lấy model tương ứng
     public function getModel()
     {
-        return \App\Models\Role::class;
+        return \App\Models\Department::class;
     }
 
-    public function getRoles()
+    public function getDepartment()
     {
-        return $this->model->all()->groupby('group');
+        return $this->model->select('Department_name')->take(5)->get();
     }
 
-    public function getRole()
+    public function insertDepartment($attributes = [])
     {
-        return $this->model->select('Role_name')->take(5)->get();
-    }
-
-    public function insertRole($attributes = [])
-    {
-        $existingRole = $this->model->where('name', $attributes['name'])->first();
-        if ($existingRole) {
+        // Implement your logic to insert a user here
+        $existingDepartment = $this->model->where('name', $attributes['name'])->first();
+        if ($existingDepartment) {
             return redirect()->back()->withErrors(['name' => 'Role with this name already exists.'])->withInput();
         }
 
         $attributes['slug'] = Str::slug($attributes['name']);
-        $role = $this->model->create($attributes);
+        $department = $this->model->create($attributes);
+        //dd($department);
 
-        $role->permissions()->attach($attributes['permission_ids']);
-        return $role;
+        return $department->toArray();
     }
 
-    public function updateRole($attributes = [], $id)
+    public function updateDepartment($attributes = [], $id)
     {
+        // Implement your logic to update a user here
         $result = $this->model->find($id);
         $attributes['slug'] = Str::slug($attributes['name']);
 
@@ -47,15 +44,13 @@ class RoleRepository extends BaseRepository implements RoleRepositoryInterface
             // Extract only the relevant attributes for the update
             $updateData = [
                 'name' => $attributes['name'],
+                'description' => $attributes['description'],
                 'slug' => $attributes['slug'],
                 // Add other attributes as needed
             ];
 
             // Use the update method with the extracted attributes
             $result->update($updateData);
-
-            // Sync the permissions
-            $result->permissions()->sync($attributes['permission_ids']);
 
             return $result;
         }
