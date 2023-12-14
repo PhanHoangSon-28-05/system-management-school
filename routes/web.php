@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use Illuminate\Support\Facades\Route;
@@ -41,4 +42,10 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::delete('/{coupon}', 'destroy')->name('destroy');
     });
     //
+
+    Route::prefix('scheldule')->controller(ScheduleController::class)->name('schedules.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/', 'store')->name('store');
+        Route::get('/create', 'create')->name('create');
+    });
 });

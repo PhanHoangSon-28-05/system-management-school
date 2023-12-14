@@ -69,6 +69,7 @@
         rel="stylesheet">
 
     <link rel="stylesheet" href="{{ URL::asset('admin/vendors/index-admin.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('admin/build/css/search.css') }}">
 
 </head>
 
@@ -77,10 +78,10 @@
         <div class="main_container">
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
-                    <div class="navbar nav_title" style="border: 0;">
-                        <a href="{{ URL::route('admin.dashboard') }}" class="site_title">
+                    <div class="navbar nav_title " style="border: 0;">
+                        <a href="{{ URL::route('admin.dashboard') }}" class="site_title text-center shadow-lg rounded">
                             <img src="{{ URL::asset('admin/build/images/log.png') }}" width="50px" />
-                            <span>Gentelella Alela!</span></a>
+                            <span class="fs-4 fw-bolder">CEP</span></a>
                     </div>
 
                     <div class="clearfix"></div>
@@ -242,6 +243,8 @@
     <script src="{{ URL::asset('admin/build/js/custom.min.js') }}"></script>
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="{{ URL::asset('admin/build/js/search.js') }}"></script>
 
     @if (session('message'))
         <script>

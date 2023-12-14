@@ -77,10 +77,11 @@
                                                                         </h3>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary"
+                                                                        <button class="btn btn-secondary"
                                                                             data-bs-dismiss="modal">Close</button>
-                                                                        <a href="" id="delete-link" type="button"
-                                                                            class="btn btn-primary">Delete</a>
+                                                                        <button type="button" class="btn btn-primary"
+                                                                            id="delete-modal-btn">Delete</button>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -100,18 +101,39 @@
         </div>
     </div>
 @endsection
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         $('.delete-role').on('click', function() {
             var roleName = $(this).data('role-name');
             $('#role-id-placeholder').text(roleName);
 
-            var roleId = $(this).data('role-id'); // Corrected variable name
+            var roleId = $(this).data('role-id');
 
-            var deleteLink = $('#delete-link');
-            var deleteUrl = "{{ route('roles.destroy', ':id') }}".replace(':id', roleId);
-            deleteLink.attr('href', deleteUrl);
+            // Set data attribute for the delete link
+            $('#delete-modal-btn').data('role-id', roleId);
+        });
+
+        $('#staticBackdrop').on('shown.bs.modal', function() {
+            $('#delete-modal-btn').on('click', function() {
+                var roleId = $('#delete-modal-btn').data('role-id');
+
+                // Perform AJAX request to delete the role
+                $.ajax({
+                    url: '{{ url('admin/roles') }}/' + roleId,
+                    type: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        window.location.reload();
+                    },
+                    error: function(error) {
+                        // Handle error, e.g., display an error message
+                        console.error(error);
+                    }
+                });
+            });
         });
     });
 </script>

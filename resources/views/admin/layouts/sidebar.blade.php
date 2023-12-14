@@ -4,6 +4,7 @@
         <ul class="nav side-menu">
             <li><a href="{{ URL::route('admin.dashboard') }}"><i class="fa fa-home"></i> Dashboard </a></li>
             <li><a href="{{ URL::route('roles.index') }}"><i class="fa fa-flag-o"></i> Roles </a></li>
+            <li><a href="{{ URL::route('schedules.index') }}"><i class="fa fa-flag-o"></i> Scheldule </a></li>
         </ul>
     </div>
 </div>
