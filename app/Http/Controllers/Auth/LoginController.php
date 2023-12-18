@@ -26,8 +26,8 @@ class LoginController extends Controller
     {
         $credentials = $request->getCredentials();
 
-        // dd(Auth::validate($credentials));
-
+        //dd(Auth::validate($credentials));
+        //dd($credentials);
         // if (!Auth::validate($credentials)) :
         //     return redirect()->to('login')
         //         ->withErrors(trans('auth.failed'));
@@ -37,6 +37,7 @@ class LoginController extends Controller
             return redirect()->to('login')
                 ->withErrors(trans('auth.failed'));
         endif;
+
 
         $user = Auth::getProvider()->retrieveByCredentials($credentials);
 
