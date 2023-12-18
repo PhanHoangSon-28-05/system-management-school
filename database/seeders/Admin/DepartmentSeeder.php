@@ -13,6 +13,7 @@ class DepartmentSeeder extends Seeder
      */
     public function run(): void
     {
+        //
         $departments = [
             [
                 'name' => 'Khoa Đào tạo và BDCD',
@@ -27,21 +28,21 @@ class DepartmentSeeder extends Seeder
             [
                 'name' => 'Khoa Kế toán',
                 'description' => 'Đào tạo và nghiên cứu về các nguyên tắc, phương pháp và quy trình liên quan đến lĩnh vực Kế toán trong giáo dục đại học và tổ chức, bao gồm quản lý tài chính, phân tích tài chính, kiểm toán, quản lý chi phí và công tác thuế.',
-                'slug' => 'khoa-kinh-te-co-so'
+                'slug' => 'khoa-ke-toan'
             ],
             [
                 'name' => 'Khoa Kinh tế cơ sở',
                 'description' => 'Đào tạo và nghiên cứu về nguyên lý và quản lý kinh tế trong giáo dục đại học và tổ chức',
-                'slug' => 'khoa-dao-tao-va-bdcd'
+                'slug' => 'khoa-kinh-te-co-so'
             ],
             [
                 'name' => 'Khoa Tin học và Ngoại ngữ',
                 'description' => 'Đào tạo và nghiên cứu về Tin học và các ngôn ngữ ngoại ngữ trong giáo dục đại học và tổ chức',
-                'slug' => 'khoa-dao-tao-va-bdcd'
+                'slug' => 'khoa-tin-học-va-ngoai-ngu'
             ],
             [
-                'name' => 'Department of foreign language information technology', '
-            description' => 'Khoa tin học ngoại ngữ',
+                'name' => 'Department of foreign language information technology',
+                'description' => 'Khoa tin học ngoại ngữ',
                 'slug' => 'tin-hoc-ngoai-ngu'
             ],
             [

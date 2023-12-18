@@ -5,7 +5,6 @@ namespace Database\Seeders\Admin;
 use App\Models\Grade;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
 
 class ClassSeeder extends Seeder
 {
@@ -14,6 +13,7 @@ class ClassSeeder extends Seeder
      */
     public function run(): void
     {
+        //
         $classes =
             [
                 ['name' => 'CNTT1-21', 'description' => 'Công nghệ thông tin 1-21', 'slug' => 'cong-nghe-thong-tin-1-21'],

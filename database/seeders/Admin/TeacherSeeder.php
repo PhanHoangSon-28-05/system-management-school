@@ -5,7 +5,6 @@ namespace Database\Seeders\Admin;
 use App\Models\Teacher;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
 
 class TeacherSeeder extends Seeder
 {
@@ -14,6 +13,7 @@ class TeacherSeeder extends Seeder
      */
     public function run(): void
     {
+        //
         $teachers =
             [
                 [
