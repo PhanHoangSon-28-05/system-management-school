@@ -4,16 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use App\Repositories\Classs\ClassRepositoryInterface;
 use App\Http\Controllers\Controller;
+use App\Models\Grade;
 use Illuminate\Http\Request;
 
 class ClassController extends Controller
 {
-    protected $classtmentRepo;
+    protected $classRepo;
 
     public function __construct(
-        ClassRepositoryInterface $classtmentRepo,
+        ClassRepositoryInterface $classRepo,
     ) {
-        $this->classtmentRepo = $classtmentRepo;
+        $this->classRepo = $classRepo;
     }
     /**
      * Display a listing of the resource.
@@ -21,7 +22,7 @@ class ClassController extends Controller
     public function index()
     {
         //
-        $class = $this->classtmentRepo->getAll();
+        $class = $this->classRepo->getAll();
         //dd($teacher);
         return view('admin.classes.index', ['classes' => $class]);
     }
@@ -41,6 +42,11 @@ class ClassController extends Controller
     public function store(Request $request)
     {
         //
+        $array = $request->all();
+        // dd($request);
+        $classtRepo = $this->classRepo->insertClass($array);
+        $class = new Grade($classtRepo);
+        return redirect()->route('classes.index')->with(['massage' => 'Create suceess']);
     }
 
     /**
@@ -57,6 +63,8 @@ class ClassController extends Controller
     public function edit(string $id)
     {
         //
+        $classRepo = $this->classRepo->find($id);
+        return view('admin.classes.edit', ['class' => $classRepo]);
     }
 
     /**
@@ -65,6 +73,9 @@ class ClassController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $classRepo = $this->classRepo->updateClass($request, $id);
+
+        return redirect()->route('classes.index')->with(['message' => 'Update success']);
     }
 
     /**
@@ -73,7 +84,7 @@ class ClassController extends Controller
     public function destroy(string $id)
     {
         //
-        $class = $this->classtmentRepo->delete($id);
+        $class = $this->classRepo->delete($id);
         return response()->json([
             'message' => 'Story deteled successfully '
         ]);
