@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\ClassController;
 use App\Http\Controllers\Admin\StudentController;
+use App\Http\Controllers\User\TeacherUserController;
 use App\Models\Department;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +39,15 @@ Route::post('/login', [LoginController::class, 'login'])->name('login.perform');
  * Logout Routes
  */
 Route::get('/logout', [LogoutController::class, 'perform'])->name('logout.perform');
+
+Route::get('/teacherUser', [TeacherUserController::class, 'index'])->name('teachers.index');
+
+// Route::prefix('teacher')->middleware('auth')->group(function () {
+//     Route::prefix('teacherUsers')->controller(RoleController::class)->name('teachers.')->group(function () {
+//         Route::get('/', 'index')->name('index');
+//     });
+// });
+
 Route::prefix('admin')->middleware('auth')->group(function () {
     // Routes in role
     Route::prefix('roles')->controller(RoleController::class)->name('roles.')->group(function () {

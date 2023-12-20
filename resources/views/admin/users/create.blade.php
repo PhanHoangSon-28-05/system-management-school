@@ -36,7 +36,7 @@
 <div class="right_col" role="main">
     <div class="row">
         <button class="tablink" onclick="openPage('Teacher', this, 'green')" id="defaultOpen">Create Teacher</button>
-        <button class="tablink" onclick="openPage('User', this, 'green')">Create User</button>
+        <button class="tablink" onclick="openPage('Student', this, 'green')">Create Student</button>
         <div id="Teacher" class="tabcontent">
             <form method="post" action="{{ route('teachers.store') }}" id="demo-form" data-parsley-validate enctype="multipart/form-data">
                 @csrf
@@ -105,15 +105,26 @@
                     </div>
                 </div>
 
+                <style>
+                    .btn-coler.active {
+                        background-color: #007bff;
+                        color: #fff;
+                    }
+
+                    .btn-coler:not(.active) {
+                        background-color: #ccc;
+                        color: #000;
+                    }
+                </style>
                 <div class="item form-group">
                     <label class="col-form-label col-md-3 col-sm-3 label-align" style="font-weight: bold; font-size:15px;">Gender <span class="required">*</span></label>
                     <div class="col-md-6 col-sm-6 ">
                         <div class="btn-group gender" data-toggle="buttons">
-                            <label class="btn btn-secondary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                            <label class="btn btn-coler" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
                                 <input type="radio" name="gender" value="male" class="join-btn">
                                 &nbsp; Male &nbsp;
                             </label>
-                            <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                            <label class="btn btn-coler" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
                                 <input type="radio" name="gender" value="fe-male" class="join-btn">
                                 Female
                             </label>
@@ -143,7 +154,8 @@
                 </div>
             </form>
         </div>
-        <div id="User" class="tabcontent">
+        <!-- create student -->
+        <div id="Student" class="tabcontent">
             <form method="post" action="{{ route('users.store') }}" id="demo-form" data-parsley-validate enctype="multipart/form-data">
                 @csrf
 
@@ -151,7 +163,7 @@
                     <label class="col-form-label col-md-3 col-sm-3  label-align" for="fullname" style="font-weight: bold; font-size:15px;">Full Name
                         <span class="required" style="color: red;">*</span></label>
                     <div class="col-md-6 col-sm-6">
-                        <input class="form-control" type="text" data-validate-length-range="6" data-validate-words="2" value="{{ old('fullname') }}" name="fullname" id="fullname" placeholder="User name" required="required" />
+                        <input class="form-control" type="text" data-validate-length-range="6" data-validate-words="2" value="{{ old('fullname') }}" name="fullname" id="fullname" placeholder="Student name" required="required" />
                         @error('fullname')
                         <span class="text-danger">{{ $message }}</span><br>
                         @enderror
@@ -214,11 +226,11 @@
                     <label class="col-form-label col-md-3 col-sm-3 label-align" style="font-weight: bold; font-size:15px;">Gender <span class="required">*</span></label>
                     <div class="col-md-6 col-sm-6 ">
                         <div class="btn-group gender" data-toggle="buttons">
-                            <label class="btn btn-secondary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                            <label class="btn btn-coler" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
                                 <input type="radio" name="gender" value="male" class="join-btn">
                                 &nbsp; Male &nbsp;
                             </label>
-                            <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                            <label class="btn btn-coler" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
                                 <input type="radio" name="gender" value="fe-male" class="join-btn">
                                 Female
                             </label>
