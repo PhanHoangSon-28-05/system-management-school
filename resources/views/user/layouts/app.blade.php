@@ -69,33 +69,27 @@
         <div class="main_container">
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
-                    <div class="navbar nav_title " style="border: 0;">
-                        <a href="{{ URL::route('admin.dashboard') }}" class="site_title text-center shadow-lg rounded">
-                            <img src="{{ URL::asset('admin/build/images/log.png') }}" width="50px" />
-                            <span class="fs-4 fw-bolder">CEP</span></a>
-                    </div>
+
 
                     <div class="clearfix"></div>
 
                     <!-- menu profile quick info -->
-                    <div class="profile clearfix">
-                        <div class="profile_pic">
-                            <img src="{{ URL::asset('admin/build/images/img.jpg') }}" alt="..." class="img-circle profile_img">
+                    <div class="profile clearfix" style="width: 14em; height: 18em; margin: 2em; background: red;">
+                        <div>
+                            <img style="height: 14em;" src="{{ URL::asset('admin/build/images/img.jpg') }}" alt="..." class="img-circle profile_img">
                         </div>
-                        <div class="profile_info">
-                            <span>Welcome,</span>
-                            <h2>
-                                {{-- {{ auth()->user()->fullname }} --}}
+                        <h2 style="text-align: center;">
+                            hfhj{{-- {{ auth()->user()->fullname }} --}}
 
-                            </h2>
-                        </div>
+                        </h2>
                     </div>
+
                     <!-- /menu profile quick info -->
 
                     <br />
 
                     <!-- sidebar menu -->
-                    @include('admin.layouts.sidebar')
+                    @include('user.layouts.sidebar')
                     <!-- /sidebar menu -->
 
                     <!-- /menu footer buttons -->

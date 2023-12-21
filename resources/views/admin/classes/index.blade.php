@@ -46,7 +46,7 @@
                                             <td>{{ $class->description }}</td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <a class="btn btn-info btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 " href=""><i class="fas fa-edit"></i> Edit</a>
+                                                    <a class="btn btn-info btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 " href="{{ URL::route('classes.edit', $class->id) }}"><i class="fas fa-edit"></i> Edit</a>
                                                     <a class="btn btn-danger btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 delete-class" data-class-id="{{ $class->id }}"><i class="fas fa-trash-alt"></i>
                                                         Delete</a>
                                                 </div>

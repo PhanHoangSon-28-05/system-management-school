@@ -48,8 +48,8 @@
                                             <td>{{ $teacher->email }}</td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <a class="btn btn-info btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 " href=""><i class="fas fa-eye"></i> View</a>
-                                                    <a class="btn btn-info btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 " href=""><i class="fas fa-edit"></i> Edit</a>
+                                                    <a class="btn btn-info btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 " href="{{ URL::route('teachers.show', $teacher->id) }}"><i class="fas fa-eye"></i> View</a>
+                                                    <a class="btn btn-info btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 " href="{{ URL::route('teachers.edit', $teacher->id) }}"><i class="fas fa-edit"></i> Edit</a>
                                                     <a class="btn btn-danger btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 delete-role" data-role-id=""><i class="fas fa-trash-alt"></i>
                                                         Delete</a>
                                                 </div>

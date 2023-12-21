@@ -5,7 +5,6 @@ namespace Database\Seeders\Admin;
 use App\Models\Student;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
 
 class StudentSeeder extends Seeder
 {
@@ -14,6 +13,7 @@ class StudentSeeder extends Seeder
      */
     public function run(): void
     {
+        //
         $students =
             [
                 [

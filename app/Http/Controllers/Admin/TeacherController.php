@@ -50,6 +50,13 @@ class TeacherController extends Controller
     public function show(string $id)
     {
         //
+        $teacher = $this->teacherRepo->findById($id);
+
+        if (!$teacher) {
+            return redirect()->route('admin.teachers.index')->with('error', 'Teacher not found.');
+        }
+
+        return view('admin.teachers.show', ['teacher' => $teacher]);
     }
 
     /**
@@ -58,6 +65,8 @@ class TeacherController extends Controller
     public function edit(string $id)
     {
         //
+        $teacher = $this->teacherRepo->find($id);
+        return view('admin.teachers.edit', ['teacher' => $teacher]);
     }
 
     /**
@@ -66,6 +75,9 @@ class TeacherController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $teacher = $this->teacherRepo->updateTeacher($request, $id);
+
+        return redirect()->route('teachers.index')->with(['message' => 'Update success']);
     }
 
     /**
