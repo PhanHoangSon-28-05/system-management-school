@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders\admin;
+namespace Database\Seeders\Admin;
 
 use App\Models\Department;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -40,8 +40,8 @@ class DepartmentSeeder extends Seeder
                 'slug' => 'khoa-dao-tao-va-bdcd'
             ],
             [
-                'name' => 'Department of foreign language information technology', '
-            description' => 'Khoa tin học ngoại ngữ',
+                'name' => 'Department of foreign language information technology',
+                'description' => 'Khoa tin học ngoại ngữ',
                 'slug' => 'tin-hoc-ngoai-ngu'
             ],
             [

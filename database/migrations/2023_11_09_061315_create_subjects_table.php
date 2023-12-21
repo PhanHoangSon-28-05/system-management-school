@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('credit_hours');
-            $table->string('description')->unique();
+            $table->longText('description')->unique();
             $table->string('slug')->unique();
             $table->timestamps();
         });
