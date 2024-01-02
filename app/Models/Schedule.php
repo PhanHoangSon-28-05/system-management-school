@@ -12,6 +12,8 @@ class Schedule extends Model
     protected $fillable = [
         'teacher_id',
         'grade_id',
+        'rank_id',
+        'periods',
         'effectiveness'
     ];
 }

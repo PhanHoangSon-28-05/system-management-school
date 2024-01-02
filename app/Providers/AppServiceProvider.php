@@ -22,8 +22,42 @@ class AppServiceProvider extends ServiceProvider
         );
 
         $this->app->singleton(
+            \App\Repositories\Department\TeacherDepartment\TeacherDepartmentRepositoryInterface::class,
+            \App\Repositories\Department\TeacherDepartment\TeacherDepartmentRepository::class
+        );
+        $this->app->singleton(
+            \App\Repositories\Department\GradeDepartment\GradeDepartmentRepositoryInterface::class,
+            \App\Repositories\Department\GradeDepartment\GradeDepartmentRepository::class
+        );
+
+        $this->app->singleton(
+            \App\Repositories\Grade\StudentGrade\StudentGradeRepositoryInterface::class,
+            \App\Repositories\Grade\StudentGrade\StudentGradeRepository::class
+        );
+
+        $this->app->singleton(
+            \App\Repositories\Grade\TeacherGrade\TeacherGradeRepositoryInterface::class,
+            \App\Repositories\Grade\TeacherGrade\TeacherGradeRepository::class
+        );
+
+        $this->app->singleton(
             \App\Repositories\Teacher\TeacherRepositoryInterface::class,
             \App\Repositories\Teacher\TeacherRepository::class
+        );
+
+        $this->app->singleton(
+            \App\Repositories\Student\StudentRepositoryInterface::class,
+            \App\Repositories\Student\StudentRepository::class
+        );
+
+        $this->app->singleton(
+            \App\Repositories\Subject\SubjectRepositoryInterface::class,
+            \App\Repositories\Subject\SubjectRepository::class
+        );
+
+        $this->app->singleton(
+            \App\Repositories\Room\RoomRepositoryInterface::class,
+            \App\Repositories\Room\RoomRepository::class
         );
 
         $this->app->singleton(
@@ -35,20 +69,14 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Permission\PermissionRepositoryInterface::class,
             \App\Repositories\Permission\PermissionRepository::class
         );
-
         $this->app->singleton(
-            \App\Repositories\Subject\SubjectRepositoryInterface::class,
-            \App\Repositories\Subject\SubjectRepository::class
+            \App\Repositories\Grade\GradeRepositoryInterface::class,
+            \App\Repositories\Grade\GradeRepository::class
         );
 
         $this->app->singleton(
-            \App\Repositories\Classs\ClassRepositoryInterface::class,
-            \App\Repositories\Classs\ClassRepository::class
-        );
-
-        $this->app->singleton(
-            \App\Repositories\Student\StudentRepositoryInterface::class,
-            \App\Repositories\Student\StudentRepository::class
+            \App\Repositories\Rank\RankRepositoryInterface::class,
+            \App\Repositories\Rank\RankRepository::class
         );
     }
 

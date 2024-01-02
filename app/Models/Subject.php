@@ -12,6 +12,7 @@ class Subject extends Model
     protected $fillable = [
         'name',
         'credit_hours',
+        'total_number_of_periods',
         'description',
         'slug',
     ];

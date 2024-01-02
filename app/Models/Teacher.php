@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Teacher extends Model
 {
@@ -12,8 +13,10 @@ class Teacher extends Model
     protected $fillable = [
         'code',
         'image_personal',
-        'image_citizenIdentification',
-        'name',
+        'image_citizenIdentification_front',
+        'image_citizenIdentification_backside',
+        'last_name',
+        'first_name',
         'birthday',
         'gender',
         'email',
@@ -22,4 +25,10 @@ class Teacher extends Model
         'slug',
         'user_id',
     ];
+
+
+    public function detail__departments(): BelongsToMany
+    {
+        return $this->belongsToMany(Department::class, 'detail__departments', 'teacher_id', 'department_id');
+    }
 }

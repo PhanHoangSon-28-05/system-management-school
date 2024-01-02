@@ -33,7 +33,7 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.teachers.create');
     }
 
     /**
@@ -41,7 +41,9 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $array = $request->all();
+        $teacher = $this->teacherRepo->insertTeacher($array);
+        return redirect()->route('teachers.index')->with(['message' => 'Create Teacher suceess']);
     }
 
     /**
@@ -65,8 +67,8 @@ class TeacherController extends Controller
     public function edit(string $id)
     {
         //
-        $teacher = $this->teacherRepo->find($id);
-        return view('admin.teachers.edit', ['teacher' => $teacher]);
+        $teachers = $this->teacherRepo->find($id);
+        return view('admin.teachers.edit', ['teachers' => $teachers]);
     }
 
     /**
@@ -75,7 +77,8 @@ class TeacherController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        $teacher = $this->teacherRepo->updateTeacher($request, $id);
+        $array = $request->all();
+        $teacher = $this->teacherRepo->updateTeacher($array, $id);
 
         return redirect()->route('teachers.index')->with(['message' => 'Update success']);
     }
@@ -85,6 +88,10 @@ class TeacherController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $teacher = $this->teacherRepo->deleteTeacher($id);
+
+        return response()->json([
+            'message' => 'Teacher deteled successfully '
+        ]);
     }
 }

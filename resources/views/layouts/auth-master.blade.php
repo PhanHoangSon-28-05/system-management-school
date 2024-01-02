@@ -21,7 +21,7 @@
 
     <!-- Custom Theme Style -->
     <link href="{{ URL::asset('admin/build/css/custom.min.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('admin/vendors/index-login.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('admin/vendors/style/index-login.css') }}" rel="stylesheet">
 </head>
 
 <body class="login">

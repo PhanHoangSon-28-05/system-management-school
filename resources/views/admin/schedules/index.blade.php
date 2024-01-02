@@ -8,87 +8,57 @@
                 <div class="">
                     <div class="x_title">
                         <h2>Schedules</h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                            <a type="button" href="{{ URL::route('schedules.create') }}" class="btn btn-secondary">
-                                Create
-                            </a>
-
-                        </ul>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="card-box table-responsive">
-                                    <span class="text-muted font-13 m-b-30">
-                                        @if (session('success'))
-                                            <div class="alert alert-success">
-                                                {{ session('success') }}
-                                            </div>
-                                        @endif
-                                    </span>
-                                    {{-- Content --}}
-                                    <div id="myBtnContainer-search">
-                                        <button class="btn-search active-search" onclick="filterSelection('all')"> Show
-                                            all</button>
-                                        <button class="btn-search" onclick="filterSelection('cars')"> Cars</button>
-                                        <button class="btn-search" onclick="filterSelection('animals')"> Animals</button>
-                                        <button class="btn-search" onclick="filterSelection('fruits')"> Fruits</button>
-                                        <button class="btn-search" onclick="filterSelection('colors')"> Colors</button>
-                                    </div>
-
-                                    <div class="container-search">
-                                        <div class="filterDiv cars">
-                                            <div class="card">
-                                                <img src="https://cly.1cdn.vn/2017/01/28/congly-vn_con-ga.jpg"
-                                                    alt="Avatar" style="width:100%">
-                                                <div class="container">
-                                                    <h4><b>BMW</b></h4>
-                                                    <p>Architect & Engineer</p>
-                                                </div>
-                                            </div>
+                        <div class="x_panel">
+                            <div class="x_content">
+                                <div class="col-md-12 col-sm-12  text-center">
+                                </div>
+                                <div class="clearfix"></div>
+                                <div id="card-list" class="row" style="margin:auto">
+                                    @foreach ($teacherSchedules as $teacherSchedule)
+                                        <div class="col-md-4 col-sm-4  profile_details search">
+                                            <a href="{{ route('schedules.show', $teacherSchedule->slug) }}">
+                                                <form action="ttm" method="post">
+                                                    {!! csrf_field() !!}
+                                                    <div class="well profile_view">
+                                                        <div class="col-sm-12">
+                                                            <h4 class="brief"><i>{{ $teacherSchedule->code }}</i>
+                                                            </h4>
+                                                            <div class="left col-md-7 col-sm-7">
+                                                                <h2>{{ $teacherSchedule->last_name . ' ' . $teacherSchedule->first_name }}
+                                                                </h2>
+                                                                <p><strong>Emai: </strong>
+                                                                    {{ $teacherSchedule->email }}
+                                                                </p>
+                                                                <ul class="list-unstyled">
+                                                                    <li><i class="fa fa-building"></i> Address:
+                                                                        {{ $teacherSchedule->hometown }}</li>
+                                                                    <li><i class="fa fa-phone"></i> Phone #:
+                                                                        {{ $teacherSchedule->phone }}</li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="right col-md-5 col-sm-5 text-center">
+                                                                <img src="{{ asset('public/uploads/teachers/individual/' . $teacherSchedule->image_personal) }}"
+                                                                    alt="" class="img-circle img-fluid w25">
+                                                            </div>
+                                                        </div>
+                                                        <div class=" profile-bottom text-center">
+                                                            <div class=" col-sm-6 emphasis">
+                                                            </div>
+                                                            <div class=" col-sm-6 emphasis">
+                                                                <a href="{{ URL::route('teachers.show', $teacherSchedule->id) }}"
+                                                                    class="btn btn-primary btn-sm">
+                                                                    <i class="fa fa-user"> </i> View Profile
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </a>
                                         </div>
-                                        <div class="filterDiv colors fruits">
-                                            <div class="card">
-                                                <img src="https://cly.1cdn.vn/2017/01/28/congly-vn_con-ga.jpg"
-                                                    alt="Avatar" style="width:100%">
-                                                <div class="container">
-                                                    <h4><b>Orange</b></h4>
-                                                    <p>Architect & Engineer</p>
-                                                </div>
-                                            </div>Orange
-                                        </div>
-                                        <div class="filterDiv cars">
-                                            <div class="card">
-                                                <img src="https://cly.1cdn.vn/2017/01/28/congly-vn_con-ga.jpg"
-                                                    alt="Avatar" style="width:100%">
-                                                <div class="container">
-                                                    <h4><b>Volvo</b></h4>
-                                                    <p>Architect & Engineer</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="filterDiv colors">
-                                            <div class="card">
-                                                <img src="https://cly.1cdn.vn/2017/01/28/congly-vn_con-ga.jpg"
-                                                    alt="Avatar" style="width:100%">
-                                                <div class="container">
-                                                    <h4><b>Red</b></h4>
-                                                    <p>Architect & Engineer</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="filterDiv cars">Ford</div>
-                                        <div class="filterDiv colors">Blue</div>
-                                        <div class="filterDiv animals">Cat</div>
-                                        <div class="filterDiv animals">Dog</div>
-                                        <div class="filterDiv fruits">Melon</div>
-                                        <div class="filterDiv fruits animals">Kiwi</div>
-                                        <div class="filterDiv fruits">Banana</div>
-                                        <div class="filterDiv fruits">Lemon</div>
-                                        <div class="filterDiv animals">Cow</div>
-                                    </div>
-
+                                    @endforeach
                                 </div>
                             </div>
                         </div>

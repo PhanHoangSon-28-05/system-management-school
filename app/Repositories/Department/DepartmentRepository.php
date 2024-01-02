@@ -3,7 +3,6 @@
 namespace App\Repositories\Department;
 
 use App\Repositories\BaseRepository;
-use App\Repositories\Department\DepartmentRepositoryInterface;
 use Illuminate\Support\Str;
 
 class DepartmentRepository extends BaseRepository implements DepartmentRepositoryInterface

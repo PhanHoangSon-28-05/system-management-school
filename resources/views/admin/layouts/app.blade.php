@@ -13,18 +13,22 @@
     <title>@yield('title', 'Dashboard')</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Bootstrap -->
     <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <link href="{{ URL::asset('admin/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
     </script>
     {{-- UX Solutions Datepicker 1.2+ --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     <!-- Font Awesome -->
     <link href="{{ URL::asset('admin/vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
@@ -34,7 +38,8 @@
     <link href="{{ URL::asset('admin/vendors/iCheck/skins/flat/green.css') }}" rel="stylesheet">
 
     <!-- bootstrap-progressbar -->
-    <link href="{{ URL::asset('admin/vendors/bootstrap-progressbar/css/bootstrap-progressbar_3_3_4.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('admin/vendors/bootstrap-progressbar/css/bootstrap-progressbar_3_3_4.min.css') }}"
+        rel="stylesheet">
     <!-- JQVMap -->
     <link href="{{ URL::asset('admin/vendors/jqvmap/dist/jqvmap.min.css') }}" rel="stylesheet" />
     <!-- bootstrap-daterangepicker -->
@@ -54,13 +59,17 @@
     <!-- Custom Theme Style -->
     <link href="{{ URL::asset('admin/build/css/custom.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('admin/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('admin/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('admin/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('admin/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('admin/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('admin/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css') }}"
+        rel="stylesheet">
+    <link href="{{ URL::asset('admin/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css') }}"
+        rel="stylesheet">
+    <link href="{{ URL::asset('admin/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css') }}"
+        rel="stylesheet">
+    <link href="{{ URL::asset('admin/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css') }}"
+        rel="stylesheet">
 
-    <link rel="stylesheet" href="{{ URL::asset('admin/vendors/index-admin.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('admin/build/css/search.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('admin/vendors/style/index-admin.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('admin/build/css/style/search.css') }}">
 
 </head>
 
@@ -80,7 +89,8 @@
                     <!-- menu profile quick info -->
                     <div class="profile clearfix">
                         <div class="profile_pic">
-                            <img src="{{ URL::asset('admin/build/images/img.jpg') }}" alt="..." class="img-circle profile_img">
+                            <img src="{{ URL::asset('admin/build/images/img.jpg') }}" alt="..."
+                                class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>
@@ -106,9 +116,10 @@
                     </div>
                     <div class="sidebar-footer hidden-small">
                         @auth
-                        <a href="{{ route('logout.perform') }}" data-toggle="tooltip" data-placement="top" title="Logout">
-                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-                        </a>
+                            <a href="{{ route('logout.perform') }}" data-toggle="tooltip" data-placement="top"
+                                title="Logout">
+                                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                            </a>
                         @endauth
                     </div>
                     <!-- /menu footer buttons -->
@@ -124,10 +135,12 @@
                     <nav class="nav navbar-nav">
                         <ul class=" navbar-right">
                             <li class="nav-item dropdown open" style="padding-left: 15px;">
-                                <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true"
+                                    id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
                                     {{-- {{ auth()->user()->fullname }} --}}
                                 </a>
-                                <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu dropdown-usermenu pull-right"
+                                    aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="javascript:;"> Profile</a>
                                     <a class="dropdown-item" href="javascript:;">
                                         <span class="badge bg-red pull-right">50%</span>
@@ -136,8 +149,9 @@
                                     <a class="dropdown-item" href="javascript:;">Help</a>
                                     {{-- Xử lý logut --}}
                                     @auth
-                                    <a href="{{ route('logout.perform') }}" class="dropdown-item"><i class="fa fa-sign-out pull-right"></i>
-                                        Log Out</a>
+                                        <a href="{{ route('logout.perform') }}" class="dropdown-item"><i
+                                                class="fa fa-sign-out pull-right"></i>
+                                            Log Out</a>
                                     @endauth
                                 </div>
                             </li>
@@ -232,10 +246,11 @@
 
     <script src="{{ URL::asset('admin/build/js/search.js') }}"></script>
 
+
     @if (session('message'))
-    <script>
-        swal("{{ session('message') }}", "You clicked the button!", "success");
-    </script>
+        <script>
+            swal("{{ session('message') }}", "You clicked the button!", "success");
+        </script>
     @endif
     @yield('scripts')
 </body>

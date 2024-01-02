@@ -12,5 +12,8 @@ class Detail_Class extends Model
     protected $fillable = [
         'grade_id',
         'student_id',
+        'teacher_id',
+        'descriptons',
+        'status'
     ];
 }

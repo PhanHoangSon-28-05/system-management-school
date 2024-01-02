@@ -1,0 +1,53 @@
+input[type=text],
+input[type=number],
+input[type=search],
+input[type=password] {
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid rgb(141, 139, 139);
+    border-radius: 8px;
+}
+
+textarea[type=text] {
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid rgb(141, 139, 139);
+    border-radius: 8px;
+}
+
+.text-area {
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid rgb(141, 139, 139);
+    border-radius: 8px;
+}
+
+table {
+    border: 2px solid rgb(141, 139, 139);
+    border-radius: 8px;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+li,
+a {
+    color: black
+}
+
+.ck-editor__editable[role="textbox"] {
+    /* editing area */
+    min-height: 300px;
+    font-size: 15px;
+    color: black;
+}
+
+.ck-content .image {
+    /* block images */
+    max-width: 80%;
+    margin: 20px auto;
+}

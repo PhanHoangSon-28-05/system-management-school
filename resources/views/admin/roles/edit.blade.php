@@ -116,8 +116,9 @@
                                     </div>
                                 </div>
                                 <br />
-                                <button type="submit" class="btn btn-primary">Update</button>
-
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
                             </form>
                             <!-- end form for validations -->
 

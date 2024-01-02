@@ -15,15 +15,16 @@ return new class extends Migration
             $table->id();
             $table->string('code')->unique();
             $table->string('image_personal')->unique();
-            $table->string('image_citizenIdentification')->unique();
-            $table->string('name')->unique();
+            $table->string('image_citizenIdentification_front')->unique();
+            $table->string('image_citizenIdentification_backside')->unique();
+            $table->string('last_name');
+            $table->string('first_name');
             $table->string('birthday');
             $table->string('gender')->default('male');
-            $table->string('email')->unique();
-            $table->string('phone')->unique();
+            $table->string('email');
+            $table->string('phone');
             $table->string('hometown', 4000);
-            $table->string('slug')->unique();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->string('slug');
             $table->timestamps();
         });
     }

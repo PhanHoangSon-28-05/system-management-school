@@ -31,7 +31,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.students.create');
     }
 
     /**
@@ -39,7 +39,9 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $array = $request->all();
+        $student = $this->studentsRepo->insertStudent($array);
+        return redirect()->route('students.index')->with(['message' => 'Create Student suceess']);
     }
 
     /**
@@ -48,6 +50,13 @@ class StudentController extends Controller
     public function show(string $id)
     {
         //
+        $student = $this->studentsRepo->find($id);
+
+        if (!$student) {
+            return redirect()->route('admin.students.index')->with('error', 'Student not found.');
+        }
+
+        return view('admin.students.show', ['student' => $student]);
     }
 
     /**
@@ -56,6 +65,8 @@ class StudentController extends Controller
     public function edit(string $id)
     {
         //
+        $students = $this->studentsRepo->find($id);
+        return view('admin.students.edit', ['students' => $students]);
     }
 
     /**
@@ -64,6 +75,10 @@ class StudentController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $array = $request->all();
+        $student = $this->studentsRepo->updateStudent($array, $id);
+
+        return redirect()->route('students.index')->with(['message' => 'Update success']);
     }
 
     /**
@@ -71,6 +86,10 @@ class StudentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $student = $this->studentsRepo->deleteStudent($id);
+
+        return response()->json([
+            'message' => 'Student deteled successfully '
+        ]);
     }
 }

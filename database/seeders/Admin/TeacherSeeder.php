@@ -13,7 +13,6 @@ class TeacherSeeder extends Seeder
      */
     public function run(): void
     {
-        //
         $teachers =
             [
                 [
@@ -27,7 +26,6 @@ class TeacherSeeder extends Seeder
                     'phone' => '0944944944',
                     'hometown' => 'Da Nang',
                     'slug' => 'gv1',
-                    'user_id' => 4,
                 ],
                 [
                     'code' => '7464534536',
@@ -40,7 +38,6 @@ class TeacherSeeder extends Seeder
                     'phone' => '0933939393',
                     'hometown' => 'Hue',
                     'slug' => 'gv2',
-                    'user_id' => 5,
                 ], [
                     'code' => '24347845456',
                     'image_personal' => 'default_image5.jpg',
@@ -52,7 +49,6 @@ class TeacherSeeder extends Seeder
                     'phone' => '0955955955',
                     'hometown' => 'Quang Nam',
                     'slug' => 'gv3',
-                    'user_id' => 6,
                 ],
             ];
 

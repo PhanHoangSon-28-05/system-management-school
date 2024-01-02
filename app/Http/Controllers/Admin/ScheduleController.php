@@ -3,16 +3,29 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\Rank\RankRepositoryInterface;
+use App\Repositories\Teacher\TeacherRepositoryInterface;
 use Illuminate\Http\Request;
 
 class ScheduleController extends Controller
 {
+    protected $teacherRepo;
+    protected $rankRepo;
+
+    public function __construct(
+        TeacherRepositoryInterface $teacherRepo,
+        RankRepositoryInterface $rankRepo,
+    ) {
+        $this->teacherRepo = $teacherRepo;
+        $this->rankRepo = $rankRepo;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('admin.schedules.index');
+        $teacherSchedules = $this->teacherRepo->getAll();
+        return view('admin.schedules.index', ['teacherSchedules' => $teacherSchedules]);
     }
 
     /**
@@ -20,7 +33,6 @@ class ScheduleController extends Controller
      */
     public function create()
     {
-        return view('admin.schedules.create');
     }
 
     /**
@@ -34,9 +46,10 @@ class ScheduleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $slug)
     {
-        //
+        $ranks = $this->rankRepo->getAll();
+        return view('admin.schedules.showteacher', ['ranks' => $ranks]);
     }
 
     /**

@@ -95,8 +95,9 @@
                                     </div>
                                 </div>
                                 <br />
-                                <button type="submit" class="btn btn-primary">ADD</button>
-
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary">ADD</button>
+                                </div>
                             </form>
                             <!-- end form for validations -->
 

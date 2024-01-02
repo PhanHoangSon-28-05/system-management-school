@@ -8,16 +8,24 @@ use App\Repositories\Department\DepartmentRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Department;
+use App\Repositories\Department\GradeDepartment\GradeDepartmentRepositoryInterface;
+use App\Repositories\Department\TeacherDepartment\TeacherDepartmentRepositoryInterface;
 
 class DepartmentController extends Controller
 {
 
     protected $departmentRepo;
+    protected $teacherDepartmentRepo;
+    protected $gradeDepartmentRepo;
 
     public function __construct(
         DepartmentRepositoryInterface $departmentRepo,
+        TeacherDepartmentRepositoryInterface $teacherDepartmentRepo,
+        GradeDepartmentRepositoryInterface $gradeDepartmentRepo
     ) {
         $this->departmentRepo = $departmentRepo;
+        $this->teacherDepartmentRepo = $teacherDepartmentRepo;
+        $this->gradeDepartmentRepo = $gradeDepartmentRepo;
     }
     /**
      * Display a listing of the resource.
@@ -55,9 +63,13 @@ class DepartmentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($slug)
     {
-        //
+        $teacherDepartments = $this->teacherDepartmentRepo->indexTeacher_Department($slug);
+        // dd($teacherDepartments);
+        $gradeDepartments = $this->gradeDepartmentRepo->indexGrade_Department($slug);
+        // dd($gradeDepartments);
+        return view('admin.departments.view', ['teacherDepartments' => $teacherDepartments, 'gradeDepartments' => $gradeDepartments, 'slugDepartment' => $slug]);
     }
 
     /**

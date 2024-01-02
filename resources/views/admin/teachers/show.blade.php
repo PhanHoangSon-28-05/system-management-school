@@ -1,125 +1,85 @@
 @extends('admin.layouts.app')
-@section('title', 'Show teacher')
+
+@section('title', 'Show Teacher')
+
 @section('content')
-<div class="right_col" role="main">
-    <div class="row">
-
-        <div class="clearfix"></div>
+    <div class="right_col" role="main">
         <div class="row">
-            <div class="col-md-12 col-sm-12 ">
-                <div class="">
-                    <div class="x_content">
-                        <style>
-                            .ul {
-                                font-size: 25px;
-                                list-style-type: none;
-                            }
+            <div class="clearfix"></div>
 
-                            .li-newline {
-                                clear: both;
-                                margin-bottom: 10px;
-                            }
-                        </style>
-                        <!-- start form for validation -->
-
-                        <div class="">
-                            <div style="margin-left: 25%;">
-                                <div style="display: inline-block;">
-                                    <img style="width: 20em; height: 20em; background: blue;" src="{{ URL::asset('admin/build/images/$teacher->image_personal') }}" alt="..." class="img-circle profile_img">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Show Teacher Information</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="teacher-info-container">
+                                <div class="content-center w-100 d-flex justify-content-center align-items-center">
+                                    <img src="{{ asset('public/uploads/teachers/individual/' . $teacher->image_personal) }}"
+                                        alt="Teacher Image" class="img-circle profile_img w-25">
+                                </div>
+                                <div class="teacher-details mt-3">
+                                    <ul>
+                                        <li class="fs-5">
+                                            <span class="label">Full Name:</span>
+                                            {{ $teacher->name }}
+                                        </li>
+                                        <li class="fs-5">
+                                            <span class="label">Teacher Code:</span>
+                                            {{ $teacher->code }}
+                                        </li>
+                                        <li class="fs-5">
+                                            <span class="label">Gender:</span>
+                                            {{ $teacher->gender }}
+                                        </li>
+                                        <li class="fs-5">
+                                            <span class="label">Birthday:</span>
+                                            {{ $teacher->birthday }}
+                                        </li>
+                                        <li class="fs-5">
+                                            <span class="label">Hometown:</span>
+                                            {{ $teacher->hometown }}
+                                        </li>
+                                        <li class="fs-5">
+                                            <span class="label">Phone:</span>
+                                            {{ $teacher->phone }}
+                                        </li>
+                                        <li class="fs-5">
+                                            <span class="label">Email:</span>
+                                            {{ $teacher->email }}
+                                        </li>
+                                        <li class="fs-5">
+                                            <span class="label">Citizen Identification Image:</span>
+                                            <div class="identification-image">
+                                                <div class="row">
+                                                    <div class="col-6"><img
+                                                            src="{{ asset('public/uploads/teachers/citizenIdentification/' . $teacher->image_citizenIdentification_front) }}"
+                                                            alt="Identification Image">
+                                                    </div>
+                                                    <div class="col-6"><img
+                                                            src="{{ asset('public/uploads/teachers/citizenIdentification/' . $teacher->image_citizenIdentification_backside) }}"
+                                                            alt="Identification Image">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
-                            <div class="">
-
-                                <ul class="ul">
-                                    <li class="li-newline" style="display: flex; align-items: center;">
-                                        <label class="col-form-label col-md-4 col-sm-4 label-align" for="fullname" style="font-weight: bold; font-size:25px; display: flex;">
-                                            <span style="flex: 1;">Full Name</span>
-                                            <span class="required" style="color: red;">*</span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6" style="display: flex; align-items: center;">
-                                            {{ $teacher->name}}
-                                        </div>
-                                    </li>
-
-                                    <li class="li-newline" style="display: flex; align-items: center;">
-                                        <label class="col-form-label col-md-4 col-sm-4 label-align" for="fullname" style="font-weight: bold; font-size:25px;">
-                                            Teacher Code
-                                            <span class="required" style="color: red;">*</span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6" style="display: flex; align-items: center;">
-                                            {{ $teacher->code}}
-                                        </div>
-                                    </li>
-
-                                    <li class="li-newline" style="display: flex; align-items: center;">
-                                        <label class="col-form-label col-md-4 col-sm-4 label-align" for="fullname" style="font-weight: bold; font-size:25px;">
-                                            Gender
-                                            <span class="required" style="color: red;">*</span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6" style="display: flex; align-items: center;">
-                                            {{ $teacher->gender }}
-                                        </div>
-                                    </li>
-
-                                    <li class="li-newline" style="display: flex; align-items: center;">
-                                        <label class="col-form-label col-md-4 col-sm-4 label-align" for="fullname" style="font-weight: bold; font-size:25px;">
-                                            Birthday
-                                            <span class="required" style="color: red;">*</span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6" style="display: flex; align-items: center;">
-                                            {{ $teacher->birthday }}
-                                        </div>
-                                    </li>
-
-                                    <li class="li-newline" style="display: flex; align-items: center;">
-                                        <label class="col-form-label col-md-4 col-sm-4 label-align" for="fullname" style="font-weight: bold; font-size:25px;">
-                                            Hometown
-                                            <span class="required" style="color: red;">*</span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6" style="display: flex; align-items: center;">
-                                            {{ $teacher->hometown }}
-                                        </div>
-                                    </li>
-
-                                    <li class="li-newline" style="display: flex; align-items: center;">
-                                        <label class="col-form-label col-md-4 col-sm-4 label-align" for="fullname" style="font-weight: bold; font-size:25px;">
-                                            Phone
-                                            <span class="required" style="color: red;">*</span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6" style="display: flex; align-items: center;">
-                                            {{ $teacher->phone }}
-                                        </div>
-                                    </li>
-
-                                    <li class="li-newline" style="display: flex; align-items: center;">
-                                        <label class="col-form-label col-md-4 col-sm-4 label-align" for="fullname" style="font-weight: bold; font-size:25px;">
-                                            Email
-                                            <span class="required" style="color: red;">*</span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6" style="display: flex; align-items: center;">
-                                            {{ $teacher->email }}
-                                        </div>
-                                    </li>
-                                    <li class="li-newline" style="display: flex; align-items: center;">
-                                        <label class="col-form-label col-md-4 col-sm-4 label-align" for="fullname" style="font-weight: bold; font-size:25px;">
-                                            Citizen identification image
-                                            <span class="required" style="color: red;">*</span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6" style="display: flex; align-items: center;">
-                                            <div style="width: 20em; height: 10em; background-color: blue; display: flex; justify-content: center; align-items: center;">
-                                                <img src="{{ URL::asset('admin/build/images/$teacher->image_citizenIdentification') }}" alt="Image" style="max-width: 100%; max-height: 100%;">
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
-                        <!-- end form for validations -->
+                        <div class="ms-auto p-2 bd-highlight">
+                            <a class="btn btn-success btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 "
+                                href="{{ URL::route('teachers.show', $teacher->id) }}"><i class="fas fa-user-plus"></i>
+                                <br />Create
+                                Acount
+                            </a>
+                        </div>
 
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection

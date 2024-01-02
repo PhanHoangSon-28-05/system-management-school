@@ -30,8 +30,6 @@ class UserController extends Controller
 
     public function create()
     {
-        $roles = $this->roleRepo->getRoles();
-        return view('admin.users.create', ['roles' => $roles]);
     }
     /**
      * Store a newly created resource in storage.
