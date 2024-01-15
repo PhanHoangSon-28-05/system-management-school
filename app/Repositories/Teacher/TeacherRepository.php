@@ -21,6 +21,15 @@ class TeacherRepository extends BaseRepository implements TeacherRepositoryInter
         return \App\Models\Teacher::class;
     }
 
+    public function getAllTeacher()
+    {
+        return $this->model->paginate(9);
+    }
+
+    public function getTeacherToSlug($slug)
+    {
+        return $this->model->where('slug', $slug)->first();
+    }
 
     public function findById(string $id)
     {
@@ -142,5 +151,16 @@ class TeacherRepository extends BaseRepository implements TeacherRepositoryInter
         }
 
         return false;
+    }
+
+    public function checkAccountTeacher(string $id)
+    {
+        $check = $this->model->find($id);
+        // dd($check->users->first());
+        if ($check->users->first() == null) {
+            return false;
+        }
+
+        return true;
     }
 }

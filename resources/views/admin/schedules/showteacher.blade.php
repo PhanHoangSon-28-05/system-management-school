@@ -7,16 +7,15 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Bordered table <small>Bordered table subtitle</small>
-
-                        </h2>
-                        <a type="button" href="{{ URL::route('teachers.create') }}" class="btn float-end btn-info text-white">
+                        <h2>Bordered table <small>Bordered table subtitle</small></h2>
+                        <a type="button"
+                            href="{{ URL::route('schedules.teachers-scheldule.add-scheldule-teacher', $slugTeacher) }}"
+                            class="btn float-end btn-info text-white">
                             ADD
                         </a>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
-
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -27,31 +26,38 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
+                                @foreach ($periods as $period)
+                                    <tr>
+                                        <th scope="row">
+                                            {{ $period->name }}
+                                        </th>
+                                        @foreach ($scheduleRanks as $scheduleRank)
+                                            @if ($scheduleRank != null)
+                                                @foreach ($scheduleProids as $array)
+                                                    @foreach ($array as $value)
+                                                        @php
+                                                            $value = $array->first(); // Get the first value in the array
+                                                        @endphp
+                                                        <td>
+                                                            @if ($value && $value->detail_schedule)
+                                                                {{ $value->grades->name }}
+                                                                <br>
+                                                                <span>{{ $value->detail_schedule->subjects ? $value->detail_schedule->subjects->name : 'N/A' }}</span>
+                                                                <br>
+                                                                <span>{{ $value->detail_schedule->rooms ? $value->detail_schedule->rooms->name : 'N/A' }}</span>
+                                                            @endif
+                                                        </td>
+                                                    @endforeach
+                                                @endforeach
+                                            @endif
+                                        @endforeach
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 @endsection

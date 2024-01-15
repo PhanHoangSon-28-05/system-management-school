@@ -119,9 +119,7 @@
 @endsection
 @section('scripts')
     <script>
-        // Add event listener to the select element
         document.getElementById('selectOption').addEventListener('change', function() {
-            // Get the selected option value
             var selectedOption = this.value;
 
             // Hide all student-info-container elements
@@ -129,8 +127,6 @@
             studentInfoContainers.forEach(function(container) {
                 container.style.display = 'none';
             });
-
-            // Display the selected student-info-container
             document.getElementById(selectedOption).style.display = 'block';
         });
     </script>

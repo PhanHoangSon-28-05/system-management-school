@@ -79,7 +79,7 @@
                                                                         href="{{ route('grades.teachers-gradeedit', [$slugGrade, $teacherGrade->id]) }}"><i
                                                                             class="fas fa-edit"></i> Edit</a>
                                                                     <a href="{{ URL::route('teachers.show', $teacherGrade->id) }}"
-                                                                        class="btn btn-primary btn-sm">
+                                                                        class="btn btn-primary btn-xs rounded-3">
                                                                         <i class="fa fa-user"> </i> View Profile
                                                                     </a>
                                                                 </div>
@@ -174,7 +174,7 @@
                                                                         href="{{ route('grades.students-gradeedit', [$slugGrade, $studentgrade->id]) }}"><i
                                                                             class="fas fa-edit"></i> Edit</a>
                                                                     <a href="{{ URL::route('students.show', $studentgrade->id) }}"
-                                                                        class="btn btn-primary btn-sm">
+                                                                        class="btn btn-primary btn-xs rounded-3">
                                                                         <i class="fa fa-user"> </i> View Profile
                                                                     </a>
                                                                 </div>
@@ -194,7 +194,7 @@
         </div>
     </div>
 @endsection
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         $('.delete-grade').on('click', function() {
@@ -234,17 +234,17 @@
     <script>
         function searchProduct() {
             const input = document.getElementById('filter').value.toUpperCase();
+            console.log("Search input:", input);
 
             const cardContainer = document.getElementById('card-list');
-            console.log(cardContainer);
+            console.log("Card container:", cardContainer);
 
             const cards = cardContainer.getElementsByClassName('profile_details');
-            console.log(cards);
+            console.log("Cards:", cards);
 
             for (let i = 0; i < cards.length; i++) {
                 let title = cards[i].querySelector(".search h2");
-
-                console.log(title);
+                console.log("Title:", title);
 
                 if (title.innerText.toUpperCase().indexOf(input) > -1) {
                     cards[i].style.display = "";

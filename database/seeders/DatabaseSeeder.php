@@ -11,6 +11,7 @@ use Database\Seeders\Admin\RoleDataSeeder;
 use Database\Seeders\Admin\TeacherSeeder;
 use Database\Seeders\Admin\DepartmentSeeder;
 use Database\Seeders\Admin\ClassSeeder;
+use Database\Seeders\Admin\RoomSeeder;
 use Database\Seeders\Admin\StudentSeeder;
 use Database\Seeders\Admin\SubjectSeeder;
 use Illuminate\Database\Seeder;
@@ -29,13 +30,14 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $this->call(RoleDataSeeder::class);
-        $this->call(PermissionSeeder::class);
+        // $this->call(RoleDataSeeder::class);
+        // $this->call(PermissionSeeder::class);
         // $this->call(UserSeederSuperAdmin::class);
-        $this->call(TeacherSeeder::class);
-        $this->call(DepartmentSeeder::class);
-        $this->call(ClassSeeder::class);
-        $this->call(SubjectSeeder::class);
+        // $this->call(TeacherSeeder::class);
+        // $this->call(DepartmentSeeder::class);
+        // $this->call(ClassSeeder::class);
+        // $this->call(SubjectSeeder::class);
         $this->call(StudentSeeder::class);
+        // $this->call(RoomSeeder::class);
     }
 }

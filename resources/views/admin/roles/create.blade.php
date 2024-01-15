@@ -23,9 +23,9 @@
                                         <span class="required" style="color: red;">*</span></label>
                                     <div class="col-md-10 col-sm-6">
                                         <input class="form-control" data-validate-length-range="6" data-validate-words="2"
-                                            value="{{ old('name') }}" name="name" id="name" type="text"
-                                            placeholder="super-admin" required="required" />
-                                        @error('name')
+                                            value="{{ old('display_name') }}" name="display_name" id="display_name"
+                                            type="text" placeholder="super-admin" required="required" />
+                                        @error('display_name')
                                             <span class="text-danger">{{ $massage }}</span><br>
                                         @enderror
                                     </div>

@@ -12,16 +12,16 @@ class Student_GradeController extends Controller
 {
     protected $gradeRepo;
     protected $studentRpo;
-    protected $studentgradeRepo;
+    protected $studentGradeRepo;
 
     public function __construct(
         GradeRepositoryInterface $gradeRepo,
         StudentRepositoryInterface $studentRpo,
-        StudentGradeRepositoryInterface $studentgradeRepo
+        StudentGradeRepositoryInterface $studentGradeRepo
     ) {
         $this->gradeRepo = $gradeRepo;
         $this->studentRpo = $studentRpo;
-        $this->studentgradeRepo = $studentgradeRepo;
+        $this->studentGradeRepo = $studentGradeRepo;
     }
     /**
      * Display a listing of the resource.
@@ -37,8 +37,8 @@ class Student_GradeController extends Controller
     public function add()
     {
         $grades = $this->gradeRepo->getAll();
-        $allstudentIds = $this->studentgradeRepo->getAllstudentIds();
-        $students = $this->studentgradeRepo->getstudentsNotIngrade($allstudentIds);
+        $allstudentIds = $this->studentGradeRepo->getAllstudentIds();
+        $students = $this->studentGradeRepo->getstudentsNotIngrade($allstudentIds);
         // dd($students);
         return view('admin.grades.studentsgrades.add', ['grades' => $grades, 'students' => $students]);
     }
@@ -50,7 +50,7 @@ class Student_GradeController extends Controller
     {
         $all = $request->all();
 
-        $grade_student = $this->studentgradeRepo->createStudentGrade($all);
+        $grade_student = $this->studentGradeRepo->createStudentGrade($all);
 
         return redirect()->route('grades.index')->with(['message' => 'Create success']);
     }
@@ -67,8 +67,8 @@ class Student_GradeController extends Controller
      */
     public function edit(string $sluggrade, string $id)
     {
-        $grades = $this->studentgradeRepo->edit_grade($sluggrade);
-        $grade_selected = $this->studentgradeRepo->index_grade($sluggrade);
+        $grades = $this->studentGradeRepo->edit_grade($sluggrade);
+        $grade_selected = $this->studentGradeRepo->index_grade($sluggrade);
         $students = $this->studentRpo->find($id);
 
         // dd($students);
@@ -81,7 +81,7 @@ class Student_GradeController extends Controller
     public function update(Request $request, string $idstudent)
     {
         $all = $request->all();
-        $grade_student = $this->studentgradeRepo->updatestudent_grade($idstudent, $all);
+        $grade_student = $this->studentGradeRepo->updatestudent_grade($idstudent, $all);
 
         return redirect()->route('grades.index')->with(['message' => 'Update success']);
     }

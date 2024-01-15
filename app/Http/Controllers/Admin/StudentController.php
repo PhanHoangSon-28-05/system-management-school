@@ -55,8 +55,8 @@ class StudentController extends Controller
         if (!$student) {
             return redirect()->route('admin.students.index')->with('error', 'Student not found.');
         }
-
-        return view('admin.students.show', ['student' => $student]);
+        $check = $this->studentsRepo->checkAccountStudent($id);
+        return view('admin.students.show', ['student' => $student, 'check' => $check]);
     }
 
     /**

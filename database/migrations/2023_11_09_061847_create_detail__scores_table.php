@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('scores_1')->default('0');
             $table->string('scores_2')->default('0');
             $table->string('final_grade')->default('0');
+            $table->string('medium_score')->default('0');
             $table->string('scale_4')->default('0');
 
             $table->timestamps();

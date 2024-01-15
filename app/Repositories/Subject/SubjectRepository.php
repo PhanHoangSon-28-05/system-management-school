@@ -14,9 +14,10 @@ class SubjectRepository extends BaseRepository implements SubjectRepositoryInter
         return \App\Models\Subject::class;
     }
 
-    public function getSubject()
+    public function getSubjectDepartment()
     {
-        return $this->model->select('Subject_name')->take(5)->get();
+        $subjects = $this->model->all();
+        return $subjects;
     }
 
     public function insertSubject($attributes = [])

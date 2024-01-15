@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -78,6 +79,18 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Rank\RankRepositoryInterface::class,
             \App\Repositories\Rank\RankRepository::class
         );
+        $this->app->singleton(
+            \App\Repositories\Period\PeriodRepositoryInterface::class,
+            \App\Repositories\Period\PeriodRepository::class
+        );
+        $this->app->singleton(
+            \App\Repositories\Schedule\ScheduleRepositoryInterface::class,
+            \App\Repositories\Schedule\ScheduleRepository::class
+        );
+        $this->app->singleton(
+            \App\Repositories\Score\ScoreRepositoryInterface::class,
+            \App\Repositories\Score\ScoreRepository::class
+        );
     }
 
     /**
@@ -85,6 +98,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Paginator::useBootstrapFive();
     }
 }

@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\Grade\Teacher_GradeController;
 use App\Http\Controllers\Admin\GradeController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\Scheldule\Teacher_SchelduleController;
+use App\Http\Controllers\Admin\Score\ScoreController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\User\TeacherUserController;
 use App\Models\Department;
@@ -59,21 +60,25 @@ Route::get('/teacherUser', [TeacherUserController::class, 'index'])->name('teach
 Route::prefix('admin')->middleware('auth')->group(function () {
     // Routes in role
     Route::prefix('roles')->controller(RoleController::class)->name('roles.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::post('/', 'store')->name('store');
-        Route::get('/create', 'create')->name('create');
-        Route::get('/{coupon}/edit', 'edit')->name('edit');
-        Route::put('/{coupon}', 'update')->name('update');
-        Route::delete('/{coupon}', 'destroy')->name('destroy');
+        // Route::get('/', 'index')->name('index');
+        // Route::post('/', 'store')->name('store');
+        // Route::get('/create', 'create')->name('create');
+        // Route::get('/{coupon}/edit', 'edit')->name('edit');
+        // Route::put('/{coupon}', 'update')->name('update');
+        // Route::delete('/{coupon}', 'destroy')->name('destroy');
+
+        Route::get('/', 'index')->name('index')->middleware('permission:show-role');
+        Route::post('/', 'store')->name('store')->middleware('permission:create-role');
+        Route::get('/create', 'create')->name('create')->middleware('permission:create-role');
+        Route::get('/{coupon}/edit', 'edit')->name('edit')->middleware('permission:update-role');
+        Route::put('/{coupon}', 'update')->name('update')->middleware('permission:update-role');
+        Route::delete('/{coupon}', 'destroy')->name('destroy')->middleware('permission:delete-role');
     });
     //
 
     // Routes in User
     Route::prefix('users')->controller(UserController::class)->name('users.')->group(function () {
         Route::get('/', 'index')->name('index');
-        /* Route::post('/', 'store')->name('store');
-        Route::get('/create', 'create')->name('create');
-        Route::get('/{coupon}', 'show')->name('show');==> false*/
         Route::get('/{coupon}/edit', 'edit')->name('edit');
         Route::put('/{coupon}', 'update')->name('update');
         Route::delete('/{coupon}', 'destroy')->name('destroy');
@@ -88,6 +93,10 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('/{coupon}/edit', 'edit')->name('edit');
         Route::put('/{coupon}', 'update')->name('update');
         Route::delete('/{coupon}', 'destroy')->name('destroy');
+        Route::prefix('users')->controller(UserController::class)->name('users.')->group(function () {
+            Route::get('/show/{coupon}/add-acount', 'addCountTeacher')->name('addCountTeacher');
+            Route::post('/show/{slugTeacher}/add-acount/', 'storeCountTeacher')->name('storeCountTeacher');
+        });
     });
     // Routes in Student
     Route::prefix('students')->controller(StudentController::class)->name('students.')->group(function () {
@@ -98,6 +107,10 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('/{coupon}/edit', 'edit')->name('edit');
         Route::put('/{coupon}', 'update')->name('update');
         Route::delete('/{coupon}', 'destroy')->name('destroy');
+        Route::prefix('users')->controller(UserController::class)->name('users.')->group(function () {
+            Route::get('/show/{coupon}/add-acount', 'addCountStudent')->name('addCountStudent');
+            Route::post('/show/{slugStudent}/add-acount/', 'storeCountStudent')->name('storeCountStudent');
+        });
     });
     // Routes in Subject
     Route::prefix('subjects')->controller(SubjectController::class)->name('subjects.')->group(function () {
@@ -170,7 +183,20 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::prefix('scheldule')->controller(ScheduleController::class)->name('schedules.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/show/{slug}', 'show')->name('show');
-        Route::prefix('/show/teachers-scheldule')->controller(Teacher_SchelduleController::class)->name('teachers-scheldule')->group(function () {
+        Route::prefix('/show/teachers-scheldule')->controller(Teacher_SchelduleController::class)->name('teachers-scheldule.')->group(function () {
+            Route::get('{slugTeacher}/add', 'add')->name('add-scheldule-teacher');
+            Route::get('/get-periods/{rankId}/{slugTeacher}', 'rank_update_periods')->name('rank-update-periods');
+            Route::post('/{slugTeacher}', 'store')->name('store');
         });
+    });
+
+    Route::prefix('scores')->controller(ScoreController::class)->name('scores.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/show/{slug}', 'showStudentClass')->name('show');
+        Route::get('/add/{slug}', 'addScore')->name('addScore');
+        Route::post('/add/{slugGrade}', 'add')->name('add');
+        Route::get('/show/{slugGrade}/view/{slugStudent}', 'viewScore')->name('viewScore');
+        Route::get('/show/{slugGrade}/view/{slugStudent}/edit/{id}', 'editScore')->name('editScore');
+        Route::put('/edit/{slugGrade}/{id}', 'update')->name('update');
     });
 });

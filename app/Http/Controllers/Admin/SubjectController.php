@@ -84,10 +84,9 @@ class SubjectController extends Controller
      */
     public function destroy(string $id)
     {
-        //
         $subject = $this->subjectRepo->delete($id);
         return response()->json([
-            'message' => 'Story deteled successfully '
+            'message' => 'Subject deteled successfully'
         ]);
     }
 }

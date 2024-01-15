@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Teacher extends Model
@@ -23,12 +24,16 @@ class Teacher extends Model
         'phone',
         'hometown',
         'slug',
-        'user_id',
     ];
 
 
     public function detail__departments(): BelongsToMany
     {
         return $this->belongsToMany(Department::class, 'detail__departments', 'teacher_id', 'department_id');
+    }
+
+    public function users(): BelongsToMany
+    {
+        return $this->BelongsToMany(User::class, 'teacher_user', 'teacher_id', 'user_id');
     }
 }

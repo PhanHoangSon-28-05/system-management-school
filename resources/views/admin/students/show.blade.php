@@ -62,11 +62,15 @@
                             </div>
                         </div>
                         <div class="ms-auto p-2 bd-highlight">
-                            <a class="btn btn-success btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 "
-                                href="{{ URL::route('students.show', $student->id) }}"><i class="fas fa-user-plus"></i>
-                                <br />Create
-                                Acount
-                            </a>
+                            @if ($check)
+                            @else
+                                <a class="btn btn-success btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 "
+                                    href="{{ URL::route('students.users.addCountStudent', $student->slug) }}"><i
+                                        class="fas fa-user-plus"></i>
+                                    <br />Create
+                                    Acount
+                                </a>
+                            @endif
                         </div>
 
                     </div>

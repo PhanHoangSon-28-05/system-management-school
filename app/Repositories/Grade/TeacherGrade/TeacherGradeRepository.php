@@ -25,6 +25,19 @@ class TeacherGradeRepository extends BaseRepository implements TeacherGradeRepos
         return $Teachers_dep;
     }
 
+    public function indexHomeroomTeacher_Grade($slug)
+    {
+        $grade = Grade::where('slug', $slug)->first();
+
+        if (!$grade) {
+        }
+        $Teachers_dep = $grade->detail_Class;
+        $homeroomTeacher = $Teachers_dep->where('status', 1)->first();
+        $dataHomeroomTeacher = $homeroomTeacher->teachers;
+        // dd($dataHomeroomTeacher);
+        return $dataHomeroomTeacher;
+    }
+
     public function getAllTeacherIds()
     {
         $allTeacher = $this->model->where('teacher_id', '<>', 'null')->pluck('Teacher_id')->toArray();

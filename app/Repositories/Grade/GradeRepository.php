@@ -18,7 +18,10 @@ class GradeRepository extends BaseRepository implements GradeRepositoryInterface
     {
         return $this->model->select('name')->take(5)->get();
     }
-
+    public function getGradeToSlug($slug)
+    {
+        return $this->model->where('slug', $slug)->first();
+    }
     public function insertGrade($attributes = [])
     {
         // Implement your logic to insert a user here

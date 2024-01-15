@@ -80,7 +80,7 @@
                                                                         href="{{ route('departments.teachers-departmentedit', [$slugDepartment, $teacherDepartment->id]) }}"><i
                                                                             class="fas fa-edit"></i> Edit</a>
                                                                     <a href="{{ URL::route('teachers.show', $teacherDepartment->id) }}"
-                                                                        class="btn btn-primary btn-sm">
+                                                                        class="btn btn-primary btn-xs rounded-3">
                                                                         <i class="fa fa-user"> </i> View Profile
                                                                     </a>
                                                                 </div>

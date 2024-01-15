@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Student extends Model
@@ -23,11 +24,15 @@ class Student extends Model
         'phone',
         'hometown',
         'slug',
-        'user_id',
     ];
 
-    public function detail__departments(): BelongsToMany
+    public function detail__class(): BelongsToMany
     {
-        return $this->belongsToMany(Department::class, 'detail__departments', 'student_id', 'department_id');
+        return $this->BelongsToMany(Grade::class, 'detail__classes', 'student_id', 'grade_id');
+    }
+
+    public function users(): BelongsToMany
+    {
+        return $this->BelongsToMany(User::class, 'student_user', 'student_id', 'user_id');
     }
 }

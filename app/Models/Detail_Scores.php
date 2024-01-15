@@ -11,10 +11,11 @@ class Detail_Scores extends Model
 
     protected $fillable = [
         'score_id',
-        'attendance_grade',
-        'scores_1',
-        'scores_2',
-        'final_grade',
+        'attendance',
+        'scores_2_1',
+        'scores_2_2',
+        'final_score',
+        'medium_score',
         'scale_4',
     ];
 }

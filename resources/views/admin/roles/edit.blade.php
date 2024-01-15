@@ -27,16 +27,17 @@
                                     <div class="col-md-10 col-sm-6">
                                         @if ($role->slug == 'super-admin')
                                             <input class="form-control" type="text" data-validate-length-range="6"
-                                                data-validate-words="2" value="{{ old('name') ?? $role->name }}"
-                                                name="name" id="name" required="required" readonly />
+                                                data-validate-words="2"
+                                                value="{{ old('display_name') ?? $role->display_name }}" name="display_name"
+                                                id="display_name" required="required" readonly />
                                             @error('name')
                                                 <span class="text-danger">{{ $message }}</span><br>
                                             @enderror
                                         @else
                                             <input class="form-control" type="text" data-validate-length-range="6"
-                                                data-validate-words="2" value="{{ old('name') ?? $role->name }}"
-                                                name="name" id="name" required="required" />
-                                            @error('name')
+                                                data-validate-words="2" value="{{ old('display_name') ?? $role->name }}"
+                                                name="display_name" id="display_name" required="required" />
+                                            @error('display_name')
                                                 <span class="text-danger">{{ $message }}</span><br>
                                             @enderror
                                         @endif

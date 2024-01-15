@@ -38,7 +38,7 @@ class RoomController extends Controller
         $array = $request->all();
         $room = $this->roomRepo->insertRoom($array);
 
-        return redirect()->route('rooms.index')->with(['massage' => 'Create suceess']);
+        return redirect()->route('rooms.index')->with(['message' => 'Create suceess']);
     }
 
     /**

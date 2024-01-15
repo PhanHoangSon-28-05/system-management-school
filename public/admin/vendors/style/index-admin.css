@@ -8,6 +8,14 @@ input[type=password] {
     border-radius: 8px;
 }
 
+select {
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid rgb(141, 139, 139);
+    border-radius: 8px;
+}
+
+
 textarea[type=text] {
     width: 100%;
     box-sizing: border-box;

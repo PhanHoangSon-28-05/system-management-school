@@ -2,6 +2,7 @@
 
 namespace Database\Seeders\Admin;
 
+use App\Models\Grade;
 use App\Models\Student;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,47 +14,37 @@ class StudentSeeder extends Seeder
      */
     public function run(): void
     {
-        $students =
-            [
-                [
-                    'code' => '12334456',
-                    'image_personal' => 'defaultimage1.jpg',
-                    'image_citizenIdentification' => 'defaultimage3.jpg',
-                    'name' => 'Sinh viên 1',
-                    'birthday' => '23/3/1999',
-                    'gender' => 'male',
-                    'email' => 'sv1@gmail.com',
-                    'phone' => '0101993993',
-                    'hometown' => 'Da Nang',
-                    'slug' => 'sv1',
-                ],
-                [
-                    'code' => '12334536',
-                    'image_personal' => 'defaultimage2.jpg',
-                    'image_citizenIdentification' => 'defaultimage4.jpg',
-                    'name' => 'Sinh viên 2',
-                    'birthday' => '12/2/1999',
-                    'gender' => 'female',
-                    'email' => 'sv2@gmail.com',
-                    'phone' => '0933033033',
-                    'hometown' => 'Hue',
-                    'slug' => 'sv2',
-                ], [
-                    'code' => '123345456',
-                    'image_personal' => 'defaultimage5.jpg',
-                    'image_citizenIdentification' => 'defaultimage6.jpg',
-                    'name' => 'Sinh viên 3',
-                    'birthday' => '12/3/1999',
-                    'gender' => 'female',
-                    'email' => 'sv3@gmail.com',
-                    'phone' => '0987987987',
-                    'hometown' => 'Quang Nam',
-                    'slug' => 'sv3',
-                ],
+        $students = [];
+
+        for ($i = 1; $i <= 120; $i++) {
+            $students[] = [
+                'code' => 'SV' . rand(1111, 999999999) . $i,
+                'image_personal' => 'teacher_image_' . $i,
+                'image_citizenIdentification_front' => 'front_image_' . $i,
+                'image_citizenIdentification_backside' => 'backside_image_' . $i,
+                'last_name' => 'Lastname' . $i,
+                'first_name' => 'Firstname' . $i,
+                'birthday' => '23/3/1999',
+                'gender' => ($i % 2 == 0) ? 'male' : 'female',
+                'email' => 'sv' . $i . '@gmail.com',
+                'phone' => '0101993993',
+                'hometown' => 'Da Nang',
+                'slug' => 'sv' . $i,
             ];
+        }
 
         foreach ($students as $student) {
-            Student::updateOrCreate($student);
+            $studentModel = Student::updateOrCreate($student);
+
+            $gradeIds = Grade::pluck('id')->random(2);
+
+            $pivotData = [];
+            foreach ($gradeIds as $gradeId) {
+                $grade = Grade::find($gradeId);
+                $pivotData[$gradeId] = ['descriptions' => 'Sinh viên lớp ' . $grade->name];
+            }
+
+            $studentModel->detail__class()->sync($pivotData);
         }
     }
 }

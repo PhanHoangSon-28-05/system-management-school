@@ -15,6 +15,10 @@ class StudentRepository extends BaseRepository implements StudentRepositoryInter
         return \App\Models\Student::class;
     }
 
+    public function getStudentToSlug($slug)
+    {
+        return $this->model->where('slug', $slug)->first();
+    }
 
     public function insertstudent($attributes = [])
     {
@@ -131,5 +135,16 @@ class StudentRepository extends BaseRepository implements StudentRepositoryInter
         }
 
         return false;
+    }
+
+    public function checkAccountStudent(string $id)
+    {
+        $check = $this->model->find($id);
+        // dd($check->users->first());
+        if ($check->users->first() == null) {
+            return false;
+        }
+
+        return true;
     }
 }

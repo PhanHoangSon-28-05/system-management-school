@@ -16,10 +16,10 @@ class RoleDataSeeder extends Seeder
     {
         $roles =
             [
-                ['name' => 'Super admin', 'slug' => 'super-admin', 'description' => 'software owner', 'group' => 'system'],
-                ['name' => 'Admin', 'slug' => 'admin', 'description' => 'software management', 'group' => 'system'],
-                ['name' => 'Teacher', 'slug' => 'teacher', 'description' => 'teacher', 'group' => 'clinet'],
-                ['name' => 'Student', 'slug' => 'student', 'description' => 'student', 'group' => 'clinet'],
+                ['name' => 'super-admin', 'display_name' => 'Super admin', 'description' => 'software owner', 'group' => 'system'],
+                ['name' => 'admin', 'display_name' => 'Admin', 'description' => 'software management', 'group' => 'system'],
+                ['name' => 'teacher', 'display_name' => 'Teacher', 'description' => 'teacher', 'group' => 'clinet'],
+                ['name' => 'student', 'display_name' => 'Student', 'description' => 'student', 'group' => 'clinet'],
             ];
 
         foreach ($roles as $role) {

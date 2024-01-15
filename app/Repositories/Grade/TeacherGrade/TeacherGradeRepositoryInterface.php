@@ -8,6 +8,7 @@ interface TeacherGradeRepositoryInterface extends RepositoryInterface
 {
     //ví dụ: lấy 5 sản phầm đầu tiên
     public function indexTeacher_Grade($slug);
+    public function indexHomeroomTeacher_Grade($slug);
     public function index_Grade($slug);
     public function getAllTeacherIds();
     public function getTeachersNotInGrade($allTeacherIds);

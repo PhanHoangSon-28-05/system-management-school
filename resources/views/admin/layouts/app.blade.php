@@ -69,7 +69,6 @@
         rel="stylesheet">
 
     <link rel="stylesheet" href="{{ URL::asset('admin/vendors/style/index-admin.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('admin/build/css/style/search.css') }}">
 
 </head>
 
@@ -246,10 +245,15 @@
 
     <script src="{{ URL::asset('admin/build/js/search.js') }}"></script>
 
-
     @if (session('message'))
         <script>
             swal("{{ session('message') }}", "You clicked the button!", "success");
+        </script>
+    @endif
+
+    @if (session('erro'))
+        <script>
+            swal("ERRO", "{{ session('erro') }}");
         </script>
     @endif
     @yield('scripts')

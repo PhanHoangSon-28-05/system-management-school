@@ -2,6 +2,7 @@
 
 namespace Database\Seeders\Admin;
 
+use App\Models\Department;
 use App\Models\Teacher;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,47 +14,31 @@ class TeacherSeeder extends Seeder
      */
     public function run(): void
     {
-        $teachers =
-            [
-                [
-                    'code' => '746456456',
-                    'image_personal' => 'default_image1.jpg',
-                    'image_citizenIdentification' => 'default_image3.jpg',
-                    'name' => 'Tên giáo viên 1',
-                    'birthday' => '23/3/1999',
-                    'gender' => 'male',
-                    'email' => 'gv1@gmail.com',
-                    'phone' => '0944944944',
-                    'hometown' => 'Da Nang',
-                    'slug' => 'gv1',
-                ],
-                [
-                    'code' => '7464534536',
-                    'image_personal' => 'default_image2.jpg',
-                    'image_citizenIdentification' => 'default_image4.jpg',
-                    'name' => 'Tên giáo viên 2',
-                    'birthday' => '12/2/1999',
-                    'gender' => 'female',
-                    'email' => 'gv2@gmail.com',
-                    'phone' => '0933939393',
-                    'hometown' => 'Hue',
-                    'slug' => 'gv2',
-                ], [
-                    'code' => '24347845456',
-                    'image_personal' => 'default_image5.jpg',
-                    'image_citizenIdentification' => 'default_image6.jpg',
-                    'name' => 'Tên giáo viên 3',
-                    'birthday' => '12/1/1999',
-                    'gender' => 'female',
-                    'email' => 'gv3@gmail.com',
-                    'phone' => '0955955955',
-                    'hometown' => 'Quang Nam',
-                    'slug' => 'gv3',
-                ],
+        $teachers = [];
+
+        for ($i = 1; $i <= 120; $i++) {
+            $teachers[] = [
+                'code' => 'TC' . rand(1111, 999999999) . $i,
+                'image_personal' => 'teacher_image_' . $i,
+                'image_citizenIdentification_front' => 'front_image_' . $i,
+                'image_citizenIdentification_backside' => 'backside_image_' . $i,
+                'last_name' => 'Lastname' . $i,
+                'first_name' => 'Firstname' . $i,
+                'birthday' => '23/3/1980',
+                'gender' => ($i % 2 == 0) ? 'male' : 'female',
+                'email' => 'teacher' . $i . '@school.com',
+                'phone' => '0101993993',
+                'hometown' => 'Hometown' . $i,
+                'slug' => 'teacher' . $i,
             ];
+        }
 
         foreach ($teachers as $teacher) {
             Teacher::updateOrCreate($teacher);
+
+            $teacherModel = Teacher::where('code', $teacher['code'])->first();
+            $departmentIds = Department::pluck('id')->random(2);
+            $teacherModel->detail__departments()->sync($departmentIds);
         }
     }
 }

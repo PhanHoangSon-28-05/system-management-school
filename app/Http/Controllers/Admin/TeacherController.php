@@ -57,8 +57,8 @@ class TeacherController extends Controller
         if (!$teacher) {
             return redirect()->route('admin.teachers.index')->with('error', 'Teacher not found.');
         }
-
-        return view('admin.teachers.show', ['teacher' => $teacher]);
+        $check = $this->teacherRepo->checkAccountTeacher($id);
+        return view('admin.teachers.show', ['teacher' => $teacher, 'check' => $check]);
     }
 
     /**

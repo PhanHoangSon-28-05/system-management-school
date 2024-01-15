@@ -54,11 +54,11 @@
                                             <span class="label">Citizen Identification Image:</span>
                                             <div class="identification-image">
                                                 <div class="row">
-                                                    <div class="col-6"><img
+                                                    <div class="col-6"><img width="400px" height="200px"
                                                             src="{{ asset('public/uploads/teachers/citizenIdentification/' . $teacher->image_citizenIdentification_front) }}"
                                                             alt="Identification Image">
                                                     </div>
-                                                    <div class="col-6"><img
+                                                    <div class="col-6"><img width="400px" height="200px"
                                                             src="{{ asset('public/uploads/teachers/citizenIdentification/' . $teacher->image_citizenIdentification_backside) }}"
                                                             alt="Identification Image">
                                                     </div>
@@ -70,13 +70,16 @@
                             </div>
                         </div>
                         <div class="ms-auto p-2 bd-highlight">
-                            <a class="btn btn-success btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 "
-                                href="{{ URL::route('teachers.show', $teacher->id) }}"><i class="fas fa-user-plus"></i>
-                                <br />Create
-                                Acount
-                            </a>
+                            @if ($check)
+                            @else
+                                <a class="btn btn-success btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 "
+                                    href="{{ URL::route('teachers.users.addCountTeacher', $teacher->slug) }}"><i
+                                        class="fas fa-user-plus"></i>
+                                    <br />Create
+                                    Acount
+                                </a>
+                            @endif
                         </div>
-
                     </div>
                 </div>
             </div>

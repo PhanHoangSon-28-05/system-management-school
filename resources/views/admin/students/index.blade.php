@@ -1,12 +1,12 @@
 @extends('admin.layouts.app')
-@section('title', 'students')
+@section('title', 'Students')
 @section('content')
-    <div class="right_col" student="main">
+    <div class="right_col" role="main">
         <div class="row">
             <div class="col-md-12 col-sm-12 ">
                 <div class="">
                     <div class="x_title">
-                        <h2>students</h2>
+                        <h2>Students</h2>
                         <ul class="nav navbar-right panel_toolbox">
                             <a type="button" href="{{ URL::route('students.create') }}" class="btn btn-secondary">
                                 Create
@@ -26,7 +26,7 @@
                                         @endif
                                     </span>
                                     <table id="datatable-keytable" class="table table-striped table-bordered"
-                                        style="width:100%,">
+                                        style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
@@ -54,44 +54,42 @@
 
                                                             <a class="btn btn-danger btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 delete-student"
                                                                 data-student-id="{{ $student->id }}"
-                                                                data-student-name="{{ $student->name }}"
-                                                                data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i
-                                                                    class="fas fa-trash-alt"></i>
-                                                                Delete</a>
+                                                                data-student-name="{{ $student->last_name . ' ' . $student->first_name }}"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#deleteStudentModal{{ $student->id }}">
+                                                                <i class="fas fa-trash-alt"></i> Delete
+                                                            </a>
                                                         </div>
-                                                        <div class="modal fade" id="staticBackdrop"
+                                                        <div class="modal fade" id="deleteStudentModal{{ $student->id }}"
                                                             data-bs-backdrop="static" data-bs-keyboard="false"
-                                                            tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                                            tabindex="-1" aria-labelledby="deleteStudentModalLabel"
                                                             aria-hidden="true">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h1 class="modal-title fs-5"
-                                                                            id="staticBackdropLabel">Modal
-                                                                            title</h1>
+                                                                            id="deleteStudentModalLabel">Delete Student</h1>
                                                                         <button type="button" class="btn-close"
                                                                             data-bs-dismiss="modal"
                                                                             aria-label="Close"></button>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        <h3>Are you sure you want to delete student with
-                                                                            name
-                                                                            <span id="student-id-placeholder"></span>?
-                                                                        </h3>
+                                                                        <p>Are you sure you want to delete student with name
+                                                                            <strong>{{ $student->last_name . ' ' . $student->first_name }}</strong>?
+                                                                        </p>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <button class="btn btn-secondary"
+                                                                        <button type="button" class="btn btn-secondary"
                                                                             data-bs-dismiss="modal">Close</button>
-                                                                        <button type="button" class="btn btn-primary"
-                                                                            id="delete-modal-btn">Delete</button>
-
+                                                                        <button type="button"
+                                                                            class="btn btn-primary delete-modal-btn"
+                                                                            data-student-id="{{ $student->id }}">Delete</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                {{-- @endif --}}
                                             @endforeach
                                         </tbody>
                                     </table>
@@ -104,7 +102,7 @@
         </div>
     </div>
 @endsection
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         $('.delete-student').on('click', function() {
@@ -117,25 +115,22 @@
             $('#delete-modal-btn').data('student-id', studentId);
         });
 
-        $('#staticBackdrop').on('shown.bs.modal', function() {
-            $('#delete-modal-btn').on('click', function() {
-                var studentId = $('#delete-modal-btn').data('student-id');
+        $('body').on('click', '.delete-modal-btn', function() {
+            var studentId = $(this).data('student-id');
 
-                // Perform AJAX request to delete the student
-                $.ajax({
-                    url: '{{ url('admin/students') }}/' + studentId,
-                    type: 'DELETE',
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function(response) {
-                        window.location.reload();
-                    },
-                    error: function(error) {
-                        // Handle error, e.g., display an error message
-                        console.error(error);
-                    }
-                });
+            // Perform AJAX request to delete the student
+            $.ajax({
+                url: '{{ url('admin/students') }}/' + studentId,
+                type: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    window.location.reload();
+                },
+                error: function(error) {
+                    console.error(error);
+                }
             });
         });
     });

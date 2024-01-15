@@ -34,7 +34,7 @@ class StudentGradeRepository extends BaseRepository implements StudentGradeRepos
 
     public function getStudentsNotInGrade($allstudentIds)
     {
-        $student = student::whereNotIn('id', function ($query) use ($allstudentIds) {
+        $student = Student::whereNotIn('id', function ($query) use ($allstudentIds) {
             $query->select('student_id')
                 ->from('detail__classes')
                 ->whereIn('student_id', $allstudentIds);
@@ -46,7 +46,6 @@ class StudentGradeRepository extends BaseRepository implements StudentGradeRepos
     public function index_Grade($slug)
     {
         $grade = Grade::where('slug', $slug)->first();
-
 
         return $grade;
     }

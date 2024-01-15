@@ -3,28 +3,35 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\Period\PeriodRepositoryInterface;
 use App\Repositories\Rank\RankRepositoryInterface;
+use App\Repositories\Schedule\ScheduleRepositoryInterface;
 use App\Repositories\Teacher\TeacherRepositoryInterface;
 use Illuminate\Http\Request;
 
 class ScheduleController extends Controller
 {
     protected $teacherRepo;
-    protected $rankRepo;
+    protected $rankRepo, $periodRepo;
+    protected $scheduleRepo;
 
     public function __construct(
         TeacherRepositoryInterface $teacherRepo,
         RankRepositoryInterface $rankRepo,
+        PeriodRepositoryInterface $periodRepo,
+        ScheduleRepositoryInterface $scheduleRepo,
     ) {
         $this->teacherRepo = $teacherRepo;
         $this->rankRepo = $rankRepo;
+        $this->periodRepo = $periodRepo;
+        $this->scheduleRepo = $scheduleRepo;
     }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $teacherSchedules = $this->teacherRepo->getAll();
+        $teacherSchedules = $this->teacherRepo->getAllTeacher();
         return view('admin.schedules.index', ['teacherSchedules' => $teacherSchedules]);
     }
 
@@ -49,7 +56,28 @@ class ScheduleController extends Controller
     public function show(string $slug)
     {
         $ranks = $this->rankRepo->getAll();
-        return view('admin.schedules.showteacher', ['ranks' => $ranks]);
+        $scheduleRanks = [];
+        for ($rank_total = 2; $rank_total <= 8; $rank_total++) {
+            if ($rank_total) {
+                $rankSlug = 'thu-' . $rank_total;
+            }
+            $scheduleRanks['scheduleRank' . $rank_total] = $this->rankRepo->checkRank($slug, $rankSlug);
+        }
+
+        $scheduleProids = [];
+        for ($proid_total = 1; $proid_total <= 10; $proid_total++) {
+            $periodSlug = 'tiet-' . $proid_total;
+            $periodId = $this->periodRepo->getPeriodSlug($periodSlug);
+            $scheduleProids['scheduleProid' . $proid_total] = $this->scheduleRepo->getSchedulePeroid($slug, $periodId);
+        }
+        $periods = $this->periodRepo->getAll();
+        return view('admin.schedules.showteacher', [
+            'ranks' => $ranks,
+            'slugTeacher' => $slug,
+            'scheduleProids' => $scheduleProids,
+            'scheduleRanks' => $scheduleRanks,
+            'periods' => $periods,
+        ]);
     }
 
     /**

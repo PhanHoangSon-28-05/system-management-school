@@ -40,6 +40,7 @@ class RoleController extends Controller
     public function store(CreateRoleRequest $request)
     {
         $array = $request->all();
+        // dd($array);
         // dd($request);
         $roleRepo = $this->roleRepo->insertRole($array);
         $role = new Role($roleRepo);

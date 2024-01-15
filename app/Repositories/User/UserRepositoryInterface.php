@@ -8,6 +8,8 @@ interface UserRepositoryInterface extends RepositoryInterface
 {
     //ví dụ: lấy 5 sản phầm đầu tiên
     public function getUser();
-    public function insertUser($attributes = []);
+    public function insertUserTeacher($attributes = [], $idTeacher);
+    public function insertUserStudent($attributes = [], $idStudent);
+    public function editUser($id);
     public function updateUser($attributes = [], $id);
 }

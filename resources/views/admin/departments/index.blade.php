@@ -103,39 +103,41 @@
         </div>
     </div>
 @endsection
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        $('.delete-department').on('click', function() {
-            var departmentName = $(this).data('department-name');
-            $('#department-id-placeholder').text(departmentName);
 
-            var departmentId = $(this).data('department-id');
+@section('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            $('.delete-department').on('click', function() {
+                var departmentName = $(this).data('department-name');
+                $('#department-id-placeholder').text(departmentName);
 
-            // Set data attribute for the delete link
-            $('#delete-modal-btn').data('department-id', departmentId);
-        });
+                var departmentId = $(this).data('department-id');
 
-        $('#staticBackdrop').on('shown.bs.modal', function() {
-            $('#delete-modal-btn').on('click', function() {
-                var departmentId = $('#delete-modal-btn').data('department-id');
+                // Set data attribute for the delete link
+                $('#delete-modal-btn').data('department-id', departmentId);
+            });
 
-                // Perform AJAX request to delete the department
-                $.ajax({
-                    url: '{{ url('admin/departments') }}/' + departmentId,
-                    type: 'DELETE',
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function(response) {
-                        window.location.reload();
-                    },
-                    error: function(error) {
-                        // Handle error, e.g., display an error message
-                        console.error(error);
-                    }
+            $('#staticBackdrop').on('shown.bs.modal', function() {
+                $('#delete-modal-btn').on('click', function() {
+                    var departmentId = $('#delete-modal-btn').data('department-id');
+
+                    // Perform AJAX request to delete the department
+                    $.ajax({
+                        url: '{{ url('admin/departments') }}/' + departmentId,
+                        type: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+                            window.location.reload();
+                        },
+                        error: function(error) {
+                            // Handle error, e.g., display an error message
+                            console.error(error);
+                        }
+                    });
                 });
             });
         });
-    });
-</script>
+    </script>
+@endsection

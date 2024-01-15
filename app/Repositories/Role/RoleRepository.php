@@ -26,12 +26,12 @@ class RoleRepository extends BaseRepository implements RoleRepositoryInterface
 
     public function insertRole($attributes = [])
     {
-        $existingRole = $this->model->where('name', $attributes['name'])->first();
+        $existingRole = $this->model->where('name',  Str::slug($attributes['display_name']))->first();
         if ($existingRole) {
             return redirect()->back()->withErrors(['name' => 'Role with this name already exists.'])->withInput();
         }
 
-        $attributes['slug'] = Str::slug($attributes['name']);
+        $attributes['name'] = Str::slug($attributes['display_name']);
         $role = $this->model->create($attributes);
 
         $role->permissions()->attach($attributes['permission_ids']);
@@ -41,13 +41,13 @@ class RoleRepository extends BaseRepository implements RoleRepositoryInterface
     public function updateRole($attributes = [], $id)
     {
         $result = $this->model->find($id);
-        $attributes['slug'] = Str::slug($attributes['name']);
+        $attributes['name'] = Str::slug($attributes['display_name']);
 
         if ($result) {
             // Extract only the relevant attributes for the update
             $updateData = [
+                'display_name' => $attributes['display_name'],
                 'name' => $attributes['name'],
-                'slug' => $attributes['slug'],
                 // Add other attributes as needed
             ];
 
