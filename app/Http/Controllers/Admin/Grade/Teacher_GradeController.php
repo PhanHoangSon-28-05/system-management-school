@@ -23,13 +23,15 @@ class Teacher_GradeController extends Controller
         $this->teacherRpo = $teacherRpo;
         $this->teacherGradeRepo = $teacherGradeRepo;
     }
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+
+    public function checkStatus($id)
     {
-        //
+        $check = $this->teacherGradeRepo->checkHomeroomTeacher($id);
+        // dd($check);
+        return response()->json(['check' => $check]);
     }
+
 
     /**
      * Show the form for creating a new resource.

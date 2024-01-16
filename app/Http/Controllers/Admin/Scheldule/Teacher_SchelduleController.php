@@ -58,6 +58,7 @@ class Teacher_SchelduleController extends Controller
     public function add(string $slug)
     {
         $ranks = $this->rankRepo->getAll();
+        $schedules = $this->rankRepo->checkRank($slug);
         $periods = $this->periodRepo->getAll();
         $subjects = $this->subjectRepo->getAll();
         $grades = $this->gradeRepo->getAll();
@@ -66,7 +67,7 @@ class Teacher_SchelduleController extends Controller
             'admin.schedules.add',
             [
                 'ranks' => $ranks, 'periods' => $periods, 'subjects' => $subjects, 'geades' => $grades,
-                'rooms' => $rooms, 'slugTeacher' => $slug
+                'rooms' => $rooms, 'slugTeacher' => $slug, 'schedules' => $schedules
             ]
         );
     }

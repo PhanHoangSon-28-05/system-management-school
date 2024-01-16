@@ -67,80 +67,80 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         // Route::put('/{coupon}', 'update')->name('update');
         // Route::delete('/{coupon}', 'destroy')->name('destroy');
 
-        Route::get('/', 'index')->name('index')->middleware('permission:show-role');
-        Route::post('/', 'store')->name('store')->middleware('permission:create-role');
-        Route::get('/create', 'create')->name('create')->middleware('permission:create-role');
-        Route::get('/{coupon}/edit', 'edit')->name('edit')->middleware('permission:update-role');
-        Route::put('/{coupon}', 'update')->name('update')->middleware('permission:update-role');
-        Route::delete('/{coupon}', 'destroy')->name('destroy')->middleware('permission:delete-role');
+        Route::get('/', 'index')->name('index')->middleware('role:super-admin');
+        Route::post('/', 'store')->name('store')->middleware('role:super-admin');
+        Route::get('/create', 'create')->name('create')->middleware('role:super-admin');
+        Route::get('/{coupon}/edit', 'edit')->name('edit')->middleware('role:super-admin');
+        Route::put('/{coupon}', 'update')->name('update')->middleware('role:super-admin');
+        Route::delete('/{coupon}', 'destroy')->name('destroy')->middleware('role:super-admin');
     });
     //
 
     // Routes in User
     Route::prefix('users')->controller(UserController::class)->name('users.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::get('/{coupon}/edit', 'edit')->name('edit');
-        Route::put('/{coupon}', 'update')->name('update');
-        Route::delete('/{coupon}', 'destroy')->name('destroy');
+        Route::get('/', 'index')->name('index')->middleware('permission:show-user');
+        Route::get('/{coupon}/edit', 'edit')->name('edit')->middleware('permission:update-user');
+        Route::put('/{coupon}', 'update')->name('update')->middleware('permission:update-user');
+        Route::delete('/{coupon}', 'destroy')->name('destroy')->middleware('permission:delete-user');
     });
 
     // Routes in Teacher
     Route::prefix('teachers')->controller(TeacherController::class)->name('teachers.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::post('/', 'store')->name('store');
-        Route::get('/create', 'create')->name('create');
-        Route::get('/show/{coupon}', 'show')->name('show');
-        Route::get('/{coupon}/edit', 'edit')->name('edit');
-        Route::put('/{coupon}', 'update')->name('update');
-        Route::delete('/{coupon}', 'destroy')->name('destroy');
+        Route::get('/', 'index')->name('index')->middleware('permission:show-teacher');
+        Route::post('/', 'store')->name('store')->middleware('permission:create-teacher');
+        Route::get('/create', 'create')->name('create')->middleware('permission:create-teacher');
+        Route::get('/show/{coupon}', 'show')->name('show')->middleware('permission:show-teacher');
+        Route::get('/{coupon}/edit', 'edit')->name('edit')->middleware('permission:update-teacher');
+        Route::put('/{coupon}', 'update')->name('update')->middleware('permission:update-teacher');
+        Route::delete('/{coupon}', 'destroy')->name('destroy')->middleware('permission:delete-teacher');
         Route::prefix('users')->controller(UserController::class)->name('users.')->group(function () {
-            Route::get('/show/{coupon}/add-acount', 'addCountTeacher')->name('addCountTeacher');
-            Route::post('/show/{slugTeacher}/add-acount/', 'storeCountTeacher')->name('storeCountTeacher');
+            Route::get('/show/{coupon}/add-acount', 'addCountTeacher')->name('addCountTeacher')->middleware('permission:create-usera-teacher');
+            Route::post('/show/{slugTeacher}/add-acount/', 'storeCountTeacher')->name('storeCountTeacher')->middleware('permission:create-usera-teacher');
         });
     });
     // Routes in Student
     Route::prefix('students')->controller(StudentController::class)->name('students.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::post('/', 'store')->name('store');
-        Route::get('/create', 'create')->name('create');
-        Route::get('/show/{coupon}', 'show')->name('show');
-        Route::get('/{coupon}/edit', 'edit')->name('edit');
-        Route::put('/{coupon}', 'update')->name('update');
-        Route::delete('/{coupon}', 'destroy')->name('destroy');
+        Route::get('/', 'index')->name('index')->middleware('permission:show-student');
+        Route::post('/', 'store')->name('store')->middleware('permission:create-student');
+        Route::get('/create', 'create')->name('create')->middleware('permission:create-student');
+        Route::get('/show/{coupon}', 'show')->name('show')->middleware('permission:create-student');
+        Route::get('/{coupon}/edit', 'edit')->name('edit')->middleware('permission:update-student');
+        Route::put('/{coupon}', 'update')->name('update')->middleware('permission:update-student');
+        Route::delete('/{coupon}', 'destroy')->name('destroy')->middleware('permission:delete-student');
         Route::prefix('users')->controller(UserController::class)->name('users.')->group(function () {
-            Route::get('/show/{coupon}/add-acount', 'addCountStudent')->name('addCountStudent');
-            Route::post('/show/{slugStudent}/add-acount/', 'storeCountStudent')->name('storeCountStudent');
+            Route::get('/show/{coupon}/add-acount', 'addCountStudent')->name('addCountStudent')->middleware('permission:create-usera-student');
+            Route::post('/show/{slugStudent}/add-acount/', 'storeCountStudent')->name('storeCountStudent')->middleware('permission:create-usera-student');
         });
     });
     // Routes in Subject
     Route::prefix('subjects')->controller(SubjectController::class)->name('subjects.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::post('/', 'store')->name('store');
-        Route::get('/create', 'create')->name('create');
-        Route::get('/{coupon}', 'show')->name('show');
-        Route::get('/{coupon}/edit', 'edit')->name('edit');
-        Route::put('/{coupon}', 'update')->name('update');
-        Route::delete('/{coupon}', 'destroy')->name('destroy');
+        Route::get('/', 'index')->name('index')->middleware('permission:show-subject');
+        Route::post('/', 'store')->name('store')->middleware('permission:create-subject');
+        Route::get('/create', 'create')->name('create')->middleware('permission:create-subject');
+        Route::get('/{coupon}', 'show')->name('show')->middleware('permission:show-subject');
+        Route::get('/{coupon}/edit', 'edit')->name('edit')->middleware('permission:update-subject');
+        Route::put('/{coupon}', 'update')->name('update')->middleware('permission:update-subject');
+        Route::delete('/{coupon}', 'destroy')->name('destroy')->middleware('permission:delete-subject');
     });
     // Routes in Room
     Route::prefix('rooms')->controller(RoomController::class)->name('rooms.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::post('/', 'store')->name('store');
-        Route::get('/create', 'create')->name('create');
-        Route::get('/{coupon}/edit', 'edit')->name('edit');
-        Route::put('/{coupon}', 'update')->name('update');
-        Route::delete('/{coupon}', 'destroy')->name('destroy');
+        Route::get('/', 'index')->name('index')->middleware('permission:show-room');
+        Route::post('/', 'store')->name('store')->middleware('permission:create-room');
+        Route::get('/create', 'create')->name('create')->middleware('permission:create-room');
+        Route::get('/{coupon}/edit', 'edit')->name('edit')->middleware('permission:update-room');
+        Route::put('/{coupon}', 'update')->name('update')->middleware('permission:update-room');
+        Route::delete('/{coupon}', 'destroy')->name('destroy')->middleware('permission:delete-room');
     });
 
     // Routes in Department
     Route::prefix('departments')->controller(DepartmentController::class)->name('departments.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::post('/', 'store')->name('store');
-        Route::get('/create', 'create')->name('create');
-        Route::get('/show/{slug}', 'show')->name('show');
-        Route::get('/{coupon}/edit', 'edit')->name('edit');
-        Route::put('/{coupon}', 'update')->name('update');
-        Route::delete('/{coupon}', 'destroy')->name('destroy');
+        Route::get('/', 'index')->name('index')->middleware('permission:show-department');
+        Route::post('/', 'store')->name('store')->middleware('permission:create-department');
+        Route::get('/create', 'create')->name('create')->middleware('permission:create-department');
+        Route::get('/show/{slug}', 'show')->name('show')->middleware('permission:show-department');
+        Route::get('/{coupon}/edit', 'edit')->name('edit')->middleware('permission:update-department');
+        Route::put('/{coupon}', 'update')->name('update')->middleware('permission:update-department');
+        Route::delete('/{coupon}', 'destroy')->name('destroy')->middleware('permission:delete-department');
         Route::prefix('/show/teachers-department')->controller(Teacher_DepartmentsController::class)->name('teachers-department')->group(function () {
             Route::get('add', 'add')->name('add-teacher-deptement');
             Route::post('/', 'store')->name('store');
@@ -157,15 +157,16 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
     // Routes in Class
     Route::prefix('grades')->controller(GradeController::class)->name('grades.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::post('/', 'store')->name('store');
-        Route::get('/create', 'create')->name('create');
-        Route::get('/{coupon}', 'show')->name('show');
-        Route::get('/{coupon}/edit', 'edit')->name('edit');
-        Route::put('/{coupon}', 'update')->name('update');
-        Route::delete('/{coupon}', 'destroy')->name('destroy');
+        Route::get('/', 'index')->name('index')->middleware('permission:show-class');
+        Route::post('/', 'store')->name('store')->middleware('permission:create-class');
+        Route::get('/create', 'create')->name('create')->middleware('permission:create-class');
+        Route::get('/{coupon}', 'show')->name('show')->middleware('permission:show-class');
+        Route::get('/{coupon}/edit', 'edit')->name('edit')->middleware('permission:update-class');
+        Route::put('/{coupon}', 'update')->name('update')->middleware('permission:update-class');
+        Route::delete('/{coupon}', 'destroy')->name('destroy')->middleware('permission:delete-class');
         Route::prefix('/show/teachers-grade')->controller(Teacher_GradeController::class)->name('teachers-grade')->group(function () {
             Route::get('add', 'add')->name('add-teacher-grade');
+            Route::get('/grades/check-status/{gradeId}', 'checkStatus')->name('checkStatus');
             Route::post('/', 'store')->name('store');
             Route::get('/{slug}/{id}/edit', 'edit')->name('edit');
             Route::put('/{idTeacher}', 'update')->name('update');

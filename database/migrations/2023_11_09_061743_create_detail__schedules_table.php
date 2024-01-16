@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('detail__schedules', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('rank_id')->constrained('rank__schedules')->cascadeOnDelete();
+            // $table->foreignId('rank_id')->constrained('rank__schedules')->cascadeOnDelete();
             $table->foreignId('subject_id')->constrained('subjects')->cascadeOnDelete();
-            $table->string('period')->unique();
             $table->foreignId('room_id')->constrained('rooms')->cascadeOnDelete();
             $table->timestamps();
         });

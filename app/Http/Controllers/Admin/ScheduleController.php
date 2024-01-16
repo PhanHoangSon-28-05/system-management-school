@@ -56,26 +56,13 @@ class ScheduleController extends Controller
     public function show(string $slug)
     {
         $ranks = $this->rankRepo->getAll();
-        $scheduleRanks = [];
-        for ($rank_total = 2; $rank_total <= 8; $rank_total++) {
-            if ($rank_total) {
-                $rankSlug = 'thu-' . $rank_total;
-            }
-            $scheduleRanks['scheduleRank' . $rank_total] = $this->rankRepo->checkRank($slug, $rankSlug);
-        }
+        $schedules = $this->rankRepo->checkRank($slug);
 
-        $scheduleProids = [];
-        for ($proid_total = 1; $proid_total <= 10; $proid_total++) {
-            $periodSlug = 'tiet-' . $proid_total;
-            $periodId = $this->periodRepo->getPeriodSlug($periodSlug);
-            $scheduleProids['scheduleProid' . $proid_total] = $this->scheduleRepo->getSchedulePeroid($slug, $periodId);
-        }
         $periods = $this->periodRepo->getAll();
         return view('admin.schedules.showteacher', [
             'ranks' => $ranks,
             'slugTeacher' => $slug,
-            'scheduleProids' => $scheduleProids,
-            'scheduleRanks' => $scheduleRanks,
+            'schedules' => $schedules,
             'periods' => $periods,
         ]);
     }

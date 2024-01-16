@@ -26,7 +26,7 @@ class LoginController extends Controller
     {
         $credentials = $request->getCredentials();
 
-        // dd(Auth::validate($credentials));
+        // dd(Auth::attempt($credentials));
 
         // if (!Auth::validate($credentials)) :
         //     return redirect()->to('login')

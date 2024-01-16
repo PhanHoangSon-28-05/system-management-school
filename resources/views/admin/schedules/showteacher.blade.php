@@ -21,36 +21,38 @@
                                 <tr>
                                     <th>#</th>
                                     @foreach ($ranks as $rank)
-                                        <th>{{ $rank->name }}</th>
+                                        <th width="140px">{{ $rank->name }}</th>
                                     @endforeach
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($periods as $period)
+                                @php
+                                    $total = 1;
+                                @endphp
+                                @foreach ($schedules as $schedule)
                                     <tr>
-                                        <th scope="row">
-                                            {{ $period->name }}
-                                        </th>
-                                        @foreach ($scheduleRanks as $scheduleRank)
-                                            @if ($scheduleRank != null)
-                                                @foreach ($scheduleProids as $array)
-                                                    @foreach ($array as $value)
-                                                        @php
-                                                            $value = $array->first(); // Get the first value in the array
-                                                        @endphp
-                                                        <td>
-                                                            @if ($value && $value->detail_schedule)
-                                                                {{ $value->grades->name }}
-                                                                <br>
-                                                                <span>{{ $value->detail_schedule->subjects ? $value->detail_schedule->subjects->name : 'N/A' }}</span>
-                                                                <br>
-                                                                <span>{{ $value->detail_schedule->rooms ? $value->detail_schedule->rooms->name : 'N/A' }}</span>
-                                                            @endif
-                                                        </td>
-                                                    @endforeach
-                                                @endforeach
-                                            @endif
+                                        <th>Tiết {{ $total }}</th>
+                                        @foreach ($schedule as $value)
+                                            {{-- {{ dd($value->grades->name) }} --}}
+                                            <td>
+                                                @if ($value != null)
+                                                    <a href="">
+                                                        Lớp: {{ $value->grades->name }}
+                                                        <br>
+                                                        Môn:
+                                                        {{-- {{ dd($value->detail_schedule) }} --}}
+                                                        {{ $value->detail_schedule->subjects->name }}
+                                                        <br>
+                                                        Phòng:
+                                                        {{ $value->detail_schedule->rooms->name }}
+                                                    </a>
+                                                @else
+                                                @endif
+                                            </td>
                                         @endforeach
+                                        @php
+                                            $total += 1;
+                                        @endphp
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -60,4 +62,5 @@
             </div>
         </div>
     </div>
+
 @endsection

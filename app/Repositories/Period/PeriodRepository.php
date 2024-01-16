@@ -22,6 +22,7 @@ class PeriodRepository extends BaseRepository implements PeriodRepositoryInterfa
     public function getPeriodSlug($slug)
     {
         $period = $this->model->where('slug', $slug)->first();
+        // dd($period);
         $period_id = $period->id;
         return $period_id;
     }

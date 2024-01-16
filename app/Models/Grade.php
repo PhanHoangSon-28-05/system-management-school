@@ -29,4 +29,9 @@ class Grade extends Model
     {
         return $this->belongsToMany(Teacher::class, 'detail__classes', 'grade_id', 'teacher_id');
     }
+
+    public function grades(): BelongsTo
+    {
+        return $this->belongsTo(Schedule::class, 'id', 'grade_id');
+    }
 }

@@ -21,8 +21,8 @@
                                 <div class="field item form-group">
                                     <div class="col-md-10 col-sm-6">
                                         <div class="form-floating">
-                                            <select class="form-select" id="selectOption" name="teacher_id"
-                                                aria-label="Floating label select example">
+                                            <select class="form-select" id="selectOption" name="grade_id"
+                                                aria-label="Floating label select example" onchange="checkGradeStatus()">
                                                 <option>Select teacher:</option>
                                                 @foreach ($teachers as $teacher)
                                                     <option value="{{ $teacher->id }}">
@@ -39,8 +39,8 @@
                                 <div class="field item form-group">
                                     <div class="col-md-10 col-sm-6">
                                         <div class="form-floating">
-                                            <select class="form-select" id="selectOption" name="grade_id"
-                                                aria-label="Floating label select example">
+                                            <select class="form-select" id="selectGrade" name="grade_id"
+                                                aria-label="Floating label select example"">
                                                 <option>Select grade:</option>
                                                 @foreach ($grades as $grade)
                                                     <option value="{{ $grade->id }}">
@@ -55,23 +55,22 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="field item form-group">
+                                <div class="field item form-group" id="radioGroupContainer">
                                     <div class="col-md-10 col-sm-6">
                                         <div class="form-floating">
                                             <h4 for="">Name position: </h4>
-                                            <div class="form-check form-check-inline">
+                                            <div class="form-check form-check-inline" id="homeroomTeacherOption"
+                                                style="display: block;">
                                                 <input class="form-check-input" type="radio" name="status"
                                                     id="flexRadioDefault1" value="1">
-                                                <label class="form-check-label" for="flexRadioDefault1">
-                                                    Homeroom teacher
-                                                </label>
+                                                <label class="form-check-label" for="flexRadioDefault1">Homeroom
+                                                    teacher</label>
                                             </div>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="status"
-                                                    id="flexRadioDefault2" value="2">
-                                                <label class="form-check-label" for="flexRadioDefault2">
-                                                    Subject teacher
-                                                </label>
+                                                    id="flexRadioDefault2" value="2" checked>
+                                                <label class="form-check-label" for="flexRadioDefault2">Subject
+                                                    teacher</label>
                                             </div>
                                         </div>
                                         @error('description')
@@ -79,6 +78,8 @@
                                         @enderror
                                     </div>
                                 </div>
+
+
                                 <br />
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary">ADD</button>
@@ -143,19 +144,48 @@
 @endsection
 @section('scripts')
     <script>
-        // Add event listener to the select element
         document.getElementById('selectOption').addEventListener('change', function() {
-            // Get the selected option value
             var selectedOption = this.value;
 
-            // Hide all teacher-info-container elements
             var teacherInfoContainers = document.querySelectorAll('.teacher-info-container');
             teacherInfoContainers.forEach(function(container) {
                 container.style.display = 'none';
             });
-
-            // Display the selected teacher-info-container
             document.getElementById(selectedOption).style.display = 'block';
+
         });
+
+
+        document.getElementById('selectGrade').addEventListener('change', function() {
+            handleHomeroomTeacherOption(this.value);
+        });
+
+        function handleHomeroomTeacherOption(gradeId) {
+            var teacherInfoContainers = document.querySelectorAll('.teacher-info-container');
+            teacherInfoContainers.forEach(function(container) {
+                container.style.display = 'block';
+            });
+
+            var homeroomTeacherOption = document.getElementById('homeroomTeacherOption');
+            homeroomTeacherOption.style.display = 'none'; // Display by default
+
+            $.ajax({
+                url: '{{ route('grades.teachers-gradecheckStatus', ['gradeId' => 'gradeId']) }}',
+                type: 'GET',
+                data: {
+                    gradeId: gradeId,
+                },
+                success: function(data) {
+
+                    if (data.check === true) {
+                        homeroomTeacherOption.style.display = 'none'; // Hide if check is true
+                    }
+                },
+                error: function(error) {
+                    console.error('Error fetching periods:', error);
+                }
+            });
+        }
     </script>
+
 @endsection

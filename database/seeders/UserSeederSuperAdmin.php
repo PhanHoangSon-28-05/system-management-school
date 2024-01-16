@@ -17,16 +17,19 @@ class UserSeederSuperAdmin extends Seeder
     {
         $user_superAdmins = [
             ['username' => 'super-admin', 'password' => Hash::make('123456789')],
-            ['username' => 'admin1', 'password' => Hash::make('123456789')],
-            ['username' => 'admin2', 'password' => Hash::make('123456789')],
         ];
 
         foreach ($user_superAdmins as $value) {
-            User::updateOrCreate($value);
+            $existingUser = User::where('username', $value['username'])->first();
+
+            if (!$existingUser) {
+                User::updateOrCreate($value);
+            }
         }
 
         $superAdmin = User::where('username', 'super-admin')->first();
-        $role = Role::where('slug', 'super-admin')->first();
+        $superAdmin->assignRole('super-admin');
+        $role = Role::where('name', 'super-admin')->first();
         $superAdmin->assignRole($role->name);
     }
 }

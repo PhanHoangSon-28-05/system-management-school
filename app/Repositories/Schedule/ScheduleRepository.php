@@ -87,10 +87,9 @@ class ScheduleRepository extends BaseRepository implements ScheduleRepositoryInt
         foreach ($period_id as $value) {
             $attributes['period_id'] = $value;
             $schedule = $this->model->create($attributes);
-            $id_schedule = $this->model->where('teacher_id', $attributes['teacher_id'])->orderBy('created_at', 'desc')->first();
+            $id_schedule = $this->model->where('teacher_id', $attributes['teacher_id'])->orderBy('id', 'desc')->first();
             $attributes['schedule_id'] = $id_schedule->id;
             $detail_schel = Detail_Schedule::create($attributes);
-            // dd($attributes);
         }
 
         return true;

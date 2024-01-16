@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Rank;
 
+use App\Models\Period;
+use App\Models\Schedule;
 use App\Models\Teacher;
 use App\Repositories\BaseRepository;
 use App\Repositories\Rank\RankRepositoryInterface;
@@ -15,24 +17,31 @@ class RankRepository extends BaseRepository implements RankRepositoryInterface
         return \App\Models\Rank_Schedule::class;
     }
 
-    public function checkRank($slugTeacher, $slugRank)
+    public function checkRank($slugTeacher)
     {
-        $check = $this->model->where('slug', $slugRank)->first();
-
-        if (!$check) {
-            return null;
-        }
-        $valueRank = $check->rank_schedule;
-        if (!$valueRank) {
-            return null;
-        }
-
         $idTeacher = Teacher::where('slug', $slugTeacher)->first();
+
         if (!$idTeacher) {
             return null;
         }
         $teacher_id = $idTeacher->id;
-        $valueScheduleTeacher = $valueRank->where('teacher_id', $teacher_id)->get();
-        return $valueScheduleTeacher;
+
+        $peripds = Period::all();
+        $ranks = $this->model->all();
+
+        $schedules = [];
+
+        foreach ($peripds as $peripd) {
+            foreach ($ranks as $rank) {
+                $check = Schedule::where('teacher_id', $teacher_id)
+                    ->where('period_id', $peripd->id)
+                    ->where('rank_id', $rank->id)->first();
+
+
+                $schedules[$peripd->slug][$rank->slug] = $check;
+            }
+        }
+        // dd($schedules);
+        return $schedules;
     }
 }

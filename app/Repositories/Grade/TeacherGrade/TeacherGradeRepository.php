@@ -40,19 +40,19 @@ class TeacherGradeRepository extends BaseRepository implements TeacherGradeRepos
 
     public function getAllTeacherIds()
     {
-        $allTeacher = $this->model->where('teacher_id', '<>', 'null')->pluck('Teacher_id')->toArray();
+        $allTeacher = $this->model->where('grade_id', '<>', 'null')->pluck('Teacher_id')->toArray();
 
         return $allTeacher;
     }
 
     public function getTeachersNotInGrade($allTeacherIds)
     {
-        $Teacher = Teacher::whereNotIn('id', function ($query) use ($allTeacherIds) {
-            $query->select('teacher_id')
-                ->from('detail__classes')
-                ->whereIn('Teacher_id', $allTeacherIds);
-        })->get();
-
+        // $Teacher = Teacher::whereNotIn('id', function ($query) use ($allTeacherIds) {
+        //     $query->select('teacher_id')
+        //         ->from('detail__classes')
+        //         ->whereIn('Teacher_id', $allTeacherIds);
+        // })->get();
+        $Teacher = Teacher::all();
         return $Teacher;
     }
 
@@ -64,13 +64,24 @@ class TeacherGradeRepository extends BaseRepository implements TeacherGradeRepos
         return $grade;
     }
 
+    public function checkHomeroomTeacher($id_Grade)
+    {
+        $check = $this->model->where('grade_id', $id_Grade)->where('status', '1')->first();
+        // dd($check);
+        if ($check == null) {
+            return false;
+        }
+
+        return true;
+    }
+
     public function createTeacherGrade($all)
     {
         $grade = Grade::where('id', $all['grade_id'])->first();
         if ($all['status'] == 1) {
-            $all['descriptons'] = 'Giáo viên chủ nhiệm của lớp ' . $grade->name;
+            $all['descriptions'] = 'Giáo viên chủ nhiệm của lớp ' . $grade->name;
         } else {
-            $all['descriptons'] = 'Giáo viên bộ môn của lớp ' . $grade->name;
+            $all['descriptions'] = 'Giáo viên bộ môn của lớp ' . $grade->name;
         }
         // dd($all);
         return $this->model->create($all);

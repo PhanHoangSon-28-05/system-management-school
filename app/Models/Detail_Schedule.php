@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Detail_Schedule extends Model
 {
     use HasFactory;
+    protected $table = 'detail__schedules';
 
     protected $fillable = [
         'schedule_id',
         'subject_id',
-        'period',
         'room_id'
     ];
 

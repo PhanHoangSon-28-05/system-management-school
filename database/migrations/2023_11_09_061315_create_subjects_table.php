@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->int('credit_hours');
-            $table->int('total_number_of_periods');
+            $table->integer('credit_hours')->unique();
+            $table->integer('total_number_of_periods');
             $table->longText('description');
             $table->string('slug')->unique();
             $table->timestamps();
