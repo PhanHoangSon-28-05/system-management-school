@@ -6,16 +6,20 @@ use App\Repositories\Teacher\TeacherRepositoryInterface;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\Subject\SubjectRepositoryInterface;
 
 class TeacherController extends Controller
 {
 
     protected $teacherRepo;
+    protected $subjectRepo;
 
     public function __construct(
         TeacherRepositoryInterface $teacherRepo,
+        SubjectRepositoryInterface $subjectRepo,
     ) {
         $this->teacherRepo = $teacherRepo;
+        $this->subjectRepo = $subjectRepo;
     }
     /**
      * Display a listing of the resource.
@@ -51,16 +55,38 @@ class TeacherController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // dd($id);
         $teacher = $this->teacherRepo->findById($id);
-
+        $idallSubject =  $this->subjectRepo->getallSubject($id);
+        $subjects =  $this->subjectRepo->getSubjectNotInGiveTeachet($idallSubject);
+        // dd($subjects);
         if (!$teacher) {
             return redirect()->route('admin.teachers.index')->with('error', 'Teacher not found.');
         }
         $check = $this->teacherRepo->checkAccountTeacher($id);
-        return view('admin.teachers.show', ['teacher' => $teacher, 'check' => $check]);
+        return view('admin.teachers.show', ['teacher' => $teacher, 'check' => $check, 'subjects' => $subjects]);
     }
 
+    public function add_subjectGiveteacher(Request $request, $id)
+    {
+        try {
+            $array = $request->all();
+            $teacher = $this->teacherRepo->subjectGiveteacher($array, $id);
+
+            return redirect()->route('teachers.show', $id)->with(['message' => 'Add Subject Give Teacher suceess']);
+        } catch (\Exception $e) {
+            return redirect()->route('teachers.show', $id)->with(['error' => 'Failed to update subjects.']);
+        }
+    }
+
+    public function destroy_subjectGiveteacher(string $idTeacher, string $id)
+    {
+        $subject = $this->teacherRepo->delete_subjectGiveteacher($id);
+        // dd($id);
+        return redirect()->route('teachers.show', $idTeacher)->with([
+            'message' => 'Subject Give Teacher deteled successfully '
+        ]);
+    }
     /**
      * Show the form for editing the specified resource.
      */

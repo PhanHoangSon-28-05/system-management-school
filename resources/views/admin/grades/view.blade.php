@@ -16,8 +16,9 @@
                         <div class="teacher">
                             <div class="page-title">
                                 <div class="title_left">
-                                    <h3>Contacts Design</h3>
-                                    <a type="button" href="{{ URL::route('grades.teachers-gradeadd-teacher-grade') }}"
+
+                                    <a type="button"
+                                        href="{{ URL::route('grades.teachers-gradeadd-teacher-grade', $slugGrade) }}"
                                         class="btn btn-secondary">
                                         ADD
                                     </a>
@@ -109,7 +110,7 @@
                         <div class="student">
                             <div class="page-title">
                                 <div class="title_left">
-                                    <h3>Contacts Design</h3>
+
                                     <a type="button" href="{{ URL::route('grades.students-gradeadd-student-grade') }}"
                                         class="btn btn-secondary">
                                         ADD

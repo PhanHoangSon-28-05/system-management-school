@@ -16,7 +16,7 @@
                         <div class="teacher">
                             <div class="page-title">
                                 <div class="title_left">
-                                    <h3>Contacts Design</h3>
+
                                     <a type="button"
                                         href="{{ URL::route('departments.teachers-departmentadd-teacher-deptement') }}"
                                         class="btn btn-secondary">
@@ -110,7 +110,7 @@
                         <div class="grade">
                             <div class="page-title">
                                 <div class="title_left">
-                                    <h3>Contacts Design</h3>
+
                                     <a type="button"
                                         href="{{ URL::route('departments.grades-departmentadd-grade-deptement') }}"
                                         class="btn btn-secondary">

@@ -24,25 +24,17 @@ class Teacher_GradeController extends Controller
         $this->teacherGradeRepo = $teacherGradeRepo;
     }
 
-
-    public function checkStatus($id)
-    {
-        $check = $this->teacherGradeRepo->checkHomeroomTeacher($id);
-        // dd($check);
-        return response()->json(['check' => $check]);
-    }
-
-
     /**
      * Show the form for creating a new resource.
      */
-    public function add()
+    public function add(string $slugGrade)
     {
+        $check = $this->teacherGradeRepo->checkHomeroomTeacher($slugGrade);
         $grades = $this->gradeRepo->getAll();
         $allTeacherIds = $this->teacherGradeRepo->getAllTeacherIds();
         $teachers = $this->teacherGradeRepo->getTeachersNotInGrade($allTeacherIds);
         // dd($teachers);
-        return view('admin.grades.teachersGrades.add', ['grades' => $grades, 'teachers' => $teachers]);
+        return view('admin.grades.teachersGrades.add', ['grades' => $grades, 'teachers' => $teachers, 'check' => $check]);
     }
 
     /**

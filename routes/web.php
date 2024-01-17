@@ -93,6 +93,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('/{coupon}/edit', 'edit')->name('edit')->middleware('permission:update-teacher');
         Route::put('/{coupon}', 'update')->name('update')->middleware('permission:update-teacher');
         Route::delete('/{coupon}', 'destroy')->name('destroy')->middleware('permission:delete-teacher');
+        Route::post('/show/{id}', 'add_subjectGiveteacher')->name('add_subjectGiveteacher')->middleware('permission:create-teacher');
+        Route::delete('/{idTeacher}/{coupon}', 'destroy_subjectGiveteacher')->name('destroy_subjectGiveteacher')->middleware('permission:delete-teacher');
         Route::prefix('users')->controller(UserController::class)->name('users.')->group(function () {
             Route::get('/show/{coupon}/add-acount', 'addCountTeacher')->name('addCountTeacher')->middleware('permission:create-usera-teacher');
             Route::post('/show/{slugTeacher}/add-acount/', 'storeCountTeacher')->name('storeCountTeacher')->middleware('permission:create-usera-teacher');
@@ -142,16 +144,16 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::put('/{coupon}', 'update')->name('update')->middleware('permission:update-department');
         Route::delete('/{coupon}', 'destroy')->name('destroy')->middleware('permission:delete-department');
         Route::prefix('/show/teachers-department')->controller(Teacher_DepartmentsController::class)->name('teachers-department')->group(function () {
-            Route::get('add', 'add')->name('add-teacher-deptement');
-            Route::post('/', 'store')->name('store');
-            Route::get('/{slug}/{id}/edit', 'edit')->name('edit');
-            Route::put('/{idTeacher}', 'update')->name('update');
+            Route::get('add', 'add')->name('add-teacher-deptement')->middleware('permission:add-teacher-deptement');
+            Route::post('/', 'store')->name('store')->middleware('permission:add-teacher-deptement');
+            Route::get('/{slug}/{id}/edit', 'edit')->name('edit')->middleware('permission:edit-teacher-deptement');
+            Route::put('/{idTeacher}', 'update')->name('update')->middleware('permission:edit-teacher-deptement');
         });
         Route::prefix('/show/grades-department')->controller(Grade__DepartmentsController::class)->name('grades-department')->group(function () {
-            Route::get('add', 'add')->name('add-grade-deptement');
-            Route::post('/', 'store')->name('store');
-            Route::get('/{slug}/{id}/edit', 'edit')->name('edit');
-            Route::put('/{idGrade}', 'update')->name('update');
+            Route::get('add', 'add')->name('add-grade-deptement')->middleware('permission:add-grade-deptement');
+            Route::post('/', 'store')->name('store')->middleware('permission:add-grade-class');
+            Route::get('/{slug}/{id}/edit', 'edit')->name('edit')->middleware('permission:edit-grade-deptement');
+            Route::put('/{idGrade}', 'update')->name('update')->middleware('permission:edit-grade-deptement');
         });
     });
 
@@ -165,39 +167,42 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::put('/{coupon}', 'update')->name('update')->middleware('permission:update-class');
         Route::delete('/{coupon}', 'destroy')->name('destroy')->middleware('permission:delete-class');
         Route::prefix('/show/teachers-grade')->controller(Teacher_GradeController::class)->name('teachers-grade')->group(function () {
-            Route::get('add', 'add')->name('add-teacher-grade');
-            Route::get('/grades/check-status/{gradeId}', 'checkStatus')->name('checkStatus');
-            Route::post('/', 'store')->name('store');
-            Route::get('/{slug}/{id}/edit', 'edit')->name('edit');
-            Route::put('/{idTeacher}', 'update')->name('update');
+            Route::get('add-teacher/{slugGrade}', 'add')->name('add-teacher-grade')->middleware('permission:add-teacher-class');
+            Route::post('/', 'store')->name('store')->middleware('permission:add-teacher-class');
+            Route::get('/{slug}/{id}/edit', 'edit')->name('edit')->middleware('permission:edit-teacher-class');
+            Route::put('/{idTeacher}', 'update')->name('update')->middleware('permission:edit-teacher-class');
         });
         Route::prefix('/show/students-grade')->controller(Student_GradeController::class)->name('students-grade')->group(function () {
-            Route::get('add', 'add')->name('add-student-grade');
-            Route::post('/', 'store')->name('store');
-            Route::get('/{slug}/{id}/edit', 'edit')->name('edit');
-            Route::put('/{idStudent}', 'update')->name('update');
+            Route::get('add', 'add')->name('add-student-grade')->middleware('permission:add-student-class');
+            Route::post('/', 'store')->name('store')->middleware('permission:add-student-class');
+            Route::get('/{slug}/{id}/edit', 'edit')->name('edit')->middleware('permission:edit-student-class');
+            Route::put('/{idStudent}', 'update')->name('update')->middleware('permission:edit-student-class');
         });
     });
 
 
     // Routes in Scheldule
     Route::prefix('scheldule')->controller(ScheduleController::class)->name('schedules.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::get('/show/{slug}', 'show')->name('show');
+        Route::get('/', 'index')->name('index')->middleware('permission:show-schedule');
+        Route::get('/show/{slug}', 'show')->name('show')->middleware('permission:show-schedule');
         Route::prefix('/show/teachers-scheldule')->controller(Teacher_SchelduleController::class)->name('teachers-scheldule.')->group(function () {
-            Route::get('{slugTeacher}/add', 'add')->name('add-scheldule-teacher');
             Route::get('/get-periods/{rankId}/{slugTeacher}', 'rank_update_periods')->name('rank-update-periods');
-            Route::post('/{slugTeacher}', 'store')->name('store');
+            Route::get('/get-grades/{periodId}', 'getGrades')->name('get-grades');
+            Route::get('/get-rooms/{periodId}', 'getRooms')->name('get-rooms');
+            Route::get('{slugTeacher}/add', 'add')->name('add-scheldule-teacher')->middleware('permission:create-schedule');
+            Route::post('/{slugTeacher}', 'store')->name('store')->middleware('permission:create-schedule');
+            Route::get('{slugTeacher}/edit/{id}', 'edit')->name('edit-scheldule-teacher')->middleware('permission:update-schedule');
+            Route::post('/{id}/{slugTeacher}', 'update')->name('update')->middleware('permission:update-schedule');
         });
     });
 
     Route::prefix('scores')->controller(ScoreController::class)->name('scores.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::get('/show/{slug}', 'showStudentClass')->name('show');
-        Route::get('/add/{slug}', 'addScore')->name('addScore');
-        Route::post('/add/{slugGrade}', 'add')->name('add');
-        Route::get('/show/{slugGrade}/view/{slugStudent}', 'viewScore')->name('viewScore');
-        Route::get('/show/{slugGrade}/view/{slugStudent}/edit/{id}', 'editScore')->name('editScore');
-        Route::put('/edit/{slugGrade}/{id}', 'update')->name('update');
+        Route::get('/', 'index')->name('index')->middleware('permission:show-score');
+        Route::get('/show/{slug}', 'showStudentClass')->name('show')->middleware('permission:show-score');
+        Route::get('/add/{slug}', 'addScore')->name('addScore')->middleware('permission:create-score');
+        Route::post('/add/{slugGrade}', 'add')->name('add')->middleware('permission:create-score');
+        Route::get('/show/{slugGrade}/view/{slugStudent}', 'viewScore')->name('viewScore')->middleware('permission:show-score');
+        Route::get('/show/{slugGrade}/view/{slugStudent}/edit/{id}', 'editScore')->name('editScore')->middleware('permission:update-score');
+        Route::put('/edit/{slugGrade}/{id}', 'update')->name('update')->middleware('permission:update-score');
     });
 });

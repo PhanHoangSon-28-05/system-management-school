@@ -64,9 +64,10 @@ class TeacherGradeRepository extends BaseRepository implements TeacherGradeRepos
         return $grade;
     }
 
-    public function checkHomeroomTeacher($id_Grade)
+    public function checkHomeroomTeacher($slugGrade)
     {
-        $check = $this->model->where('grade_id', $id_Grade)->where('status', '1')->first();
+        $grade = Grade::where('slug', $slugGrade)->first();
+        $check = $this->model->where('grade_id', $grade->id)->where('status', '1')->first();
         // dd($check);
         if ($check == null) {
             return false;

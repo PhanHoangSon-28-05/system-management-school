@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Teacher;
 
-
+use App\Models\Detail_Teacher;
 use Intervention\Image\Facades\Image;
 
 
@@ -12,6 +12,7 @@ use App\Repositories\Teacher\TeacherRepositoryInterface;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\View;
 
 class TeacherRepository extends BaseRepository implements TeacherRepositoryInterface
 {
@@ -36,11 +37,35 @@ class TeacherRepository extends BaseRepository implements TeacherRepositoryInter
         return $this->model->find($id);
     }
 
+    public function subjectGiveteacher($attributes = [], string $id)
+    {
+        $attributes['teacher_id'] = $id;
+        $add = Detail_Teacher::create($attributes);
+        return $add;
+    }
+
+    public function delete_subjectGiveteacher(string $id)
+    {
+        $subject = Detail_Teacher::find($id);
+
+        if ($subject) {
+            $subject->delete();
+
+            return response()->json([
+                'message' => 'Subject Give Teacher deleted successfully'
+            ]);
+        } else {
+            return response()->json([
+                'error' => 'Subject Give Teacher not found'
+            ], 404);
+        }
+    }
+
     public function insertTeacher($attributes = [])
     {
         $slug_name =  Str::slug($attributes['last_name']) . '-' . Str::slug($attributes['first_name']);
         $attributes['slug'] = $slug_name;
-        $attributes['code'] = 'TC' . rand(1111, 999999999) . $attributes['numerical-order'];
+        $attributes['code'] = 'TC' . rand(1111, 99999999999);
 
         $get_image_personal = $attributes['image_personal'];
         $path_persona = 'public/uploads/teachers/individual/';

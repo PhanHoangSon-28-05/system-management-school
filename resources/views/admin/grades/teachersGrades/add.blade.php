@@ -39,8 +39,7 @@
                                 <div class="field item form-group">
                                     <div class="col-md-10 col-sm-6">
                                         <div class="form-floating">
-                                            <select class="form-select" id="selectGrade" name="grade_id"
-                                                aria-label="Floating label select example"">
+                                            <select class="form-select" id="selectGrade" name="grade_id">
                                                 <option>Select grade:</option>
                                                 @foreach ($grades as $grade)
                                                     <option value="{{ $grade->id }}">
@@ -60,7 +59,7 @@
                                         <div class="form-floating">
                                             <h4 for="">Name position: </h4>
                                             <div class="form-check form-check-inline" id="homeroomTeacherOption"
-                                                style="display: block;">
+                                                style="display: {{ $check == true ? 'none' : 'block' }};">
                                                 <input class="form-check-input" type="radio" name="status"
                                                     id="flexRadioDefault1" value="1">
                                                 <label class="form-check-label" for="flexRadioDefault1">Homeroom
@@ -154,38 +153,5 @@
             document.getElementById(selectedOption).style.display = 'block';
 
         });
-
-
-        document.getElementById('selectGrade').addEventListener('change', function() {
-            handleHomeroomTeacherOption(this.value);
-        });
-
-        function handleHomeroomTeacherOption(gradeId) {
-            var teacherInfoContainers = document.querySelectorAll('.teacher-info-container');
-            teacherInfoContainers.forEach(function(container) {
-                container.style.display = 'block';
-            });
-
-            var homeroomTeacherOption = document.getElementById('homeroomTeacherOption');
-            homeroomTeacherOption.style.display = 'none'; // Display by default
-
-            $.ajax({
-                url: '{{ route('grades.teachers-gradecheckStatus', ['gradeId' => 'gradeId']) }}',
-                type: 'GET',
-                data: {
-                    gradeId: gradeId,
-                },
-                success: function(data) {
-
-                    if (data.check === true) {
-                        homeroomTeacherOption.style.display = 'none'; // Hide if check is true
-                    }
-                },
-                error: function(error) {
-                    console.error('Error fetching periods:', error);
-                }
-            });
-        }
     </script>
-
 @endsection

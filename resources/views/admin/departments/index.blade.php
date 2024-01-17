@@ -6,7 +6,7 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="">
                     <div class="x_title">
-                        <h2>departments</h2>
+                        <h2>Departments</h2>
                         <ul class="nav navbar-right panel_toolbox">
                             <a type="button" href="{{ URL::route('departments.create') }}" class="btn btn-secondary">
                                 Create

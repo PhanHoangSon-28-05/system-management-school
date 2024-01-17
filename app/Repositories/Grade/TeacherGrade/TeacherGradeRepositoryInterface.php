@@ -10,7 +10,7 @@ interface TeacherGradeRepositoryInterface extends RepositoryInterface
     public function indexTeacher_Grade($slug);
     public function indexHomeroomTeacher_Grade($slug);
     public function index_Grade($slug);
-    public function checkHomeroomTeacher($id_Grade);
+    public function checkHomeroomTeacher($slugGrade);
     public function getAllTeacherIds();
     public function getTeachersNotInGrade($allTeacherIds);
     public function createTeacherGrade($all);

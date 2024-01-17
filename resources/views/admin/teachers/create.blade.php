@@ -19,17 +19,6 @@
                                 enctype="multipart/form-data" data-parsley-validate>
                                 @csrf
                                 <div class="field item form-group">
-                                    <label class="col-form-label col-sm-3 label-align" for="numerical-order"
-                                        style="font-weight: bold; font-size:15px;">
-                                        Numerical Order
-                                        <span class="required" style="color: red;">*</span></label>
-                                    <div class="col-md-9 col-sm-6">
-                                        <input class="form-control" data-validate-length-range="6" data-validate-words="2"
-                                            value="" name="numerical-order" id="numerical-order" type="text"
-                                            placeholder="1->100" required="required" />
-                                    </div>
-                                </div>
-                                <div class="field item form-group">
                                     <label class="col-form-label col-sm-3 label-align" for="inputimage_personal"
                                         style="font-weight: bold; font-size:15px;">Image Personal
                                         <span class="required" style="color: red;">*</span></label>

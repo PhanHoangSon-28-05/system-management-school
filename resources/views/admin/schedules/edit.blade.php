@@ -1,12 +1,12 @@
 @extends('admin.layouts.app')
-@section('title', 'Add Schedule')
+@section('title', 'Edit Schedule')
 
 @section('content')
     <div class="right_col" role="main">
         <div class="row">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Add Schedule</h3>
+                    <h3>Edit Schedule</h3>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -16,7 +16,8 @@
                         <div class="x_content">
 
                             <!-- start form for validation -->
-                            <form method="post" action="{{ route('schedules.teachers-scheldule.store', $slugTeacher) }}"
+                            <form method="post"
+                                action="{{ route('schedules.teachers-scheldule.update', [$id, $slugTeacher]) }}"
                                 id="demo-form" enctype="multipart/form-data" data-parsley-validate>
                                 @csrf
                                 <div class="field item form-group">
@@ -28,7 +29,7 @@
                                     <div class=" col-sm-9 col-sm-6">
                                         <select class="form-select" aria-label="Default select example" name="rank_id"
                                             id="rankSelect">
-                                            <option value="null" selected>Open this select menu</option>
+
                                             @foreach ($ranks as $rank)
                                                 <option value="{{ $rank->id }}">{{ $rank->name }}</option>
                                             @endforeach
@@ -45,7 +46,8 @@
                                         @foreach ($periods as $period)
                                             <div class="col-md-4">
                                                 <div class="form-check form-check-inline">
-                                                    <input name="period_ids[]" class="form-check-input " type="checkbox"
+                                                    <input name="period_ids[]" class="form-check-input " type="radio"
+                                                        {{ $scheduleFind->period_id == $period->id ? 'checked' : '' }}
                                                         value="{{ $period->id }}" id="{{ $period->id }}">
                                                     <label style="font-weight: bold; font-size:15px;"
                                                         class="form-check-label"
@@ -64,7 +66,7 @@
                                     <div class=" col-sm-9 col-sm-6">
                                         <select class="form-select" aria-label="Default select example" name="grade_id"
                                             id="gradeSelect">
-                                            <option value="null" selected>Open this select menu</option>
+
                                             @foreach ($geades as $geade)
                                                 <option value="{{ $geade->id }}">{{ $geade->name }}</option>
                                             @endforeach
@@ -78,7 +80,7 @@
                                         <span class="required" style="color: red;">*</span></label>
                                     <div class=" col-sm-9 col-sm-6">
                                         <select class="form-select" aria-label="Default select example" name="subject_id">
-                                            <option value="null" selected>Open this select menu</option>
+
                                             @foreach ($subjects as $subject)
                                                 <option value="{{ $subject->subjects->id }}">
                                                     {{ $subject->subjects->name }}
@@ -95,31 +97,11 @@
                                     <div class=" col-sm-9 col-sm-6">
                                         <select class="form-select" aria-label="Default select example" name="room_id"
                                             id="roomSelect">
-                                            <option value="null" selected>Open this select menu</option>
+
                                             @foreach ($rooms as $room)
                                                 <option value="{{ $room->id }}">{{ $room->name }}</option>
                                             @endforeach
                                         </select>
-                                    </div>
-                                </div>
-                                <div class="field item form-group">
-                                    <label class="col-form-label col-sm-2 label-align" for="numerical-order"
-                                        style="font-weight: bold; font-size:15px;">
-                                        Effect
-                                        <span class="required" style="color: red;">*</span></label>
-                                    <div class=" col-sm-9 col-sm-6">
-                                        <fieldset>
-                                            <div class="control-group">
-                                                <div class="controls">
-                                                    <div class="input-prepend input-group">
-                                                        <span class="add-on input-group-addon"><i
-                                                                class="fa fa-calendar"></i></span>
-                                                        <input type="text" name="effect" id="reservation-time"
-                                                            class="form-control" value="01/01/2016 - 01/25/2016" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </fieldset>
                                     </div>
                                 </div>
 

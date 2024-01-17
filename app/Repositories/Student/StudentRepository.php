@@ -24,7 +24,7 @@ class StudentRepository extends BaseRepository implements StudentRepositoryInter
     {
         $slug_name =  Str::slug($attributes['last_name']) . '-' . Str::slug($attributes['first_name']);
         $attributes['slug'] = $slug_name;
-        $attributes['code'] = 'SV' . rand(1111, 999999999) . $attributes['numerical-order'];
+        $attributes['code'] = 'SV' . rand(1111, 99999999999);
 
         $get_image_personal = $attributes['image_personal'];
         $path_persona = 'public/uploads/students/individual/';

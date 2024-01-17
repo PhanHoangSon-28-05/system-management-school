@@ -34,6 +34,10 @@ class PermissionSeeder extends Seeder
             ['name' => 'update-department', 'display_name' => 'Update Department', 'description' => 'Modify and update the Department', 'group' => 'Department'],
             ['name' => 'show-department', 'display_name' => 'Show Department', 'description' => 'View Department', 'group' => 'Department'],
             ['name' => 'delete-department', 'display_name' => 'Delete Department', 'description' => 'Delete Department', 'group' => 'Department'],
+            ['name' => 'add-teacher-department', 'display_name' => 'Add Teacher In Department', 'description' => 'Add Teacher In Department', 'group' => 'Department'],
+            ['name' => 'edit-teacher-department', 'display_name' => 'Edit Teacher In Department', 'description' => 'Edit Teacher In Department', 'group' => 'Department'],
+            ['name' => 'add-grade-department', 'display_name' => 'Add Grade In Department', 'description' => 'Add Grade In Department', 'group' => 'Department'],
+            ['name' => 'edit-grade-department', 'display_name' => 'Edit Grade In Department', 'description' => 'Edit Grade In Department', 'group' => 'Department'],
 
             ['name' => 'create-student', 'display_name' => 'Create Student', 'description' => 'Establish a new Student', 'group' => 'Student'],
             ['name' => 'update-student', 'display_name' => 'Update Student', 'description' => 'Modify and update the Student', 'group' => 'Student'],
@@ -45,6 +49,10 @@ class PermissionSeeder extends Seeder
             ['name' => 'update-class', 'display_name' => 'Update Class', 'description' => 'Modify and update the Class', 'group' => 'Class'],
             ['name' => 'show-class', 'display_name' => 'Show Class', 'description' => 'View Class', 'group' => 'Class'],
             ['name' => 'delete-class', 'display_name' => 'Delete Class', 'description' => 'Delete Class', 'group' => 'Class'],
+            ['name' => 'add-teacher-class', 'display_name' => 'Add Teacher In Class', 'description' => 'Add Teacher In Class', 'group' => 'Class'],
+            ['name' => 'edit-teacher-class', 'display_name' => 'Edit Teacher In Class', 'description' => 'Edit Teacher In Class', 'group' => 'Class'],
+            ['name' => 'add-student-class', 'display_name' => 'Add Student In Class', 'description' => 'Add Student In Class', 'group' => 'Class'],
+            ['name' => 'edit-student-class', 'display_name' => 'Edit Student In Class', 'description' => 'Edit Student In Class', 'group' => 'Class'],
 
             ['name' => 'create-subject', 'display_name' => 'Create Subject', 'description' => 'Establish a new Subject', 'group' => 'Subject'],
             ['name' => 'update-subject', 'display_name' => 'Update Subject', 'description' => 'Modify and update the Subject', 'group' => 'Subject'],

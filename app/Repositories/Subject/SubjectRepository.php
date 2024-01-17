@@ -2,6 +2,9 @@
 
 namespace App\Repositories\Subject;
 
+use App\Models\Detail_Teacher;
+use App\Models\Subject;
+use App\Models\Teacher;
 use App\Repositories\BaseRepository;
 use App\Repositories\Subject\SubjectRepositoryInterface;
 use Illuminate\Support\Str;
@@ -18,6 +21,31 @@ class SubjectRepository extends BaseRepository implements SubjectRepositoryInter
     {
         $subjects = $this->model->all();
         return $subjects;
+    }
+
+    public function getallSubjectToSlugTeacher($slug)
+    {
+        $teacher = Teacher::where('slug', $slug)->first();
+        $allSubject = Detail_Teacher::where('teacher_id', $teacher->id)->get();
+
+        return $allSubject;
+    }
+    public function getallSubject($id)
+    {
+        $allSubject = Detail_Teacher::where('teacher_id', $id)->pluck('subject_id')->unique()->toArray();
+
+        return $allSubject;
+    }
+
+    public function getSubjectNotInGiveTeachet($allSubject)
+    {
+        $teacher = Subject::whereNotIn('id', function ($query) use ($allSubject) {
+            $query->select('subject_id')
+                ->from('detail__teachers')
+                ->whereIn('subject_id', $allSubject);
+        })->get();
+
+        return $teacher;
     }
 
     public function insertSubject($attributes = [])

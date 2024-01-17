@@ -7,7 +7,6 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Bordered table <small>Bordered table subtitle</small></h2>
                         <a type="button"
                             href="{{ URL::route('schedules.teachers-scheldule.add-scheldule-teacher', $slugTeacher) }}"
                             class="btn float-end btn-info text-white">
@@ -21,7 +20,7 @@
                                 <tr>
                                     <th>#</th>
                                     @foreach ($ranks as $rank)
-                                        <th width="140px">{{ $rank->name }}</th>
+                                        <th width="188px">{{ $rank->name }}</th>
                                     @endforeach
                                 </tr>
                             </thead>
@@ -34,9 +33,11 @@
                                         <th>Tiết {{ $total }}</th>
                                         @foreach ($schedule as $value)
                                             {{-- {{ dd($value->grades->name) }} --}}
+                                            {{-- {{ dd($value) }} --}}
                                             <td>
                                                 @if ($value != null)
-                                                    <a href="">
+                                                    <a
+                                                        href=" {{ URL::route('schedules.teachers-scheldule.edit-scheldule-teacher', [$slugTeacher, $value->id]) }}">
                                                         Lớp: {{ $value->grades->name }}
                                                         <br>
                                                         Môn:

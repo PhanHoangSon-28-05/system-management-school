@@ -253,7 +253,7 @@
 
     @if (session('erro'))
         <script>
-            swal("ERRO", "{{ session('erro') }}");
+            swal("ERROR", "{{ session('error') }}");
         </script>
     @endif
     @yield('scripts')
