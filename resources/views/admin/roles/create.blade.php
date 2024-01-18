@@ -88,8 +88,8 @@
                                             </label>
                                             <label class="btn btn-primary ms-1" data-toggle-class="btn-primary"
                                                 data-toggle-passive-class="btn-default">
-                                                <input type="radio" name="group" value="user" class="join-btn">
-                                                User
+                                                <input type="radio" name="group" value="client" class="join-btn">
+                                                Client
                                             </label>
                                         </div>
                                     </div>

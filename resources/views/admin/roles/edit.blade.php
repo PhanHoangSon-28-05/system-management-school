@@ -35,8 +35,9 @@
                                             @enderror
                                         @else
                                             <input class="form-control" type="text" data-validate-length-range="6"
-                                                data-validate-words="2" value="{{ old('display_name') ?? $role->name }}"
-                                                name="display_name" id="display_name" required="required" />
+                                                data-validate-words="2"
+                                                value="{{ old('display_name') ?? $role->display_name }}" name="display_name"
+                                                id="display_name" required="required" />
                                             @error('display_name')
                                                 <span class="text-danger">{{ $message }}</span><br>
                                             @enderror
@@ -70,15 +71,16 @@
                                     <div class="col-md-10 col-sm-6" style="margin-top: 8px;">
                                         <div class="row">
                                             @foreach ($permissions as $groupName => $permission)
-                                                <div class="col-md-3 mb-3">
+                                                <div class="col-md-4 mb-3">
                                                     <h4>{{ $groupName }}</h4>
                                                     <div class="row">
                                                         @foreach ($permission as $item)
+                                                            {{-- {{ dd($role->permissions) }} --}}
                                                             <div class="col-md-10">
                                                                 <div class="form-check form-check-inline">
                                                                     <input name="permission_ids[]" class="form-check-input"
                                                                         type="checkbox" value="{{ $item->id }} "
-                                                                        {{ $role->permissions->contains('name', $item->display_name) ? 'checked' : '' }}
+                                                                        {{ $role->permissions->contains('name', $item->name) ? 'checked' : '' }}
                                                                         id="{{ $item->id }}">
                                                                     <label style="font-weight: bold; font-size:13px;"
                                                                         class="form-check-label"
@@ -99,6 +101,7 @@
                                         <span class="required" style="color: red;">*</span></label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <div id="group" class="btn-group" data-toggle="buttons">
+                                            {{-- {{ dd($role->group) }} --}}
                                             <label class="btn btn-secondary" data-toggle-class="btn-primary"
                                                 data-toggle-passive-class="btn-default">
                                                 <input type="radio" name="group"
@@ -109,9 +112,9 @@
                                             <label class="btn btn-primary ms-1" data-toggle-class="btn-primary"
                                                 data-toggle-passive-class="btn-default">
                                                 <input type="radio" name="group"
-                                                    value="user"{{ $role->group == 'user' ? 'checked' : '' }}
+                                                    value="client"{{ $role->group == 'client' ? 'checked' : '' }}
                                                     class="join-btn">
-                                                User
+                                                Client
                                             </label>
                                         </div>
                                     </div>

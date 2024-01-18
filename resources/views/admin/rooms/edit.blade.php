@@ -50,7 +50,9 @@
 
                                 <br />
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Update</button>
+                                    @can('update-room')
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                    @endcan
                                 </div>
                             </form>
                             <!-- end form for validations -->

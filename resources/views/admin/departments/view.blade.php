@@ -16,12 +16,13 @@
                         <div class="teacher">
                             <div class="page-title">
                                 <div class="title_left">
-
-                                    <a type="button"
-                                        href="{{ URL::route('departments.teachers-departmentadd-teacher-deptement') }}"
-                                        class="btn btn-secondary">
-                                        ADD
-                                    </a>
+                                    @can('add-teacher-department')
+                                        <a type="button"
+                                            href="{{ URL::route('departments.teachers-departmentadd-teacher-deptement') }}"
+                                            class="btn btn-secondary">
+                                            ADD
+                                        </a>
+                                    @endcan
                                 </div>
 
                                 <div class="title_right">
@@ -76,13 +77,17 @@
                                                                 <div class=" col-sm-6 emphasis">
                                                                 </div>
                                                                 <div class=" col-sm-6 emphasis">
-                                                                    <a class="btn btn-info btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 "
-                                                                        href="{{ route('departments.teachers-departmentedit', [$slugDepartment, $teacherDepartment->id]) }}"><i
-                                                                            class="fas fa-edit"></i> Edit</a>
-                                                                    <a href="{{ URL::route('teachers.show', $teacherDepartment->id) }}"
-                                                                        class="btn btn-primary btn-xs rounded-3">
-                                                                        <i class="fa fa-user"> </i> View Profile
-                                                                    </a>
+                                                                    @can('edit-teacher-department')
+                                                                        <a class="btn btn-info btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 "
+                                                                            href="{{ route('departments.teachers-departmentedit', [$slugDepartment, $teacherDepartment->id]) }}"><i
+                                                                                class="fas fa-edit"></i> Edit</a>
+                                                                    @endcan
+                                                                    @can('show-teacher')
+                                                                        <a href="{{ URL::route('teachers.show', $teacherDepartment->id) }}"
+                                                                            class="btn btn-primary btn-xs rounded-3">
+                                                                            <i class="fa fa-user"> </i> View Profile
+                                                                        </a>
+                                                                    @endcan
                                                                 </div>
                                                             </div>
                                                         </div>

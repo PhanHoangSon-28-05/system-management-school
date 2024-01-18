@@ -8,9 +8,11 @@
                     <div class="x_title">
                         <h2>Subjects</h2>
                         <ul class="nav navbar-right panel_toolbox">
-                            <a type="button" href="{{ URL::route('subjects.create') }}" class="btn btn-secondary">
-                                Create
-                            </a>
+                            @can('create-subject')
+                                <a type="button" href="{{ URL::route('subjects.create') }}" class="btn btn-secondary">
+                                    Create
+                                </a>
+                            @endcan
                         </ul>
                         <div class="clearfix"></div>
                     </div>
@@ -47,17 +49,20 @@
                                                     <td>{{ $subject->description }}</td>
                                                     <td>
                                                         <div class="btn-group">
-                                                            <a class="btn btn-info btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 "
-                                                                href="{{ route('subjects.edit', $subject->id) }}"><i
-                                                                    class="fas fa-edit"></i> Edit</a>
-
-                                                            <a class="btn btn-danger btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 delete-subject"
-                                                                data-subject-id="{{ $subject->id }}"
-                                                                data-subject-name="{{ $subject->name }}"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#deleteSubjectModal{{ $subject->id }}"><i
-                                                                    class="fas fa-trash-alt"></i>
-                                                                Delete</a>
+                                                            @can('update-subject')
+                                                                <a class="btn btn-info btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 "
+                                                                    href="{{ route('subjects.edit', $subject->id) }}"><i
+                                                                        class="fas fa-edit"></i> Edit</a>
+                                                            @endcan
+                                                            @can('delete-subject')
+                                                                <a class="btn btn-danger btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 delete-subject"
+                                                                    data-subject-id="{{ $subject->id }}"
+                                                                    data-subject-name="{{ $subject->name }}"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#deleteSubjectModal{{ $subject->id }}"><i
+                                                                        class="fas fa-trash-alt"></i>
+                                                                    Delete</a>
+                                                            @endcan
                                                         </div>
                                                         <div class="modal fade" id="deleteSubjectModal{{ $subject->id }}"
                                                             data-bs-backdrop="static" data-bs-keyboard="false"

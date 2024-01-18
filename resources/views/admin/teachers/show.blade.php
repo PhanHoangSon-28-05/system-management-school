@@ -52,7 +52,7 @@
                                         </li>
                                         <li class="fs-5">
                                             <span class="label">Department:</span>
-                                            {{ $teacher->detail__departments->first()->name }}
+                                            {{ $teacher->detail__departments->first()->name ?? 'Chưa được vào khoa' }}
                                         </li>
                                         <li class="fs-5">
                                             <span class="label">Teaching subjects:</span>
@@ -88,8 +88,10 @@
                                                                     </select>
                                                                 </div>
                                                                 <div class="col-md-2 col-sm-2">
-                                                                    <button type="submit"
-                                                                        class="btn btn-primary">ADD</button>
+                                                                    @can('add-subject-teacher')
+                                                                        <button type="submit"
+                                                                            class="btn btn-primary">ADD</button>
+                                                                    @endcan
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -157,12 +159,14 @@
                         <div class="ms-auto p-2 bd-highlight">
                             @if ($check)
                             @else
-                                <a class="btn btn-success btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 "
-                                    href="{{ URL::route('teachers.users.addCountTeacher', $teacher->slug) }}"><i
-                                        class="fas fa-user-plus"></i>
-                                    <br />Create
-                                    Acount
-                                </a>
+                                @can('create-usera-teacher')
+                                    <a class="btn btn-success btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 "
+                                        href="{{ URL::route('teachers.users.addCountTeacher', $teacher->slug) }}"><i
+                                            class="fas fa-user-plus"></i>
+                                        <br />Create
+                                        Acount
+                                    </a>
+                                @endcan
                             @endif
                         </div>
                     </div>

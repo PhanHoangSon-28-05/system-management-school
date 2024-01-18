@@ -122,8 +122,9 @@
                                         </fieldset>
                                     </div>
                                 </div>
-
-                                <button type="submit" class="btn btn-primary">ADD</button>
+                                @can('create-schedule')
+                                    <button type="submit" class="btn btn-primary">ADD</button>
+                                @endcan
 
                             </form>
                             <!-- end form for validations -->

@@ -92,7 +92,9 @@
                                 <div class="ln_solid">
                                     <div class="form-group">
                                         <div class="col-md-6 offset-md-3">
-                                            <button type="submit" class="btn btn-primary">ADD</button>
+                                            @can('create-usera-student')
+                                                <button type="submit" class="btn btn-primary">ADD</button>
+                                            @endcan
                                         </div>
                                     </div>
                                 </div>

@@ -104,8 +104,9 @@
                                         </select>
                                     </div>
                                 </div>
-
-                                <button type="submit" class="btn btn-primary">ADD</button>
+                                @can('update-schedule')
+                                    <button type="submit" class="btn btn-primary">ADD</button>
+                                @endcan
 
                             </form>
                             <!-- end form for validations -->

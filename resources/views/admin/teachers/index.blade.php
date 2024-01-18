@@ -12,9 +12,11 @@
                         <h2>Teachers</h2>
 
                         <ul class="nav navbar-right panel_toolbox">
-                            <a type="button" href="{{ URL::route('teachers.create') }}" class="btn btn-secondary">
-                                Create
-                            </a>
+                            @can('create-teacher')
+                                <a type="button" href="{{ URL::route('teachers.create') }}" class="btn btn-secondary">
+                                    Create
+                                </a>
+                            @endcan
                         </ul>
                         <div class="clearfix"></div>
                     </div>
@@ -49,19 +51,25 @@
                                                     <td>{{ $teacher->email }}</td>
                                                     <td>
                                                         <div class="btn-group">
-                                                            <a class="btn btn-info btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 "
-                                                                href="{{ URL::route('teachers.show', $teacher->id) }}"><i
-                                                                    class="fas fa-eye"></i> View</a>
-                                                            <a class="btn btn-info btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 "
-                                                                href="{{ URL::route('teachers.edit', $teacher->id) }}"><i
-                                                                    class="fas fa-edit"></i> Edit</a>
-                                                            <a class="btn btn-danger btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 delete-teacher"
-                                                                data-teacher-id="{{ $teacher->id }}"
-                                                                data-teacher-name="{{ $teacher->last_name . ' ' . $teacher->first_name }}"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#deleteTeacherModal{{ $teacher->id }}">
-                                                                <i class="fas fa-trash-alt"></i> Delete
-                                                            </a>
+                                                            @can('show-teacher')
+                                                                <a class="btn btn-info btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 "
+                                                                    href="{{ URL::route('teachers.show', $teacher->id) }}"><i
+                                                                        class="fas fa-eye"></i> View</a>
+                                                            @endcan
+                                                            @can('update-teacher')
+                                                                <a class="btn btn-info btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 "
+                                                                    href="{{ URL::route('teachers.edit', $teacher->id) }}"><i
+                                                                        class="fas fa-edit"></i> Edit</a>
+                                                            @endcan
+                                                            @can('delete-teacher')
+                                                                <a class="btn btn-danger btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 delete-teacher"
+                                                                    data-teacher-id="{{ $teacher->id }}"
+                                                                    data-teacher-name="{{ $teacher->last_name . ' ' . $teacher->first_name }}"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#deleteTeacherModal{{ $teacher->id }}">
+                                                                    <i class="fas fa-trash-alt"></i> Delete
+                                                                </a>
+                                                            @endcan
                                                         </div>
                                                         <div class="modal fade" id="deleteTeacherModal{{ $teacher->id }}"
                                                             data-bs-backdrop="static" data-bs-keyboard="false"

@@ -8,9 +8,11 @@
                     <div class="x_title">
                         <h2>Departments</h2>
                         <ul class="nav navbar-right panel_toolbox">
-                            <a type="button" href="{{ URL::route('departments.create') }}" class="btn btn-secondary">
-                                Create
-                            </a>
+                            @can('create-department')
+                                <a type="button" href="{{ URL::route('departments.create') }}" class="btn btn-secondary">
+                                    Create
+                                </a>
+                            @endcan
                         </ul>
                         <div class="clearfix"></div>
                     </div>
@@ -43,20 +45,24 @@
                                                     <td>{{ $department->description }}</td>
                                                     <td>
                                                         <div class="btn-group">
-                                                            <a class="btn btn-success btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 "
-                                                                href="{{ route('departments.show', $department->slug) }}"><i
-                                                                    class="fas fa-eye"></i> View</a>
-
-                                                            <a class="btn btn-info btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 "
-                                                                href="{{ route('departments.edit', $department->id) }}"><i
-                                                                    class="fas fa-edit"></i> Edit</a>
-
-                                                            <a class="btn btn-danger btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 delete-department"
-                                                                data-department-id="{{ $department->id }}"
-                                                                data-department-name="{{ $department->name }}"
-                                                                data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i
-                                                                    class="fas fa-trash-alt"></i>
-                                                                Delete</a>
+                                                            @can('show-department')
+                                                                <a class="btn btn-success btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 "
+                                                                    href="{{ route('departments.show', $department->slug) }}"><i
+                                                                        class="fas fa-eye"></i> View</a>
+                                                            @endcan
+                                                            @can('update-department')
+                                                                <a class="btn btn-info btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 "
+                                                                    href="{{ route('departments.edit', $department->id) }}"><i
+                                                                        class="fas fa-edit"></i> Edit</a>
+                                                            @endcan
+                                                            @can('delete-department')
+                                                                <a class="btn btn-danger btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 delete-department"
+                                                                    data-department-id="{{ $department->id }}"
+                                                                    data-department-name="{{ $department->name }}"
+                                                                    data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i
+                                                                        class="fas fa-trash-alt"></i>
+                                                                    Delete</a>
+                                                            @endcan
                                                         </div>
                                                         <div class="modal fade" id="staticBackdrop"
                                                             data-bs-backdrop="static" data-bs-keyboard="false"

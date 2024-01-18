@@ -73,15 +73,18 @@
                                                     value="{{ $score->detail_scores->medium_score }}" readonly>
                                                 <small class="form-text text-muted">Ghi chú: Điểm trung bình = (Điểm chuyên
                                                     cần
-                                                    + Điểm hệ số 2 lần 1 + Điểm hệ số 2 lần 2) * 0.4 + Điểm hệ số 2 *
-                                                    0.6</small>
+                                                    + (Điểm hệ số 2 lần 1 * 2) + (Điểm hệ số 2 lần 2 * 2) + (Điểm hệ số 2 *
+                                                    3)
+                                                    )/8</small>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <br />
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Update</button>
+                                    @can('update-score')
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                    @endcan
                                 </div>
                             </form>
                             <!-- end form for validations -->
@@ -139,7 +142,7 @@
                 var final_score = parseFloat(document.getElementById('final_score').value) || 0;
 
                 // Tính toán theo công thức
-                var medium_score = (attendance + scores_2_1 + scores_2_2) * 0.4 + final_score * 0.6;
+                var medium_score = (attendance + (scores_2_1 * 2 + scores_2_2 * 2) + final_score * 3) / 8;
 
                 // Hiển thị giá trị tính toán trong input cuối cùng
                 if (medium_score >= 10) {

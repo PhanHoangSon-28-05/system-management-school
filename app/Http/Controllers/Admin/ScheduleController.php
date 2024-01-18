@@ -67,6 +67,20 @@ class ScheduleController extends Controller
         ]);
     }
 
+    public function showuser(string $slug)
+    {
+        $ranks = $this->rankRepo->getAll();
+        $schedules = $this->rankRepo->checkRank($slug);
+
+        $periods = $this->periodRepo->getAll();
+        return view('admin.schedules.showuser', [
+            'ranks' => $ranks,
+            'slugTeacher' => $slug,
+            'schedules' => $schedules,
+            'periods' => $periods,
+        ]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

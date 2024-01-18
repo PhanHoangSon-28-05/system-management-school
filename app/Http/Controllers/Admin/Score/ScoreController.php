@@ -67,7 +67,12 @@ class ScoreController extends Controller
      */
     public function addScore($slugGrade)
     {
-        $subjects = $this->subjectRepo->getAll();
+        // dd(Auth::user()->teachers->first()->slug);
+        if (Auth::user()->teachers->first()) {
+            $subjects = $this->subjectRepo->getallSubjectToSlugTeacher(Auth::user()->teachers->first()->slug);
+        } else {
+            $subjects = $this->subjectRepo->getAll();
+        }
         $grades = $this->gradeRepo->getGradeToSlug($slugGrade);
         $allstudentIds = $this->studentGradeRepo->getAllstudentIds();
         $students = $this->scoreRepo->getStudentsNotInGradeScorce($grades->id, $allstudentIds);

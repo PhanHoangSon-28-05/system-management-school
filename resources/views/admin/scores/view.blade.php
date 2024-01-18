@@ -48,16 +48,19 @@
                                                     <td>{{ $score->detail_scores->scale_4 }}</td>
                                                     <td>
                                                         <div class="btn-group">
-                                                            <a class="btn btn-info btn-xs ms-1 pt-2 pb-2 ps-2 pe-2 rounded-3 "
-                                                                href="{{ route('scores.editScore', [$slugGrade, $slugStudent, $score->id]) }}"><i
-                                                                    class="fas fa-edit"></i> Edit</a>
-
-                                                            <a class="btn btn-danger btn-xs ms-1 pt-2 pb-2 ps-2 pe-2 rounded-3 delete-score"
-                                                                data-score-id="{{ $score->id }}"
-                                                                data-score-name="{{ $score->subjects->name }}"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#staticBackdrop{{ $score->id }}"><i
-                                                                    class="fas fa-trash-alt"></i> Delete</a>
+                                                            @can('update-score')
+                                                                <a class="btn btn-info btn-xs ms-1 pt-2 pb-2 ps-2 pe-2 rounded-3 "
+                                                                    href="{{ route('scores.editScore', [$slugGrade, $slugStudent, $score->id]) }}"><i
+                                                                        class="fas fa-edit"></i> Edit</a>
+                                                            @endcan
+                                                            @can('delete-score')
+                                                                <a class="btn btn-danger btn-xs ms-1 pt-2 pb-2 ps-2 pe-2 rounded-3 delete-score"
+                                                                    data-score-id="{{ $score->id }}"
+                                                                    data-score-name="{{ $score->subjects->name }}"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#staticBackdrop{{ $score->id }}"><i
+                                                                        class="fas fa-trash-alt"></i> Delete</a>
+                                                            @endcan
                                                         </div>
                                                         <div class="modal fade" id="staticBackdrop{{ $score->id }}"
                                                             data-bs-backdrop="static" data-bs-keyboard="false"

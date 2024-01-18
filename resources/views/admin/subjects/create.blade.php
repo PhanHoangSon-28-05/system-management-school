@@ -76,7 +76,9 @@
 
                                 <br />
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">ADD</button>
+                                    @can('create-subject')
+                                        <button type="submit" class="btn btn-primary">ADD</button>
+                                    @endcan
                                 </div>
                             </form>
                             <!-- end form for validations -->

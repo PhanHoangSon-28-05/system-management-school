@@ -16,12 +16,13 @@
                         <div class="teacher">
                             <div class="page-title">
                                 <div class="title_left">
-
-                                    <a type="button"
-                                        href="{{ URL::route('grades.teachers-gradeadd-teacher-grade', $slugGrade) }}"
-                                        class="btn btn-secondary">
-                                        ADD
-                                    </a>
+                                    @can('add-teacher-class')
+                                        <a type="button"
+                                            href="{{ URL::route('grades.teachers-gradeadd-teacher-grade', $slugGrade) }}"
+                                            class="btn btn-secondary">
+                                            ADD
+                                        </a>
+                                    @endcan
                                 </div>
 
                                 <div class="title_right">
@@ -76,12 +77,16 @@
                                                                 <div class=" col-sm-6 emphasis">
                                                                 </div>
                                                                 <div class=" col-sm-6 emphasis">
-                                                                    <a class="btn btn-info btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 "
-                                                                        href="{{ route('grades.teachers-gradeedit', [$slugGrade, $teacherGrade->id]) }}"><i
-                                                                            class="fas fa-edit"></i> Edit</a>
-                                                                    <a href="{{ URL::route('teachers.show', $teacherGrade->id) }}"
-                                                                        class="btn btn-primary btn-xs rounded-3">
-                                                                        <i class="fa fa-user"> </i> View Profile
+                                                                    @can('edit-teacher-class')
+                                                                        <a class="btn btn-info btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 "
+                                                                            href="{{ route('grades.teachers-gradeedit', [$slugGrade, $teacherGrade->id]) }}"><i
+                                                                                class="fas fa-edit"></i> Edit</a>
+                                                                    @endcan
+                                                                    @can('show-teacher')
+                                                                        <a href="{{ URL::route('teachers.show', $teacherGrade->id) }}"
+                                                                            class="btn btn-primary btn-xs rounded-3">
+                                                                            <i class="fa fa-user"> </i> View Profile
+                                                                        @endcan
                                                                     </a>
                                                                 </div>
                                                             </div>
@@ -110,13 +115,13 @@
                         <div class="student">
                             <div class="page-title">
                                 <div class="title_left">
-
-                                    <a type="button" href="{{ URL::route('grades.students-gradeadd-student-grade') }}"
-                                        class="btn btn-secondary">
-                                        ADD
-                                    </a>
+                                    @can('add-student-class')
+                                        <a type="button" href="{{ URL::route('grades.students-gradeadd-student-grade') }}"
+                                            class="btn btn-secondary">
+                                            ADD
+                                        </a>
+                                    @endcan
                                 </div>
-
                                 <div class="title_right">
                                     <div class="col-md-5 col-sm-5  form-group pull-right top_search">
                                         <div class="input-group">
@@ -171,13 +176,17 @@
                                                                 <div class=" col-sm-6 emphasis">
                                                                 </div>
                                                                 <div class=" col-sm-6 emphasis">
-                                                                    <a class="btn btn-info btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 "
-                                                                        href="{{ route('grades.students-gradeedit', [$slugGrade, $studentgrade->id]) }}"><i
-                                                                            class="fas fa-edit"></i> Edit</a>
-                                                                    <a href="{{ URL::route('students.show', $studentgrade->id) }}"
-                                                                        class="btn btn-primary btn-xs rounded-3">
-                                                                        <i class="fa fa-user"> </i> View Profile
-                                                                    </a>
+                                                                    @can('edit-student-class')
+                                                                        <a class="btn btn-info btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 "
+                                                                            href="{{ route('grades.students-gradeedit', [$slugGrade, $studentgrade->id]) }}"><i
+                                                                                class="fas fa-edit"></i> Edit</a>
+                                                                    @endcan
+                                                                    @can('show-student')
+                                                                        <a href="{{ URL::route('students.show', $studentgrade->id) }}"
+                                                                            class="btn btn-primary btn-xs rounded-3">
+                                                                            <i class="fa fa-user"> </i> View Profile
+                                                                        </a>
+                                                                    @endcan
                                                                 </div>
                                                             </div>
                                                         </div>

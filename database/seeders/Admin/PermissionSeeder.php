@@ -29,6 +29,7 @@ class PermissionSeeder extends Seeder
             ['name' => 'show-teacher', 'display_name' => 'Show Teacher', 'description' => 'View Teacher', 'group' => 'Teacher'],
             ['name' => 'delete-teacher', 'display_name' => 'Delete Teacher', 'description' => 'Delete Teacher', 'group' => 'Teacher'],
             ['name' => 'create-usera-teacher', 'display_name' => 'Create User Teacher', 'description' => 'Establish a new User of Teacher', 'group' => 'Teacher'],
+            ['name' => 'add-subject-teacher', 'display_name' => 'Add Subject Teacher', 'description' => 'Establish a new Subject to Teacher', 'group' => 'Teacher'],
 
             ['name' => 'create-department', 'display_name' => 'Create Department', 'description' => 'Establish a new Department', 'group' => 'Department'],
             ['name' => 'update-department', 'display_name' => 'Update Department', 'description' => 'Modify and update the Department', 'group' => 'Department'],
@@ -68,6 +69,7 @@ class PermissionSeeder extends Seeder
             ['name' => 'update-schedule', 'display_name' => 'Update Schedule', 'description' => 'Modify and update the Schedule', 'group' => 'Schedule'],
             ['name' => 'show-schedule', 'display_name' => 'Show Schedule', 'description' => 'View Schedule', 'group' => 'Schedule'],
             ['name' => 'delete-schedule', 'display_name' => 'Delete Schedule', 'description' => 'Delete Schedule', 'group' => 'Schedule'],
+            ['name' => 'show-schedule-me', 'display_name' => 'Show schedule User', 'description' => 'Show schedule User', 'group' => 'Schedule'],
 
             ['name' => 'create-attendance', 'display_name' => 'Create Attendance', 'description' => 'Establish a new Attendance', 'group' => 'Attendance'],
             ['name' => 'update-attendance', 'display_name' => 'Update Attendance', 'description' => 'Modify and update the Attendance', 'group' => 'Attendance'],

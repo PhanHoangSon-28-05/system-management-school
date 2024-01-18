@@ -10,10 +10,12 @@
                 <div class="student">
                     <div class="page-title">
                         <div class="title_left">
-                            <a href="{{ route('scores.addScore', $slugGrade) }}" type="button" href=""
-                                class="btn btn-secondary">
-                                ADD
-                            </a>
+                            @can('create-score')
+                                <a href="{{ route('scores.addScore', $slugGrade) }}" type="button" href=""
+                                    class="btn btn-secondary">
+                                    ADD
+                                </a>
+                            @endcan
                         </div>
 
                         <div class="title_right">
@@ -107,13 +109,17 @@
                                                         <div class=" col-sm-6 emphasis">
                                                         </div>
                                                         <div class=" col-sm-6 emphasis">
-                                                            <a class="btn btn-info btn-xs rounded-3 "
-                                                                href="{{ route('scores.viewScore', [$slugGrade, $studentgrade->slug]) }}"><i
-                                                                    class="fas fa-edit"></i> Edit</a>
-                                                            <a href="{{ URL::route('students.show', $studentgrade->id) }}"
-                                                                class="btn btn-primary btn-xs rounded-3">
-                                                                <i class="fa fa-user"> </i> View Profile
-                                                            </a>
+                                                            @can('show-score')
+                                                                <a class="btn btn-info btn-xs rounded-3 "
+                                                                    href="{{ route('scores.viewScore', [$slugGrade, $studentgrade->slug]) }}"><i
+                                                                        class="fas fa-edit"></i> Edit</a>
+                                                            @endcan
+                                                            @can('show-student')
+                                                                <a href="{{ URL::route('students.show', $studentgrade->id) }}"
+                                                                    class="btn btn-primary btn-xs rounded-3">
+                                                                    <i class="fa fa-user"> </i> View Profile
+                                                                </a>
+                                                            @endcan
                                                         </div>
                                                     </div>
                                                 </div>

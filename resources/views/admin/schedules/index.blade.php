@@ -19,7 +19,9 @@
                                 <div id="card-list" class="row" style="margin:auto">
                                     @foreach ($teacherSchedules as $teacherSchedule)
                                         <div class="col-md-4 col-sm-4  profile_details search">
-                                            <a href="{{ route('schedules.show', $teacherSchedule->slug) }}">
+                                            @can('show-schedule')
+                                                <a href="{{ route('schedules.show', $teacherSchedule->slug) }}">
+                                                @endcan
                                                 <form action="ttm" method="post">
                                                     {!! csrf_field() !!}
                                                     <div class="well profile_view">
@@ -48,15 +50,19 @@
                                                             <div class=" col-sm-6 emphasis">
                                                             </div>
                                                             <div class=" col-sm-6 emphasis">
-                                                                <a href="{{ URL::route('teachers.show', $teacherSchedule->id) }}"
-                                                                    class="btn btn-primary btn-sm">
-                                                                    <i class="fa fa-user"> </i> View Profile
-                                                                </a>
+                                                                @can('show-teacher')
+                                                                    <a href="{{ URL::route('teachers.show', $teacherSchedule->id) }}"
+                                                                        class="btn btn-primary btn-sm">
+                                                                        <i class="fa fa-user"> </i> View Profile
+                                                                    </a>
+                                                                @endcan
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </form>
-                                            </a>
+                                                @can('show-schedule')
+                                                </a>
+                                            @endcan
                                         </div>
                                     @endforeach
                                     {{ $teacherSchedules->links() }}

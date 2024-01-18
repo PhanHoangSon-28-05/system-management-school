@@ -53,7 +53,7 @@ class StudentGradeRepository extends BaseRepository implements StudentGradeRepos
     public function createStudentGrade($all)
     {
         $grade = Grade::where('id', $all['grade_id'])->first();
-        $all['descriptons'] = 'Sinh viên lớp ' . $grade->name;
+        $all['descriptions'] = 'Sinh viên lớp ' . $grade->name;
 
         return $this->model->create($all);
     }

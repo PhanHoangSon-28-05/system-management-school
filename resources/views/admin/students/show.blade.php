@@ -64,12 +64,14 @@
                         <div class="ms-auto p-2 bd-highlight">
                             @if ($check)
                             @else
-                                <a class="btn btn-success btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 "
-                                    href="{{ URL::route('students.users.addCountStudent', $student->slug) }}"><i
-                                        class="fas fa-user-plus"></i>
-                                    <br />Create
-                                    Acount
-                                </a>
+                                @can('create-usera-student')
+                                    <a class="btn btn-success btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 "
+                                        href="{{ URL::route('students.users.addCountStudent', $student->slug) }}"><i
+                                            class="fas fa-user-plus"></i>
+                                        <br />Create
+                                        Acount
+                                    </a>
+                                @endcan
                             @endif
                         </div>
 

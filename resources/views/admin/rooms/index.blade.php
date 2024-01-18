@@ -8,10 +8,11 @@
                     <div class="x_title">
                         <h2>Rooms</h2>
                         <ul class="nav navbar-right panel_toolbox">
-                            <a type="button" href="{{ URL::route('rooms.create') }}" class="btn btn-secondary">
-                                Create
-                            </a>
-
+                            @can('create-room')
+                                <a type="button" href="{{ URL::route('rooms.create') }}" class="btn btn-secondary">
+                                    Create
+                                </a>
+                            @endcan
                         </ul>
                         <div class="clearfix"></div>
                     </div>
@@ -44,15 +45,18 @@
                                                     <td>{{ $room->description }}</td>
                                                     <td>
                                                         <div class="btn-group">
-                                                            <a class="btn btn-info btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 "
-                                                                href="{{ route('rooms.edit', $room->id) }}"><i
-                                                                    class="fas fa-edit"></i> Edit</a>
-
-                                                            <a class="btn btn-danger btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 delete-room"
-                                                                data-room-id="{{ $room->id }}"
-                                                                data-room-name="{{ $room->name }}" data-bs-toggle="modal"
-                                                                data-bs-target="#staticBackdrop{{ $room->id }}"><i
-                                                                    class="fas fa-trash-alt"></i> Delete</a>
+                                                            @can('update-room')
+                                                                <a class="btn btn-info btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 "
+                                                                    href="{{ route('rooms.edit', $room->id) }}"><i
+                                                                        class="fas fa-edit"></i> Edit</a>
+                                                            @endcan
+                                                            @can('delete-room')
+                                                                <a class="btn btn-danger btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 delete-room"
+                                                                    data-room-id="{{ $room->id }}"
+                                                                    data-room-name="{{ $room->name }}" data-bs-toggle="modal"
+                                                                    data-bs-target="#staticBackdrop{{ $room->id }}"><i
+                                                                        class="fas fa-trash-alt"></i> Delete</a>
+                                                            @endcan
                                                         </div>
                                                         <div class="modal fade" id="staticBackdrop{{ $room->id }}"
                                                             data-bs-backdrop="static" data-bs-keyboard="false"

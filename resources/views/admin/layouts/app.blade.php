@@ -88,13 +88,13 @@
                     <!-- menu profile quick info -->
                     <div class="profile clearfix">
                         <div class="profile_pic">
-                            <img src="{{ URL::asset('admin/build/images/img.jpg') }}" alt="..."
-                                class="img-circle profile_img">
+                            <img src="{{ asset('public/uploads/teachers/individual/' . Auth::user()->teachers->first()->image_personal) }}"
+                                alt="Teacher Image" class="img-circle profile_img w-10">
                         </div>
                         <div class="profile_info">
-                            <span>Welcome,</span>
+                            {{-- <span>{{ Auth::user()->teachers->first()->name }}</span> --}}
                             <h2>
-                                {{-- {{ auth()->user()->fullname }} --}}
+                                {{ Auth::user()->teachers->first()->last_name . ' ' . Auth::user()->teachers->first()->first_name }}
 
                             </h2>
                         </div>

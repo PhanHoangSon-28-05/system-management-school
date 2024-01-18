@@ -81,7 +81,9 @@
 
                                 <br />
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">ADD</button>
+                                    @can('add-teacher-class')
+                                        <button type="submit" class="btn btn-primary">ADD</button>
+                                    @endcan
                                 </div>
                             </form>
                             <!-- end form for validations -->

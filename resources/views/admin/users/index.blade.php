@@ -42,17 +42,19 @@
                                                     <td>
                                                         <div class="btn-group">
                                                             @if ($user->username != 'super-admin')
-                                                                <a class="btn btn-info btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3"
-                                                                    href="{{ route('users.edit', $user->id) }}"><i
-                                                                        class="fas fa-edit"></i> Edit</a>
-
-                                                                <a class="btn btn-danger btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 delete-user"
-                                                                    data-user-id="{{ $user->id }}"
-                                                                    data-bs-toggle="modal"
-                                                                    data-bs-target="#deleteUserModal{{ $user->id }}"><i
-                                                                        class="fas fa-trash-alt"></i>
-                                                                    Delete</a>
-
+                                                                @can('update-user')
+                                                                    <a class="btn btn-info btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3"
+                                                                        href="{{ route('users.edit', $user->id) }}"><i
+                                                                            class="fas fa-edit"></i> Edit</a>
+                                                                @endcan
+                                                                @can('delete-user')
+                                                                    <a class="btn btn-danger btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 delete-user"
+                                                                        data-user-id="{{ $user->id }}"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#deleteUserModal{{ $user->id }}"><i
+                                                                            class="fas fa-trash-alt"></i>
+                                                                        Delete</a>
+                                                                @endcan
                                                                 <div class="modal fade"
                                                                     id="deleteUserModal{{ $user->id }}"
                                                                     data-bs-backdrop="static" data-bs-keyboard="false"
