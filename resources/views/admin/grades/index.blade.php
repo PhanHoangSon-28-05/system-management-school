@@ -42,7 +42,7 @@
                                                 {{-- @if ($grade->name == 'super-admin')
                                                 @else --}}
                                                 <tr>
-                                                    <td>{{ $grade->id }}</td>
+                                                    <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $grade->name }}</td>
                                                     <td>{{ $grade->description }}</td>
                                                     <td>

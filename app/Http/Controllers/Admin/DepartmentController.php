@@ -57,7 +57,7 @@ class DepartmentController extends Controller
         // dd($request);
         $departmentRepo = $this->departmentRepo->insertDepartment($array);
         $department = new Department($departmentRepo);
-        return redirect()->route('departments.index')->with(['massage' => 'Create suceess']);
+        return redirect()->route('departments.index')->with(['message' => 'Create suceess']);
     }
 
     /**

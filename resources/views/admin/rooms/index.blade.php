@@ -40,7 +40,7 @@
                                         <tbody>
                                             @foreach ($rooms as $room)
                                                 <tr>
-                                                    <td>{{ $room->id }}</td>
+                                                    <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $room->name }}</td>
                                                     <td>{{ $room->description }}</td>
                                                     <td>

@@ -42,7 +42,7 @@
                                         <tbody>
                                             @foreach ($subjects as $subject)
                                                 <tr>
-                                                    <td>{{ $subject->id }}</td>
+                                                    <td>{{ $loop->iteration}}</td>
                                                     <td>{{ $subject->name }}</td>
                                                     <td class="text-center">{{ $subject->credit_hours }}</td>
                                                     <td class="text-center">{{ $subject->total_number_of_periods }}</td>
