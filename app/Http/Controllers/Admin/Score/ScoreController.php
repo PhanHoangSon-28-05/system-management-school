@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\Score;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Scroe\CreateScoreRequest;
+use App\Http\Requests\Scroe\UpdateScoreRequest;
 use App\Models\Scores;
 use App\Models\Subject;
 use App\Models\Teacher;
@@ -81,7 +83,7 @@ class ScoreController extends Controller
     }
 
 
-    public function add(Request $request, string $slugGrade)
+    public function add(CreateScoreRequest $request, string $slugGrade)
     {
         $array = $request->all();
         $students = $this->scoreRepo->addScore($array);
@@ -106,7 +108,7 @@ class ScoreController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $slugGrade, string $score_id)
+    public function update(UpdateScoreRequest $request, string $slugGrade, string $score_id)
     {
         $array = $request->all();
         $score = $this->scoreRepo->updateScore($array, $score_id);

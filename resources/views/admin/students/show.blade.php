@@ -16,9 +16,9 @@
                         </div>
                         <div class="x_content">
                             <div class="student-info-container">
-                                <div class="d-flex content-center">
-                                    <img src="{{ asset('admin/build/images/' . $student->image_personal) }}"
-                                        alt="student Image" class="img-circle profile_img">
+                                <div class="content-center w-100 d-flex justify-content-center align-items-center">
+                                    <img src="{{ asset('public/uploads/students/individual/' . $student->image_personal) }}"
+                                        alt="student Image" class="img-circle profile_img w-25">
                                 </div>
                                 <div class="student-details mt-3">
                                     <ul>
@@ -53,8 +53,16 @@
                                         <li class="fs-5">
                                             <span class="label">Citizen Identification Image:</span>
                                             <div class="identification-image">
-                                                <img src="{{ asset('admin/build/images/' . $student->image_citizenIdentification) }}"
-                                                    alt="Identification Image">
+                                                <div class="row">
+                                                    <div class="col-6"><img width="400px" height="200px"
+                                                            src="{{ asset('public/uploads/students/citizenIdentification/' . $student->image_citizenIdentification_front) }}"
+                                                            alt="Identification Image">
+                                                    </div>
+                                                    <div class="col-6"><img width="400px" height="200px"
+                                                            src="{{ asset('public/uploads/students/citizenIdentification/' . $student->image_citizenIdentification_backside) }}"
+                                                            alt="Identification Image">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </li>
                                     </ul>

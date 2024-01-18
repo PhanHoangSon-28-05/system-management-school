@@ -6,6 +6,8 @@ use App\Repositories\Teacher\TeacherRepositoryInterface;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Teacher\CreateTeacherRequest;
+use App\Http\Requests\Teacher\UpdateTeacherRequest;
 use App\Repositories\Subject\SubjectRepositoryInterface;
 
 class TeacherController extends Controller
@@ -43,7 +45,7 @@ class TeacherController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateTeacherRequest $request)
     {
         $array = $request->all();
         $teacher = $this->teacherRepo->insertTeacher($array);
@@ -100,7 +102,7 @@ class TeacherController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateTeacherRequest $request, string $id)
     {
         //
         $array = $request->all();

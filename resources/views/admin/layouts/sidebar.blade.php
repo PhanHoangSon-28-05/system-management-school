@@ -32,7 +32,7 @@
             @endcan
             @can('show-schedule-me')
                 @if (Auth::user()->teachers->first())
-                    <li><a href="{{ URL::route('schedules.show', Auth::user()->teachers->first()->slug) }}"><i
+                    <li><a href="{{ URL::route('schedules.showuser', Auth::user()->teachers->first()->slug) }}"><i
                                 class="fa fa-flag-o"></i> Scheldule </a></li>
                 @endif
             @endcan

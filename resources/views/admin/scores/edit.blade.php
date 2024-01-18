@@ -37,6 +37,9 @@
                                                     placeholder="Nhập điểm chuyên cần"
                                                     value="{{ $score->detail_scores->attendance }}">
                                             </div>
+                                            @error('attendance')
+                                                <span class="text-danger">{{ $message }}</span><br>
+                                            @enderror
                                         </div>
                                         <div class="col-md-3 col-sm-6">
                                             <label class=" label-align" for="scores_2_1">Điểm hệ số
@@ -46,6 +49,9 @@
                                                     placeholder="Nhập điểm hệ số 2 lần 1"
                                                     value="{{ $score->detail_scores->scores_2_1 }}">
                                             </div>
+                                            @error('scores_2_1')
+                                                <span class="text-danger">{{ $message }}</span><br>
+                                            @enderror
                                         </div>
                                         <div class="col-md-3 col-sm-6">
                                             <label class=" label-align" for="scores_2_2">Điểm hệ số
@@ -55,6 +61,9 @@
                                                     placeholder="Nhập điểm hệ số 2 lần 2"
                                                     value="{{ $score->detail_scores->scores_2_2 }}">
                                             </div>
+                                            @error('scores_2_2')
+                                                <span class="text-danger">{{ $message }}</span><br>
+                                            @enderror
                                         </div>
                                         <div class="col-md-3 col-sm-6">
                                             <label class=" label-align" for="final_score">Điểm cuối
@@ -64,6 +73,9 @@
                                                     name="final_score" placeholder="Nhập điểm cuối kỳ"
                                                     value="{{ $score->detail_scores->final_score }}">
                                             </div>
+                                            @error('final_score')
+                                                <span class="text-danger">{{ $message }}</span><br>
+                                            @enderror
                                         </div>
                                         <div class="col-md-3 col-sm-6">
                                             <label class=" label-align" for="medium_score">Điểm kết thúc môn:</label>
@@ -77,6 +89,9 @@
                                                     3)
                                                     )/8</small>
                                             </div>
+                                            @error('medium_score')
+                                                <span class="text-danger">{{ $message }}</span><br>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>

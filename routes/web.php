@@ -185,7 +185,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::prefix('scheldule')->controller(ScheduleController::class)->name('schedules.')->group(function () {
         Route::get('/', 'index')->name('index')->middleware('permission:show-schedule');
         Route::get('/show/{slug}', 'show')->name('show')->middleware('permission:show-schedule');
-        Route::get('/show-user/{slug}', 'showuser')->name('show')->middleware('permission:show-schedule-me');
+        Route::get('/show-user/{slug}', 'showuser')->name('showuser')->middleware('permission:show-schedule-me');
         Route::prefix('/show/teachers-scheldule')->controller(Teacher_SchelduleController::class)->name('teachers-scheldule.')->group(function () {
             Route::get('/get-periods/{rankId}/{slugTeacher}', 'rank_update_periods')->name('rank-update-periods');
             Route::get('/get-grades/{periodId}', 'getGrades')->name('get-grades');

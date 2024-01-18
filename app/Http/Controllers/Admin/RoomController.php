@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Role\UpdateRoleRequest;
+use App\Http\Requests\Room\CreateRoomRequest;
 use App\Repositories\Room\RoomRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -33,7 +35,7 @@ class RoomController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateRoomRequest $request)
     {
         $array = $request->all();
         $room = $this->roomRepo->insertRoom($array);
@@ -61,7 +63,7 @@ class RoomController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateRoleRequest $request, string $id)
     {
         $array = $request->all();
         $rooms = $this->roomRepo->updateRoom($array, $id);

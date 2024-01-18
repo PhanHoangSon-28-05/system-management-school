@@ -24,10 +24,12 @@
                                         <div class="form-floating">
                                             <select class="form-select" id="selectOption" name="subject_id"
                                                 aria-label="Floating label select example">
-                                                <option>Select subject:</option>
+                                                <option value="">Select subject:</option>
                                                 @foreach ($subjects as $subject)
-                                                    <option value="{{ $subject->subjects->id }}">
-                                                        {{ $subject->subjects->name }}</option>
+                                                    @if ($subject->subjects)
+                                                        <option value="{{ $subject->subjects->id }}">
+                                                            {{ $subject->subjects->name }}</option>
+                                                    @endif
                                                 @endforeach
                                             </select>
                                             <label for="floatingSelect">Name Subject</label>
@@ -42,7 +44,7 @@
                                         <div class="form-floating">
                                             <select class="form-select" id="selectOption" name="student_id"
                                                 aria-label="Floating label select example">
-                                                <option>Select student:</option>
+                                                <option value="">Select student:</option>
                                                 @foreach ($students as $student)
                                                     <option value="{{ $student->id }}">
                                                         {{ $student->last_name . ' ' . $student->first_name }}</option>
@@ -64,6 +66,9 @@
                                                 <input type="text" class="form-control" id="attendance" name="attendance"
                                                     placeholder="Nhập điểm chuyên cần" value="0">
                                             </div>
+                                            @error('attendance')
+                                                <span class="text-danger">{{ $message }}</span><br>
+                                            @enderror
                                         </div>
                                         <div class="col-md-3 col-sm-6">
                                             <label class=" label-align" for="scores_2_1">Điểm hệ số
@@ -72,6 +77,9 @@
                                                 <input type="text" class="form-control" id="scores_2_1" name="scores_2_1"
                                                     placeholder="Nhập điểm hệ số 2 lần 1" value="0">
                                             </div>
+                                            @error('scores_2_1')
+                                                <span class="text-danger">{{ $message }}</span><br>
+                                            @enderror
                                         </div>
                                         <div class="col-md-3 col-sm-6">
                                             <label class=" label-align" for="scores_2_2">Điểm hệ số
@@ -80,6 +88,9 @@
                                                 <input type="text" class="form-control" id="scores_2_2" name="scores_2_2"
                                                     placeholder="Nhập điểm hệ số 2 lần 2" value="0">
                                             </div>
+                                            @error('scores_2_2')
+                                                <span class="text-danger">{{ $message }}</span><br>
+                                            @enderror
                                         </div>
                                         <div class="col-md-3 col-sm-6">
                                             <label class=" label-align" for="final_score">Điểm cuối
@@ -88,6 +99,9 @@
                                                 <input type="text" class="form-control" id="final_score"
                                                     name="final_score" placeholder="Nhập điểm cuối kỳ" value="0">
                                             </div>
+                                            @error('final_score')
+                                                <span class="text-danger">{{ $message }}</span><br>
+                                            @enderror
                                         </div>
                                         <div class="col-md-3 col-sm-6">
                                             <label class=" label-align" for="medium_score">Điểm kết thúc môn:</label>

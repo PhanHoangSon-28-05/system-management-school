@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Grade\CreateGradeRequest;
+use App\Http\Requests\Grade\UpdateGradeRequest;
 use App\Repositories\Grade\GradeRepositoryInterface;
 use App\Repositories\Grade\StudentGrade\StudentGradeRepositoryInterface;
 use App\Repositories\Grade\TeacherGrade\TeacherGradeRepositoryInterface;
@@ -45,7 +47,7 @@ class GradeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateGradeRequest $request)
     {
         //
         $array = $request->all();
@@ -80,7 +82,7 @@ class GradeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateGradeRequest $request, string $id)
     {
         //
         $gradeRepo = $this->gradeRepo->updategrade($request, $id);

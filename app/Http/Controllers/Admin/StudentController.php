@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Repositories\Student\StudentRepositoryInterface;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Student\CreateStudentRequest;
+use App\Http\Requests\Student\UpdateStudentRequest;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -37,7 +39,7 @@ class StudentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateStudentRequest $request)
     {
         $array = $request->all();
         $student = $this->studentsRepo->insertStudent($array);
@@ -72,7 +74,7 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateStudentRequest $request, string $id)
     {
         //
         $array = $request->all();

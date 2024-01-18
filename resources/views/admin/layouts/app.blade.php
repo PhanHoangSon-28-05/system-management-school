@@ -88,14 +88,23 @@
                     <!-- menu profile quick info -->
                     <div class="profile clearfix">
                         <div class="profile_pic">
-                            <img src="{{ asset('public/uploads/teachers/individual/' . Auth::user()->teachers->first()->image_personal) }}"
-                                alt="Teacher Image" class="img-circle profile_img w-10">
+                            @if (Auth::user()->teachers->first())
+                                <img src="{{ asset('public/uploads/teachers/individual/' . Auth::user()->teachers->first()->image_personal) }}"
+                                    alt="Teacher Image" class="img-circle profile_img w-10">
+                            @else
+                                <img src="{{ URL::asset('admin/build/images/img.jpg') }}" alt="..."
+                                    class="img-circle profile_img">
+                            @endif
+
                         </div>
                         <div class="profile_info">
                             {{-- <span>{{ Auth::user()->teachers->first()->name }}</span> --}}
                             <h2>
-                                {{ Auth::user()->teachers->first()->last_name . ' ' . Auth::user()->teachers->first()->first_name }}
-
+                                @if (Auth::user()->teachers->first())
+                                    {{ Auth::user()->teachers->first()->last_name . ' ' . Auth::user()->teachers->first()->first_name }}
+                                @else
+                                    Super Admin
+                                @endif
                             </h2>
                         </div>
                     </div>
