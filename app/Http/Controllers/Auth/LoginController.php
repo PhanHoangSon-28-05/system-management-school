@@ -25,18 +25,19 @@ class LoginController extends Controller
     public function login(LoginRequest $request)
     {
         $credentials = $request->getCredentials();
-
+        // $credentials['password'] = bcrypt($credentials['password']);
+        // dd($credentials);
         // dd(Auth::attempt($credentials));
 
-        // if (!Auth::validate($credentials)) :
-        //     return redirect()->to('login')
-        //         ->withErrors(trans('auth.failed'));
-        // endif;
-
-        if (Auth::validate($credentials) == true) :
+        if (!Auth::validate($credentials)) :
             return redirect()->to('login')
                 ->withErrors(trans('auth.failed'));
         endif;
+
+        // if (Auth::validate($credentials) == true) :
+        //     return redirect()->to('login')
+        //         ->withErrors(trans('auth.failed'));
+        // endif;
 
 
         $user = Auth::getProvider()->retrieveByCredentials($credentials);

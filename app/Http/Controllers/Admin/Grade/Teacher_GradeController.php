@@ -11,16 +11,16 @@ use Illuminate\Http\Request;
 class Teacher_GradeController extends Controller
 {
     protected $gradeRepo;
-    protected $teacherRpo;
+    protected $teacherRepo;
     protected $teacherGradeRepo;
 
     public function __construct(
         GradeRepositoryInterface $gradeRepo,
-        TeacherRepositoryInterface $teacherRpo,
+        TeacherRepositoryInterface $teacherRepo,
         TeacherGradeRepositoryInterface $teacherGradeRepo
     ) {
         $this->gradeRepo = $gradeRepo;
-        $this->teacherRpo = $teacherRpo;
+        $this->teacherRepo = $teacherRepo;
         $this->teacherGradeRepo = $teacherGradeRepo;
     }
 
@@ -62,10 +62,12 @@ class Teacher_GradeController extends Controller
     {
         $grades = $this->teacherGradeRepo->edit_Grade($slugGrade);
         $departement_selected = $this->teacherGradeRepo->index_Grade($slugGrade);
-        $teachers = $this->teacherRpo->find($id);
-
+        $teachersStats = $this->teacherRepo->getTeacherToSlugAndSlugGrade($slugGrade, $id);
+        $teachers = $this->teacherRepo->find($id);
+        // dd($teachers->first()->status);
+        $check = $this->teacherGradeRepo->checkHomeroomTeacher($slugGrade);
         // dd($teachers);
-        return view('admin.grades.teachersGrades.edit', ['grades' => $grades, 'teacher' => $teachers, 'departement_selected' => $departement_selected]);
+        return view('admin.grades.teachersGrades.edit', ['grades' => $grades, 'teacher' => $teachers, 'departement_selected' => $departement_selected, 'teachersStatus' => $teachersStats, 'check' => $check]);
     }
 
     /**

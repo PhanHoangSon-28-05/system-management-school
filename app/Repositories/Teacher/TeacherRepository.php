@@ -2,7 +2,9 @@
 
 namespace App\Repositories\Teacher;
 
+use App\Models\Detail_Class;
 use App\Models\Detail_Teacher;
+use App\Models\Grade;
 use Intervention\Image\Facades\Image;
 
 
@@ -31,6 +33,14 @@ class TeacherRepository extends BaseRepository implements TeacherRepositoryInter
     {
         return $this->model->where('slug', $slug)->first();
     }
+
+    public function getTeacherToSlugAndSlugGrade($slugGrade, $idTeacher)
+    {
+        $idGrade = Grade::where('slug', $slugGrade)->first()->id;
+        $check = Detail_Class::where('grade_id', $idGrade)->where('teacher_id', $idTeacher)->first();
+        return $check;
+    }
+
 
     public function findById(string $id)
     {

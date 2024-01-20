@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Detail_Department extends Model
 {
@@ -14,4 +15,9 @@ class Detail_Department extends Model
         'teacher_id',
         'grade_id',
     ];
+
+    public function departments(): BelongsTo
+    {
+        return $this->belongsTo(Detail_Department::class, 'department_id', 'id');
+    }
 }

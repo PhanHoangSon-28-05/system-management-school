@@ -21,7 +21,7 @@
                                 <div class="field item form-group">
                                     <div class="col-md-10 col-sm-6">
                                         <div class="form-floating">
-                                            <select class="form-select" id="selectOption" name="grade_id"
+                                            <select class="form-select" id="selectOption" name="teacher_id"
                                                 aria-label="Floating label select example" onchange="checkGradeStatus()">
                                                 <option>Select teacher:</option>
                                                 @foreach ($teachers as $teacher)

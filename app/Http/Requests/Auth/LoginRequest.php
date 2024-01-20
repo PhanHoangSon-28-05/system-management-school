@@ -32,7 +32,7 @@ class LoginRequest extends FormRequest
     public function getCredentials()
     {
         $username = $this->get('username');
-        //dd($this->get('username'), $this->get('password'));
+        // dd($this->get('username'), $this->get('password'));
 
         if ($this->isUsername($username)) {
             return [
@@ -47,10 +47,11 @@ class LoginRequest extends FormRequest
     public function isUsername($param)
     {
         $factory = $this->container->make(ValidationFactory::class);
+        // dd(!$factory);
 
         return !$factory->make(
             ['username' => $param],
-            ['username' => 'required|min:3|max:255']
+            ['username' => '']
         )->fails();
     }
 }

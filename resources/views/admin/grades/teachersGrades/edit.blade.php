@@ -19,20 +19,41 @@
                                 id="demo-form" data-parsley-validate>
                                 @csrf
                                 @method('PUT')
-                                <div class="field item form-group">
+                                <div class="field item form-group" id="radioGroupContainer">
                                     <div class="col-md-10 col-sm-6">
                                         <div class="form-floating">
-                                            <select class="form-select" name="grade_id"
-                                                aria-label="Floating label select example">
-                                                <option value="{{ $teacher_selected->id }}">
-                                                    {{ $teacher_selected->name }}</option>
-                                                @foreach ($teachers as $teacher)
-                                                    <option value="{{ $teacher->id }}">
-                                                        {{ $teacher->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            <label for="floatingSelect">Name teacher</label>
+                                            <h4 for="">Name position: </h4>
+                                            {{-- {{ dd($check) }} --}}
+                                            @if ($check)
+                                                <div class="form-check form-check-inline" id="homeroomTeacherOption"
+                                                    style="display: {{ $teachersStatus->status == 1 ? 'block' : 'none' }};">
+                                                    <input class="form-check-input" type="radio" name="status"
+                                                        id="flexRadioDefault1" value="1"
+                                                        {{ $teachersStatus->status == 1 ? 'checked' : '' }}>
+                                                    <label class="form-check-label" for="flexRadioDefault1">Homeroom
+                                                        teacher</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="status"
+                                                        id="flexRadioDefault2" value="2"
+                                                        {{ $teachersStatus->status == 2 ? 'checked' : '' }}>
+                                                    <label class="form-check-label" for="flexRadioDefault2">Subject
+                                                        teacher</label>
+                                                </div>
+                                            @else
+                                                <div class="form-check form-check-inline" id="homeroomTeacherOption">
+                                                    <input class="form-check-input" type="radio" name="status"
+                                                        id="flexRadioDefault1" value="1">
+                                                    <label class="form-check-label" for="flexRadioDefault1">Homeroom
+                                                        teacher</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="status"
+                                                        id="flexRadioDefault2" value="2" checked>
+                                                    <label class="form-check-label" for="flexRadioDefault2">Subject
+                                                        teacher</label>
+                                                </div>
+                                            @endif
                                         </div>
                                         @error('description')
                                             <span class="text-danger">{{ $message }}</span><br>

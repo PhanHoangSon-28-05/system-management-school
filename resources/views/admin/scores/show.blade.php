@@ -43,38 +43,40 @@
                                     <div class="col-md-12 col-sm-12  profile_details search text-center">
                                         <form action="ttm" method="post">
                                             {!! csrf_field() !!}
-                                            <div class="well profile_view">
-                                                <div class="col-sm-12">
-                                                    <h4 class="brief"><i>{{ $teacherGrade->code }}</i>
-                                                    </h4>
-                                                    <div class="left col-md-8 col-sm-7">
-                                                        <h2>{{ $teacherGrade->last_name . ' ' . $teacherGrade->first_name }}
-                                                        </h2>
-                                                        <p><strong>Emai: </strong>
-                                                            {{ $teacherGrade->email }}
-                                                        </p>
-                                                        <ul class="list-unstyled">
-                                                            <li><i class="fa fa-building"></i> Address:
-                                                                {{ $teacherGrade->hometown }}</li>
-                                                            <li><i class="fa fa-phone"></i> Phone #:
-                                                                {{ $teacherGrade->phone }}</li>
-                                                        </ul>
+                                            @if ($teacherGrade)
+                                                <div class="well profile_view">
+                                                    <div class="col-sm-12">
+                                                        <h4 class="brief"><i>{{ $teacherGrade->code }}</i>
+                                                        </h4>
+                                                        <div class="left col-md-8 col-sm-7">
+                                                            <h2>{{ $teacherGrade->last_name . ' ' . $teacherGrade->first_name }}
+                                                            </h2>
+                                                            <p><strong>Emai: </strong>
+                                                                {{ $teacherGrade->email }}
+                                                            </p>
+                                                            <ul class="list-unstyled">
+                                                                <li><i class="fa fa-building"></i> Address:
+                                                                    {{ $teacherGrade->hometown }}</li>
+                                                                <li><i class="fa fa-phone"></i> Phone #:
+                                                                    {{ $teacherGrade->phone }}</li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="right col-md-4 col-sm-5 w-25">
+                                                            <img src="{{ asset('public/uploads/teachers/individual/' . $teacherGrade->image_personal) }}"
+                                                                alt="" class="img-circle img-fluid">
+                                                        </div>
                                                     </div>
-                                                    <div class="right col-md-4 col-sm-5 w-25">
-                                                        <img src="{{ asset('public/uploads/teachers/individual/' . $teacherGrade->image_personal) }}"
-                                                            alt="" class="img-circle img-fluid">
+                                                    <div class=" profile-bottom">
+                                                        <div class=" col-sm-7 emphasis">
+                                                        </div>
+                                                        <div class=" col-sm-5 emphasis">
+                                                            <a href="" class="btn btn-primary btn-xs rounded-3">
+                                                                <i class="fa fa-user"> </i> View Profile
+                                                            </a>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class=" profile-bottom">
-                                                    <div class=" col-sm-7 emphasis">
-                                                    </div>
-                                                    <div class=" col-sm-5 emphasis">
-                                                        <a href="" class="btn btn-primary btn-xs rounded-3">
-                                                            <i class="fa fa-user"> </i> View Profile
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            @endif
                                         </form>
                                     </div>
                                     @foreach ($studentgrades as $studentgrade)

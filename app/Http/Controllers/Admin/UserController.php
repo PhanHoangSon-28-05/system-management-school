@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Repositories\User\UserRepositoryInterface;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\Student;
 use App\Repositories\Role\RoleRepositoryInterface;
 use App\Repositories\Student\StudentRepositoryInterface;
@@ -44,11 +45,13 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function storeCountTeacher(Request $request, $slugTeacher)
+    public function storeCountTeacher(RegisterRequest $request, $slugTeacher)
     {
+        // dd($request);
         try {
-            $array = $request->all();
+            $array = $request->validated();
             $teacher = $this->teacherRepo->getTeacherToSlug($slugTeacher);
+            // dd($teacher);
             $user = $this->userRepo->insertUserTeacher($array, $teacher->id);
             return redirect()->route('teachers.show', $teacher->id)->with(['message' => 'Create Account Teacher success']);
         } catch (\Exception $e) {
@@ -69,7 +72,7 @@ class UserController extends Controller
     public function storeCountStudent(Request $request, $slugStudent)
     {
         try {
-            $array = $request->all();
+            $array = $request->validated();
             $student = $this->studentRepo->getStudentToSlug($slugStudent);
             $user = $this->userRepo->insertUserStudent($array, $student->id);
             return redirect()->route('students.show', $student->id)->with(['message' => 'Create Account Student success']);
@@ -105,8 +108,11 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy()
+    public function destroy(string $id)
     {
-        //
+        $user = $this->userRepo->delete($id);
+        return response()->json([
+            'message' => 'User deleted successfully.'
+        ]);
     }
 }

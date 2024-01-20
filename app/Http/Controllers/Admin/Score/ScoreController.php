@@ -50,7 +50,8 @@ class ScoreController extends Controller
      */
     public function index()
     {
-        $department = $this->departmentRepo->getAll();
+        $department = $this->scoreRepo->departmentTeacher();
+        // dd($department);
         return view('admin.scores.index', ['departments' => $department]);
     }
 
@@ -61,6 +62,7 @@ class ScoreController extends Controller
     {
         $studentGrades = $this->studentGradeRepo->indexStudent_Grade($slugClass);
         $teacherGrade = $this->teacherGradeRepo->indexHomeroomTeacher_Grade($slugClass);
+        // dd($teacherGrade);
         return view('admin.scores.show', ['studentgrades' => $studentGrades, 'teacherGrade' => $teacherGrade, 'slugGrade' => $slugClass]);
     }
 

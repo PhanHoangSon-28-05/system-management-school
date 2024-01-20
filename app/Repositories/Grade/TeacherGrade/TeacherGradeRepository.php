@@ -22,6 +22,7 @@ class TeacherGradeRepository extends BaseRepository implements TeacherGradeRepos
         if (!$grade) {
         }
         $Teachers_dep = $grade->Teachers;
+        // dd($Teachers_dep);
         return $Teachers_dep;
     }
 
@@ -30,12 +31,17 @@ class TeacherGradeRepository extends BaseRepository implements TeacherGradeRepos
         $grade = Grade::where('slug', $slug)->first();
 
         if (!$grade) {
+            return [];
         }
+
         $Teachers_dep = $grade->detail_Class;
-        $homeroomTeacher = $Teachers_dep->where('status', 1)->first();
-        $dataHomeroomTeacher = $homeroomTeacher->teachers;
-        // dd($dataHomeroomTeacher);
-        return $dataHomeroomTeacher;
+
+        if ($Teachers_dep) {
+            $homeroomTeacher = $Teachers_dep->where('status', 1)->first();
+            $dataHomeroomTeacher = $homeroomTeacher ? $homeroomTeacher->teachers : [];
+            return $dataHomeroomTeacher;
+        }
+        return false;
     }
 
     public function getAllTeacherIds()
@@ -47,12 +53,12 @@ class TeacherGradeRepository extends BaseRepository implements TeacherGradeRepos
 
     public function getTeachersNotInGrade($allTeacherIds)
     {
-        // $Teacher = Teacher::whereNotIn('id', function ($query) use ($allTeacherIds) {
-        //     $query->select('teacher_id')
-        //         ->from('detail__classes')
-        //         ->whereIn('Teacher_id', $allTeacherIds);
-        // })->get();
-        $Teacher = Teacher::all();
+        $Teacher = Teacher::whereNotIn('id', function ($query) use ($allTeacherIds) {
+            $query->select('teacher_id')
+                ->from('detail__classes')
+                ->whereIn('Teacher_id', $allTeacherIds);
+        })->get();
+        // $Teacher = Teacher::all();
         return $Teacher;
     }
 

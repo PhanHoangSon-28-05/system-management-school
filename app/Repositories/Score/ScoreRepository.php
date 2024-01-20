@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Score;
 
+use App\Models\Department;
+use App\Models\Detail_Department;
 use App\Models\Detail_Scores;
 use App\Models\Grade;
 use App\Models\Student;
@@ -41,6 +43,23 @@ class ScoreRepository extends BaseRepository implements ScoreRepositoryInterface
             ->get();
 
         return $students;
+    }
+
+    public function departmentTeacher()
+    {
+        // dd(Auth::user()->teachers);
+        if (Auth::user()->teachers == []) {
+            // dd(Auth::user()->teachers->first()->id);
+            $idDepartment = Detail_Department::where('teacher_id', Auth::user()->teachers->first()->id)->get();
+            // dd($idDepartment != []);
+            if ($idDepartment == []) {
+                $department = $idDepartment->departments->get();
+                return $department;
+            }
+            return false;
+        } else {
+            return Department::all();
+        }
     }
 
     public function addScore($attributes = [])

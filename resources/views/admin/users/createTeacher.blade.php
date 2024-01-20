@@ -55,8 +55,8 @@
                                         style="font-weight: bold; font-size:15px;">Repeat password <span
                                             class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6">
-                                        <input class="form-control" type="password" name="password2"
-                                            data-validate-linked='password' required='required' id="password2"
+                                        <input class="form-control" type="password" name="password_confirmation"
+                                            data-validate-linked='password' required='required' id="password_confirmation"
                                             value="xyz@1234" />
                                     </div>
                                 </div>

@@ -25,13 +25,13 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function insertUserTeacher($attributes = [], $idTeacher)
     {
         // dd(Teacher_User::all());
+        // dd($attributes);
         $existingUser = $this->model->where('username', $attributes['username'])->first();
         if ($existingUser) {
             return response()->json(['error' => 'Username already exists'], 400);
         }
 
-        $password = $attributes['password'];
-        $attributes['password'] = Hash::make($password);
+        // $password = $attributes['password'];
         $user = $this->model->create($attributes);
         $user->roles()->attach($attributes['role_ids']);
 
@@ -56,7 +56,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         }
 
         $password = $attributes['password'];
-        $attributes['password'] = Hash::make($password);
+        // $attributes['password'] = bcrypt($password);
         $user = $this->model->create($attributes);
         $user->roles()->attach($attributes['role_ids']);
 

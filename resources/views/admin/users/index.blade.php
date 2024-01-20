@@ -115,14 +115,14 @@
 
         $('body').on('click', '.delete-modal-btn', function() {
             var userId = $(this).data('user-id');
-
             $.ajax({
-                url: '/admin/users/' + userId,
+                url: '{{ url('admin/users') }}/' + userId,
                 type: 'DELETE',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(response) {
+                    // console.log(response);
                     window.location.reload();
                 },
                 error: function(xhr) {

@@ -16,7 +16,7 @@ class UserSeederSuperAdmin extends Seeder
     public function run(): void
     {
         $user_superAdmins = [
-            ['username' => 'super-admin', 'password' => Hash::make('123456789')],
+            ['username' => 'super-admin', 'password' => '123456789'],
         ];
 
         foreach ($user_superAdmins as $value) {

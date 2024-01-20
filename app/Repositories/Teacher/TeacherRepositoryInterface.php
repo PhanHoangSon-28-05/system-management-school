@@ -12,6 +12,7 @@ interface TeacherRepositoryInterface extends RepositoryInterface
     public function subjectGiveteacher($attributes = [], string $id);
     public function delete_subjectGiveteacher(string $id);
     public function getTeacherToSlug($slug);
+    public function getTeacherToSlugAndSlugGrade($slugGrade, $idTeacher);
     public function insertTeacher($attributes = []);
     public function updateTeacher($attributes = [], $id);
     public function deleteTeacher($id);
