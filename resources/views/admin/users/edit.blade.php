@@ -8,7 +8,11 @@
                     <h3>Edit Uses</h3>
                 </div>
             </div>
-            <div class="clearfix"></div>
+            <div class="clearfix">
+                <a href="{{ URL::route('users.index') }}" type="button" href="" class="btn btn-secondary">
+                    <i class="fas fa-backward"></i>
+                </a>
+            </div>
             <div class="row">
                 <div class="col-md-12 col-sm-12 ">
                     <div class="">
@@ -112,7 +116,29 @@
         </div>
     </div>
 @endsection
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="{{ URL::asset('admin/vendors/validator/multifield.js') }}"></script>
+<script src="{{ URL::asset('admin/vendors/validator/validator.js') }}"></script>
 
+<!-- Javascript functions	-->
+<script>
+    function hideshow() {
+        var password = document.getElementById("password1");
+        var slash = document.getElementById("slash");
+        var eye = document.getElementById("eye");
+
+        if (password.type === 'password') {
+            password.type = "text";
+            slash.style.display = "block";
+            eye.style.display = "none";
+        } else {
+            password.type = "password";
+            slash.style.display = "none";
+            eye.style.display = "block";
+        }
+
+    }
+</script>
 @section('scripts')
     {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js"></script>

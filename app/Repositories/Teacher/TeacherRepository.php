@@ -42,17 +42,25 @@ class TeacherRepository extends BaseRepository implements TeacherRepositoryInter
     }
 
 
+
     public function findById(string $id)
     {
         return $this->model->find($id);
     }
 
+    public function getSubjectTeacherToId($id)
+    {
+        return Detail_Teacher::where('teacher_id', $id)->get();
+    }
+
     public function subjectGiveteacher($attributes = [], string $id)
     {
         $attributes['teacher_id'] = $id;
+        // dd($attributes);
         $add = Detail_Teacher::create($attributes);
         return $add;
     }
+
 
     public function delete_subjectGiveteacher(string $id)
     {

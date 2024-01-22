@@ -80,7 +80,6 @@ class ScoreController extends Controller
         $grades = $this->gradeRepo->getGradeToSlug($slugGrade);
         $allstudentIds = $this->studentGradeRepo->getAllstudentIds();
         $students = $this->scoreRepo->getStudentsNotInGradeScorce($grades->id, $allstudentIds);
-        // dd($grades);
         return view('admin.scores.add', ['subjects' => $subjects, 'slugGrade' => $slugGrade, 'students' => $students]);
     }
 
@@ -88,6 +87,7 @@ class ScoreController extends Controller
     public function add(CreateScoreRequest $request, string $slugGrade)
     {
         $array = $request->all();
+        // dd($array);
         $students = $this->scoreRepo->addScore($array);
 
         return redirect()->route('scores.show', $slugGrade)->with(['message' => 'Add success']);

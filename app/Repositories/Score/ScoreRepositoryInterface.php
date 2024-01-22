@@ -6,7 +6,8 @@ use App\Repositories\RepositoryInterface;
 
 interface ScoreRepositoryInterface extends RepositoryInterface
 {
-    public function getStudentsNotInGradeScorce($gradeId, $allStudentIds);
+    // public function getStudentsNotInGradeScorce($gradeId, $allStudentIds);
+    public function getStudentsNotInGradeScorce($gradeId);
     public function departmentTeacher();
     public function addScore($attributes = []);
     public function viewscore($slugStudent);

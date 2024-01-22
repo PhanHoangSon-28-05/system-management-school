@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Grade;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Grade\Teacher\CreateGradeTeacherRequest;
 use App\Repositories\Grade\GradeRepositoryInterface;
 use App\Repositories\Grade\TeacherGrade\TeacherGradeRepositoryInterface;
 use App\Repositories\Teacher\TeacherRepositoryInterface;
@@ -31,16 +32,16 @@ class Teacher_GradeController extends Controller
     {
         $check = $this->teacherGradeRepo->checkHomeroomTeacher($slugGrade);
         $grades = $this->gradeRepo->getAll();
-        $allTeacherIds = $this->teacherGradeRepo->getAllTeacherIds();
-        $teachers = $this->teacherGradeRepo->getTeachersNotInGrade($allTeacherIds);
+        // $allTeacherIds = $this->teacherGradeRepo->getAllTeacherIds();
+        $teachers = $this->teacherRepo->getAll();
         // dd($teachers);
-        return view('admin.grades.teachersGrades.add', ['grades' => $grades, 'teachers' => $teachers, 'check' => $check]);
+        return view('admin.grades.teachersGrades.add', ['grades' => $grades, 'teachers' => $teachers, 'check' => $check, 'slugGrade' => $slugGrade]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateGradeTeacherRequest $request)
     {
         $all = $request->all();
         $departement_teacher = $this->teacherGradeRepo->createTeacherGrade($all);
@@ -61,13 +62,13 @@ class Teacher_GradeController extends Controller
     public function edit(string $slugGrade, string $id)
     {
         $grades = $this->teacherGradeRepo->edit_Grade($slugGrade);
-        $departement_selected = $this->teacherGradeRepo->index_Grade($slugGrade);
+        $grade_selected = $this->teacherGradeRepo->index_Grade($slugGrade);
         $teachersStats = $this->teacherRepo->getTeacherToSlugAndSlugGrade($slugGrade, $id);
         $teachers = $this->teacherRepo->find($id);
         // dd($teachers->first()->status);
         $check = $this->teacherGradeRepo->checkHomeroomTeacher($slugGrade);
         // dd($teachers);
-        return view('admin.grades.teachersGrades.edit', ['grades' => $grades, 'teacher' => $teachers, 'departement_selected' => $departement_selected, 'teachersStatus' => $teachersStats, 'check' => $check]);
+        return view('admin.grades.teachersGrades.edit', ['grades' => $grades, 'teacher' => $teachers, 'grade_selected' => $grade_selected, 'teachersStatus' => $teachersStats, 'check' => $check, 'slugGrade' => $slugGrade]);
     }
 
     /**
@@ -84,8 +85,12 @@ class Teacher_GradeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $slugGrade, string $id)
     {
-        //
+        $teacher = $this->teacherGradeRepo->deleteTeacherToSlugAndSlugGrade($slugGrade, $id);
+        dd($teacher);
+        return redirect()->json([
+            'message' => 'Teacher deteled in grade successfully'
+        ]);
     }
 }

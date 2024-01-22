@@ -59,6 +59,7 @@ class TeacherController extends Controller
     {
         // dd($id);
         $teacher = $this->teacherRepo->findById($id);
+        $detail_subjects = $this->teacherRepo->getSubjectTeacherToId($id);
         $idallSubject =  $this->subjectRepo->getallSubject($id);
         $subjects =  $this->subjectRepo->getSubjectNotInGiveTeachet($idallSubject);
         // dd($subjects);
@@ -66,13 +67,14 @@ class TeacherController extends Controller
             return redirect()->route('admin.teachers.index')->with('error', 'Teacher not found.');
         }
         $check = $this->teacherRepo->checkAccountTeacher($id);
-        return view('admin.teachers.show', ['teacher' => $teacher, 'check' => $check, 'subjects' => $subjects]);
+        return view('admin.teachers.show', ['teacher' => $teacher, 'check' => $check, 'subjects' => $subjects, 'detail_subjects' => $detail_subjects]);
     }
 
     public function add_subjectGiveteacher(Request $request, $id)
     {
         try {
             $array = $request->all();
+            // dd($array);
             $teacher = $this->teacherRepo->subjectGiveteacher($array, $id);
 
             return redirect()->route('teachers.show', $id)->with(['message' => 'Add Subject Give Teacher suceess']);

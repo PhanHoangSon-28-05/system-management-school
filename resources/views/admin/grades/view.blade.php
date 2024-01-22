@@ -2,6 +2,9 @@
 @section('title', 'grade')
 @section('content')
     <div class="right_col" role="main">
+        <a href="{{ URL::route('grades.index') }}" type="button" href="" class="btn btn-secondary">
+            <i class="fas fa-backward"></i>
+        </a>
         <div class="accordion" id="accordionExample">
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingOne">
@@ -47,6 +50,7 @@
                                         </div>
                                         <div class="clearfix"></div>
                                         <div id="card-list" class="row" style="margin:auto">
+                                            {{-- {{ dd($teacherGrades) }} --}}
                                             @foreach ($teacherGrades as $teacherGrade)
                                                 <div class="col-md-4 col-sm-4  profile_details search">
                                                     <form action="ttm" method="post">
@@ -86,8 +90,20 @@
                                                                         <a href="{{ URL::route('teachers.show', $teacherGrade->id) }}"
                                                                             class="btn btn-primary btn-xs rounded-3">
                                                                             <i class="fa fa-user"> </i> View Profile
-                                                                        @endcan
-                                                                    </a>
+                                                                        </a>
+                                                                    @endcan
+                                                                    {{-- @can('delete-teacher-class')
+                                                                        <form
+                                                                            action="{{ URL::route('grades.teachers-gradedestroy', [$slugGrade, $teacherGrade->id]) }}"
+                                                                            method="post">
+                                                                            @csrf
+                                                                            @method('delete')
+                                                                            <button
+                                                                                class="btn btn-danger btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3 "
+                                                                                type="submit"><i
+                                                                                    class="fas fa-trash-alt"></i>Delete</button>
+                                                                        </form>
+                                                                    @endcan --}}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -116,7 +132,8 @@
                             <div class="page-title">
                                 <div class="title_left">
                                     @can('add-student-class')
-                                        <a type="button" href="{{ URL::route('grades.students-gradeadd-student-grade') }}"
+                                        <a type="button"
+                                            href="{{ URL::route('grades.students-gradeadd-student-grade', $slugGrade) }}"
                                             class="btn btn-secondary">
                                             ADD
                                         </a>
@@ -144,6 +161,7 @@
                                         </div>
                                         <div class="clearfix"></div>
                                         <div id="card-list" class="row" style="margin:auto">
+
                                             @foreach ($studentgrades as $studentgrade)
                                                 <div class="col-md-4 col-sm-4  profile_details search">
                                                     <form action="ttm" method="post">

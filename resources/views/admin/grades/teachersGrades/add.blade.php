@@ -8,7 +8,11 @@
                     <h3>Create Grade Teacher</h3>
                 </div>
             </div>
-            <div class="clearfix"></div>
+            <div class="clearfix">
+                <a href="{{ route('grades.show', $slugGrade) }}" type="button" href="" class="btn btn-secondary">
+                    <i class="fas fa-backward"></i>
+                </a>
+            </div>
             <div class="row">
                 <div class="col-md-4 col-sm-4 ">
                     <div class="">
@@ -23,7 +27,7 @@
                                         <div class="form-floating">
                                             <select class="form-select" id="selectOption" name="teacher_id"
                                                 aria-label="Floating label select example" onchange="checkGradeStatus()">
-                                                <option>Select teacher:</option>
+                                                <option value="">Select teacher:</option>
                                                 @foreach ($teachers as $teacher)
                                                     <option value="{{ $teacher->id }}">
                                                         {{ $teacher->last_name . ' ' . $teacher->first_name }}</option>
@@ -31,7 +35,7 @@
                                             </select>
                                             <label for="floatingSelect">Name tracher</label>
                                         </div>
-                                        @error('description')
+                                        @error('teacher_id')
                                             <span class="text-danger">{{ $message }}</span><br>
                                         @enderror
                                     </div>
@@ -40,7 +44,7 @@
                                     <div class="col-md-10 col-sm-6">
                                         <div class="form-floating">
                                             <select class="form-select" id="selectGrade" name="grade_id">
-                                                <option>Select grade:</option>
+                                                <option value="">Select grade:</option>
                                                 @foreach ($grades as $grade)
                                                     <option value="{{ $grade->id }}">
                                                         {{ $grade->name }}
@@ -49,7 +53,7 @@
                                             </select>
                                             <label for="floatingSelect">Name grade</label>
                                         </div>
-                                        @error('description')
+                                        @error('grade_id')
                                             <span class="text-danger">{{ $message }}</span><br>
                                         @enderror
                                     </div>

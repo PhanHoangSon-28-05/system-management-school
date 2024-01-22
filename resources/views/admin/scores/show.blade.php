@@ -11,6 +11,9 @@
                     <div class="page-title">
                         <div class="title_left">
                             @can('create-score')
+                                <a href="{{ route('scores.index') }}" type="button" href="" class="btn btn-secondary">
+                                    <i class="fas fa-backward"></i>
+                                </a>
                                 <a href="{{ route('scores.addScore', $slugGrade) }}" type="button" href=""
                                     class="btn btn-secondary">
                                     ADD
@@ -79,55 +82,49 @@
                                             @endif
                                         </form>
                                     </div>
-                                    @foreach ($studentgrades as $studentgrade)
-                                        <div class="col-md-4 col-sm-4  profile_details search">
-                                            <form action="ttm" method="post">
-                                                {!! csrf_field() !!}
-                                                <div class="well profile_view">
-                                                    <div class="col-sm-12">
-                                                        <h4 class="brief"><i>{{ $studentgrade->code }}</i>
-                                                        </h4>
-                                                        <div class="left col-md-7 col-sm-7">
-                                                            <h2>{{ $studentgrade->last_name . ' ' . $studentgrade->first_name }}
-                                                            </h2>
-                                                            <p><strong>Emai: </strong>
-                                                                {{ $studentgrade->email }}
-                                                            </p>
-                                                            <ul class="list-unstyled">
-                                                                <li><i class="fa fa-building"></i> Address:
-                                                                    {{ $studentgrade->hometown }}
-                                                                </li>
-                                                                <li><i class="fa fa-phone"></i> Phone #:
-                                                                    {{ $studentgrade->phone }}
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="right col-md-5 col-sm-5 text-center">
-                                                            <img src="{{ asset('public/uploads/students/individual/' . $studentgrade->image_personal) }}"
-                                                                alt="" class="img-circle img-fluid w25">
-                                                        </div>
-                                                    </div>
-                                                    <div class=" profile-bottom text-center">
-                                                        <div class=" col-sm-6 emphasis">
-                                                        </div>
-                                                        <div class=" col-sm-6 emphasis">
-                                                            @can('show-score')
-                                                                <a class="btn btn-info btn-xs rounded-3 "
-                                                                    href="{{ route('scores.viewScore', [$slugGrade, $studentgrade->slug]) }}"><i
-                                                                        class="fas fa-edit"></i> Edit</a>
-                                                            @endcan
-                                                            @can('show-student')
-                                                                <a href="{{ URL::route('students.show', $studentgrade->id) }}"
-                                                                    class="btn btn-primary btn-xs rounded-3">
-                                                                    <i class="fa fa-user"> </i> View Profile
-                                                                </a>
-                                                            @endcan
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    @endforeach
+                                    <table id="datatable-keytable" class="table table-striped table-bordered"
+                                        style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Student Code</th>
+                                                <th>Student Name</th>
+                                                <th>Gender</th>
+                                                <th>Email</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($studentgrades as $studentgrade)
+                                                <form action="ttm" method="post">
+                                                    {!! csrf_field() !!}
+                                                    <tr>
+                                                        <td>{{ $loop->iteration }}</td>
+                                                        <td>{{ $studentgrade->code }}</td>
+                                                        <td>{{ $studentgrade->last_name . ' ' . $studentgrade->first_name }}
+                                                        </td>
+                                                        <td>{{ $studentgrade->gender }}</td>
+                                                        <td>{{ $studentgrade->email }}</td>
+                                                        <td>
+                                                            <div class="btn-group">
+                                                                @can('show-score')
+                                                                    <a class="btn btn-info btn-xs rounded-3 "
+                                                                        href="{{ route('scores.viewScore', [$slugGrade, $studentgrade->slug]) }}"><i
+                                                                            class="fas fa-edit"></i> Edit</a>
+                                                                @endcan
+                                                                @can('show-student')
+                                                                    <a href="{{ URL::route('students.show', $studentgrade->id) }}"
+                                                                        class="btn btn-primary btn-xs rounded-3">
+                                                                        <i class="fa fa-user"> </i> View Profile
+                                                                    </a>
+                                                                @endcan
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </form>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>

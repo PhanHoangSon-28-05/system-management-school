@@ -8,7 +8,11 @@
                     <h3>Edit Grade Teacher</h3>
                 </div>
             </div>
-            <div class="clearfix"></div>
+            <div class="clearfix">
+                <a href="{{ route('grades.show', $slugGrade) }}" type="button" href="" class="btn btn-secondary">
+                    <i class="fas fa-backward"></i>
+                </a>
+            </div>
             <div class="row">
                 <div class="col-md-4 col-sm-4 ">
                     <div class="">
@@ -21,6 +25,26 @@
                                 @method('PUT')
                                 <div class="field item form-group" id="radioGroupContainer">
                                     <div class="col-md-10 col-sm-6">
+                                        <div class="field item form-group">
+                                            <div class="col-md-10 col-sm-6">
+                                                <div class="form-floating">
+                                                    <select class="form-select" name="grade_id"
+                                                        aria-label="Floating label select example">
+                                                        <option value="{{ $grade_selected->id }}">
+                                                            {{ $grade_selected->name }}</option>
+                                                        @foreach ($grades as $grade)
+                                                            <option value="{{ $grade->id }}">
+                                                                {{ $grade->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    <label for="floatingSelect">Name Grade</label>
+                                                </div>
+                                                @error('description')
+                                                    <span class="text-danger">{{ $message }}</span><br>
+                                                @enderror
+                                            </div>
+                                        </div>
                                         <div class="form-floating">
                                             <h4 for="">Name position: </h4>
                                             {{-- {{ dd($check) }} --}}

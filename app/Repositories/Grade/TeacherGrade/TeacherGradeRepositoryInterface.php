@@ -16,4 +16,5 @@ interface TeacherGradeRepositoryInterface extends RepositoryInterface
     public function createTeacherGrade($all);
     public function edit_Grade($slug);
     public function updateTeacher_Grade($id_Teacher, $attributes = []);
+    public function deleteTeacherToSlugAndSlugGrade($slugGrade, $idTeacher);
 }

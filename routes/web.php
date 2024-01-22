@@ -171,9 +171,10 @@ Route::prefix('admin')->middleware('auth')->group(function () {
             Route::post('/', 'store')->name('store')->middleware('permission:add-teacher-class');
             Route::get('/{slug}/{id}/edit', 'edit')->name('edit')->middleware('permission:edit-teacher-class');
             Route::put('/{idTeacher}', 'update')->name('update')->middleware('permission:edit-teacher-class');
+            Route::delete('/{slug}/{id}', 'destroy')->name('destroy')->middleware('permission:delete-class');
         });
         Route::prefix('/show/students-grade')->controller(Student_GradeController::class)->name('students-grade')->group(function () {
-            Route::get('add', 'add')->name('add-student-grade')->middleware('permission:add-student-class');
+            Route::get('add/{slugGrade}', 'add')->name('add-student-grade')->middleware('permission:add-student-class');
             Route::post('/', 'store')->name('store')->middleware('permission:add-student-class');
             Route::get('/{slug}/{id}/edit', 'edit')->name('edit')->middleware('permission:edit-student-class');
             Route::put('/{idStudent}', 'update')->name('update')->middleware('permission:edit-student-class');

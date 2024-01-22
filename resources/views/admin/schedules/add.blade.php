@@ -28,11 +28,14 @@
                                     <div class=" col-sm-9 col-sm-6">
                                         <select class="form-select" aria-label="Default select example" name="rank_id"
                                             id="rankSelect">
-                                            <option value="null" selected>Open this select menu</option>
+                                            <option value="" selected>Open this select menu</option>
                                             @foreach ($ranks as $rank)
                                                 <option value="{{ $rank->id }}">{{ $rank->name }}</option>
                                             @endforeach
                                         </select>
+                                        @error('rank_id')
+                                            <span class="text-danger">{{ $message }}</span><br>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="field item form-group">
@@ -53,6 +56,9 @@
                                                 </div>
                                             </div>
                                         @endforeach
+                                        @error('period_ids')
+                                            <span class="text-danger">{{ $message }}</span><br>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="field item form-group">
@@ -64,11 +70,14 @@
                                     <div class=" col-sm-9 col-sm-6">
                                         <select class="form-select" aria-label="Default select example" name="grade_id"
                                             id="gradeSelect">
-                                            <option value="null" selected>Open this select menu</option>
+                                            <option value="" selected>Open this select menu</option>
                                             @foreach ($geades as $geade)
                                                 <option value="{{ $geade->id }}">{{ $geade->name }}</option>
                                             @endforeach
                                         </select>
+                                        @error('grade_id')
+                                            <span class="text-danger">{{ $message }}</span><br>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="field item form-group">
@@ -78,13 +87,16 @@
                                         <span class="required" style="color: red;">*</span></label>
                                     <div class=" col-sm-9 col-sm-6">
                                         <select class="form-select" aria-label="Default select example" name="subject_id">
-                                            <option value="null" selected>Open this select menu</option>
+                                            <option value="" selected>Open this select menu</option>
                                             @foreach ($subjects as $subject)
                                                 <option value="{{ $subject->subjects->id }}">
                                                     {{ $subject->subjects->name }}
                                                 </option>
                                             @endforeach
                                         </select>
+                                        @error('subject_id')
+                                            <span class="text-danger">{{ $message }}</span><br>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="field item form-group">
@@ -95,11 +107,14 @@
                                     <div class=" col-sm-9 col-sm-6">
                                         <select class="form-select" aria-label="Default select example" name="room_id"
                                             id="roomSelect">
-                                            <option value="null" selected>Open this select menu</option>
+                                            <option value="" selected>Open this select menu</option>
                                             @foreach ($rooms as $room)
                                                 <option value="{{ $room->id }}">{{ $room->name }}</option>
                                             @endforeach
                                         </select>
+                                        @error('room_id')
+                                            <span class="text-danger">{{ $message }}</span><br>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="field item form-group">
@@ -120,6 +135,9 @@
                                                 </div>
                                             </div>
                                         </fieldset>
+                                        @error('effect')
+                                            <span class="text-danger">{{ $message }}</span><br>
+                                        @enderror
                                     </div>
                                 </div>
                                 @can('create-schedule')

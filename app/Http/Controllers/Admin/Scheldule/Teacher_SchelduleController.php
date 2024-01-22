@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Scheldule;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Scheldule\CreateSchelduleRequest;
 use App\Models\Grade;
 use App\Models\Period;
 use App\Models\Schedule;
@@ -104,7 +105,7 @@ class Teacher_SchelduleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, string $slug)
+    public function store(CreateSchelduleRequest $request, string $slug)
     {
         $array = $request->all();
         $check = $this->schelRepo->checkTeacheSchedule($array);

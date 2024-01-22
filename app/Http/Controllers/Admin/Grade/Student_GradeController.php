@@ -34,13 +34,13 @@ class Student_GradeController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function add()
+    public function add($slugGrade)
     {
         $grades = $this->gradeRepo->getAll();
         $allstudentIds = $this->studentGradeRepo->getAllstudentIds();
         $students = $this->studentGradeRepo->getstudentsNotIngrade($allstudentIds);
         // dd($students);
-        return view('admin.grades.studentsgrades.add', ['grades' => $grades, 'students' => $students]);
+        return view('admin.grades.studentsgrades.add', ['grades' => $grades, 'students' => $students, 'slugGrade' => $slugGrade]);
     }
 
     /**
@@ -65,14 +65,14 @@ class Student_GradeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $sluggrade, string $id)
+    public function edit(string $slugGrade, string $id)
     {
-        $grades = $this->studentGradeRepo->edit_grade($sluggrade);
-        $grade_selected = $this->studentGradeRepo->index_grade($sluggrade);
+        $grades = $this->studentGradeRepo->edit_grade($slugGrade);
+        $grade_selected = $this->studentGradeRepo->index_grade($slugGrade);
         $students = $this->studentRpo->find($id);
 
         // dd($students);
-        return view('admin.grades.studentsgrades.edit', ['grades' => $grades, 'student' => $students, 'grade_selected' => $grade_selected]);
+        return view('admin.grades.studentsgrades.edit', ['grades' => $grades, 'student' => $students, 'grade_selected' => $grade_selected, 'slugGrade' => $slugGrade]);
     }
 
     /**

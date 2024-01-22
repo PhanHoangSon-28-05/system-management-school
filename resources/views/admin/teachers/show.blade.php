@@ -5,14 +5,17 @@
 @section('content')
     <div class="right_col" role="main">
         <div class="row">
-            <div class="clearfix"></div>
+            <div class="clearfix">
+                <a href="{{ URL::route('teachers.index') }}" type="button" href="" class="btn btn-secondary">
+                    <i class="fas fa-backward"></i>
+                </a>
+            </div>
 
             <div class="row">
                 <div class="col-md-12 col-sm-12">
                     <div class="x_panel">
                         <div class="x_title">
                             <h2>Show Teacher Information</h2>
-                            <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
                             <div class="teacher-info-container">
@@ -105,31 +108,29 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody id="subjectContainer">
-                                                                {{-- {{ dd($teacher->detail_subjects) }} --}}
-                                                                @if ($teacher->detail_subjects)
-                                                                    @foreach ($teacher->detail_subjects->get() as $subject)
-                                                                        <tr>
-                                                                            <td>{{ $loop->iteration }}</td>
-                                                                            <td>{{ $subject->subjects->name }}</td>
-                                                                            <td>
-                                                                                <div class="btn-group">
-                                                                                    <form method="POST"
-                                                                                        action="{{ route('teachers.destroy_subjectGiveteacher', [$teacher->id, $subject->id]) }}"
-                                                                                        class="d-inline">
-                                                                                        @csrf
-                                                                                        @method('DELETE')
-                                                                                        <button type="submit"
-                                                                                            class="btn btn-danger btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3"
-                                                                                            onclick="return confirm('Are you sure you want to delete this subject?')">
-                                                                                            <i class="fas fa-trash-alt"></i>
-                                                                                            Delete
-                                                                                        </button>
-                                                                                    </form>
-                                                                                </div>
-                                                                            </td>
-                                                                        </tr>
-                                                                    @endforeach
-                                                                @endif
+                                                                @foreach ($detail_subjects as $subject)
+                                                                    {{-- {{ dd($subject) }} --}}
+                                                                    <tr>
+                                                                        <td>{{ $loop->iteration }}</td>
+                                                                        <td>{{ $subject->subjects->name }}</td>
+                                                                        <td>
+                                                                            <div class="btn-group">
+                                                                                <form method="POST"
+                                                                                    action="{{ route('teachers.destroy_subjectGiveteacher', [$teacher->id, $subject->id]) }}"
+                                                                                    class="d-inline">
+                                                                                    @csrf
+                                                                                    @method('DELETE')
+                                                                                    <button type="submit"
+                                                                                        class="btn btn-danger btn-xs ms-1 pt-2 pb-2 ps-3 pe-3 rounded-3"
+                                                                                        onclick="return confirm('Are you sure you want to delete this subject?')">
+                                                                                        <i class="fas fa-trash-alt"></i>
+                                                                                        Delete
+                                                                                    </button>
+                                                                                </form>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                @endforeach
                                                             </tbody>
 
                                                         </table>

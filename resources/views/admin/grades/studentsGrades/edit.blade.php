@@ -8,7 +8,11 @@
                     <h3>Edit Grade Student</h3>
                 </div>
             </div>
-            <div class="clearfix"></div>
+            <div class="clearfix">
+                <a href="{{ route('grades.show', $slugGrade) }}" type="button" href="" class="btn btn-secondary">
+                    <i class="fas fa-backward"></i>
+                </a>
+            </div>
             <div class="row">
                 <div class="col-md-4 col-sm-4 ">
                     <div class="">
@@ -24,15 +28,15 @@
                                         <div class="form-floating">
                                             <select class="form-select" name="grade_id"
                                                 aria-label="Floating label select example">
-                                                <option value="{{ $departement_selected->id }}">
-                                                    {{ $departement_selected->name }}</option>
-                                                @foreach ($departements as $departement)
-                                                    <option value="{{ $departement->id }}">
-                                                        {{ $departement->name }}
+                                                <option value="{{ $grade_selected->id }}">
+                                                    {{ $grade_selected->name }}</option>
+                                                @foreach ($grades as $grade)
+                                                    <option value="{{ $grade->id }}">
+                                                        {{ $grade->name }}
                                                     </option>
                                                 @endforeach
                                             </select>
-                                            <label for="floatingSelect">Name departement</label>
+                                            <label for="floatingSelect">Name Grade</label>
                                         </div>
                                         @error('description')
                                             <span class="text-danger">{{ $message }}</span><br>

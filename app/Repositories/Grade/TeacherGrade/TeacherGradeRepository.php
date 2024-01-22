@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Grade\TeacherGrade;
 
+use App\Models\Detail_Class;
 use App\Models\Grade;
 use App\Models\Teacher;
 use App\Repositories\BaseRepository;
@@ -66,7 +67,6 @@ class TeacherGradeRepository extends BaseRepository implements TeacherGradeRepos
     {
         $grade = Grade::where('slug', $slug)->first();
 
-
         return $grade;
     }
 
@@ -85,10 +85,25 @@ class TeacherGradeRepository extends BaseRepository implements TeacherGradeRepos
     public function createTeacherGrade($all)
     {
         $grade = Grade::where('id', $all['grade_id'])->first();
-        if ($all['status'] == 1) {
-            $all['descriptions'] = 'Giáo viên chủ nhiệm của lớp ' . $grade->name;
+        $existingRecord = $this->model
+            ->where('grade_id', $all['grade_id'])
+            ->where('teacher_id', $all['teacher_id'])
+            ->first();
+
+        if ($existingRecord) {
+            // If the record exists, update the descriptions and status
+            $existingRecord->update([
+                'descriptions' => ($all['status'] == 1) ? 'Giáo viên chủ nhiệm của lớp ' . $grade->name : 'Giáo viên bộ môn của lớp ' . $grade->name,
+                'status' => $all['status'],
+            ]);
+
+            return $existingRecord;
         } else {
-            $all['descriptions'] = 'Giáo viên bộ môn của lớp ' . $grade->name;
+            // If the record does not exist, create a new one
+            // $grade = Grade::where('id', $all['grade_id'])->first();
+            $all['descriptions'] = ($all['status'] == 1) ? 'Giáo viên chủ nhiệm của lớp ' . $grade->name : 'Giáo viên bộ môn của lớp ' . $grade->name;
+
+            return $this->model->create($all);
         }
         // dd($all);
         return $this->model->create($all);
@@ -114,5 +129,14 @@ class TeacherGradeRepository extends BaseRepository implements TeacherGradeRepos
         } else {
             return response()->json(['message' => 'Không tìm thấy bản ghi'], 404);
         }
+    }
+
+    public function deleteTeacherToSlugAndSlugGrade($slugGrade, $idTeacher)
+    {
+        $idGrade = Grade::where('slug', $slugGrade)->first()->id;
+        $check = Detail_Class::where('grade_id', $idGrade)->where('teacher_id', $idTeacher)->first();
+        dd($check);
+        $check->delete();
+        return $check;
     }
 }

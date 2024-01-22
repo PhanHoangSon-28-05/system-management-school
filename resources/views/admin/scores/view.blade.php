@@ -8,6 +8,10 @@
                     <div class="x_title">
                         <h2>View Score Student</h2>
                         <div class="clearfix"></div>
+                        <a href="{{ URL::route('scores.show', $slugGrade) }}" type="button" href=""
+                            class="btn btn-secondary">
+                            <i class="fas fa-backward"></i>
+                        </a>
                     </div>
                     <div class="x_content">
                         <div class="row">

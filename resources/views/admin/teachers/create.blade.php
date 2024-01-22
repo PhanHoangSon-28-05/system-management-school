@@ -8,7 +8,11 @@
                     <h3>Create Teacher</h3>
                 </div>
             </div>
-            <div class="clearfix"></div>
+            <div class="clearfix">
+                <a href="{{ URL::route('teachers.index') }}" type="button" href="" class="btn btn-secondary">
+                    <i class="fas fa-backward"></i>
+                </a>
+            </div>
             <div class="row">
                 <div class="col-md-12 col-sm-12 ">
                     <div class="">
